@@ -254,7 +254,8 @@ else:
 		password = opts["-p"]
 		phone = opts["-n"]
 		text = a[0]
-		sms=sendsmscmd(account,username,password,phone,text,verbose)
+		cmdlogin(account,username,password,verbose)
+		sendsmscmd(account,username,password,phone,text,verbose)
 	except getopt.GetoptError, msg:
     			usage()
 			sys.exit("Invalid Option(s) specified")

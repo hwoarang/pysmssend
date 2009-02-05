@@ -103,12 +103,9 @@ def mylogin(f,tray,verbose):
 	#this is in case we have betamax sites :)
 	if account != "otenet" and account != "yahoo":
 		foobar.select_form(nr=0)#form number=0. This means the first form
-	if account=="otenet":
-		foobar["username"] = username#parse the data
-               	foobar["password"] = password#again
-	if account != "otenet" and account != "yahoo":
-		foobar["username"] = username#same as before
-            	foobar["password"] = password#and again
+	if account!="yahoo":
+		foobar["username"] = username
+            	foobar["password"] = password
 	if account=="yahoo":
 		pass#do nothing on yahoo
 	if account!="yahoo":
