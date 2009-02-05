@@ -94,8 +94,8 @@ def mysmssend(foobar,f,trayic,account):
 			report=response.read()
 			sent=1
 	except:
-       	f.ui.lineEdit_2.setText("Not sent ...")
-	sent=0
+	       	f.ui.lineEdit_2.setText("Not sent ...")
+		sent=0
         if sent==1:
 		if account=="otenet" or account=="yahoo":
 			cred=creditsleft(f,account,testfoo)
