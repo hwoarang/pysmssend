@@ -1,0 +1,262 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#***************************************************************************
+#*    Pysmssend ( Source Code ) MAIN PROGRAM
+#***************************************************************************
+# This file is part of Pysmssend Project
+#
+#    Pysmssend Project is free software; you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation; either version 3 of the License, or
+#     (at your option) any later version.
+#
+#    Pysmssend is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# -*- coding: utf-8 -*-
+
+import sys,signal 
+import os
+import getopt
+import re
+#set  /usr/lib/python2.X/site-packges path as first
+#find python version
+v1=sys.version
+v2=v1[0:3]
+final="/usr/lib/python"+v2+"/site-packages/"
+sys.path.insert(1,final)
+#end of hack
+homedir=os.environ["HOME"]
+SHAREDIR="/usr/share/pysmssend/"
+TEMPDIR="/.pysmssend/"
+ACCOUNTS=homedir+TEMPDIR+"accounts/"
+global account,verbose,username,password,text,debug
+debug=False
+version="1.39"
+modules=['pysmssendgui','about','tray','accountmanager','updater','updater2','myloadaccount','checklength','myinserts','mydeleteaccount','myallowsend','creditsleft','login','mysmssend','usage','mystoreaccount']
+
+#Check for pyqt4 support
+try:
+  from PyQt4 import QtCore, QtGui
+except ImportError :
+  print "You need to have PyQT4 installed for gui support..."
+if __name__=="__main__":
+
+		global account,username,password,test,verbose,length,leftcred
+		def dotheconnections(GUI):
+			try:
+				if verbose:
+					print "creating Connections...\n"
+				QtCore.QObject.connect(GUI.comboBox,QtCore.SIGNAL("activated(const QString&)"),loadaccount)
+				QtCore.QObject.connect(GUI.comboBox_2,QtCore.SIGNAL("activated(const QString&)"),loadstoredaccount)
+				QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),storeaccount)
+				QtCore.QObject.connect(GUI.pushButton_2,QtCore.SIGNAL("clicked()"),clearform)
+	        		QtCore.QObject.connect(GUI.Exit,QtCore.SIGNAL("clicked()"),closemod)
+				QtCore.QObject.connect(GUI.Insert,QtCore.SIGNAL("clicked()"),insert)
+				QtCore.QObject.connect(GUI.lineEdit2,QtCore.SIGNAL("returnPressed()"),f.ui.Login.animateClick)
+        			QtCore.QObject.connect(GUI.lineEdit3,QtCore.SIGNAL("returnPressed()"),f.ui.textEdit.setFocus)
+				QtCore.QObject.connect(GUI.lineEdit3,QtCore.SIGNAL("textChanged(const QString &)"),enablebutton)
+        			QtCore.QObject.connect(GUI.Login,QtCore.SIGNAL("clicked()"),login)
+        			QtCore.QObject.connect(GUI.Send,QtCore.SIGNAL("clicked()"),sendsms)
+        			QtCore.QObject.connect(GUI.textEdit,QtCore.SIGNAL("textChanged()"),checklength)
+				QtCore.QObject.connect(GUI.actionAbout,QtCore.SIGNAL("activated()"),createabout)
+				QtCore.QObject.connect(GUI.ins_acc,QtCore.SIGNAL("clicked()"),insertaccount)
+				QtCore.QObject.connect(GUI.del_acc,QtCore.SIGNAL("clicked()"),deleteaccount)
+				QtCore.QObject.connect(GUI.actionCheck_for_updates,QtCore.SIGNAL("activated()"),checkforupdates)
+	                        QtCore.QObject.connect(tray.trayic.Updater,QtCore.SIGNAL("triggered()"),checkforupdates)
+	                        QtCore.QObject.connect(tray.trayic.Exit,QtCore.SIGNAL("triggered()"),closemod)
+	                        QtCore.QObject.connect(tray.trayic.About,QtCore.SIGNAL("triggered()"),createabout)
+
+			except:
+				print "Failed to creating connections. Please fill a bug report"
+	    
+	    	#Functions definitions
+
+		def checkforupdates():
+			updater=Browser()
+		    	updater.open("http://pysmssend.sourceforge.net")
+		    	data1=updater.response()
+		    	data2=data1.read()
+		    	data3=data2.find("Current Version")
+		    	data4=data2[data3:].split("<em>")[1].split("</em>")[0] 
+			#workaround #1
+			if not startup:#if we are NOT at the init of the program
+			    	if data4>version :
+					updater1.show()
+				else:
+					updater2.show()			
+			else:#if we are at the begining of the program 
+				if data4>version :#show us the popup only if there is a newer version
+					updater1.show()
+		def loadaccount():
+			global f
+			myloadaccount(f,verbose)		
+		def loadstoredaccount():
+			global f
+			myloadstoredaccount(f,verbose)
+		def checklength():
+        		global f
+			mychecklength(f)
+    		def insert():
+			global f
+			myinsert(f)
+		def insertaccount():
+			global f
+			myinsertaccount(f)
+		def deleteaccount():
+			global f
+			mydeleteaccount(f)
+		def storeaccount():
+	 		global f
+			mystoreaccount(f)		
+		def clearform():
+			f.ui.lineEdit_6.clear()
+			f.ui.lineEdit_4.clear()
+			f.ui.lineEdit_7.clear()
+		def closemod():#close
+			sys.exit(0)
+		def writetofile(choice,user,password):
+	 		mywritetofile(choice,user,password)
+		def enablebutton():
+			number=f.ui.lineEdit3.text()
+			numlen=len(number)
+			if numlen>1:
+				f.ui.Send.setEnabled(True)
+			else:
+				f.ui.Send.setEnabled(False)
+		def login():
+			global account_loggedin,foobar,leftcred
+			foobar,account_loggedin,leftcred=mylogin(f,tray,verbose)
+		def createabout():
+			about.show()
+		def sendsms():	
+			global account_loggedin,foobar,leftcred
+			mysmssend(foobar,f,tray,account_loggedin,verbose,leftcred)
+	
+
+
+#EXECUTING MAIN PROGRAM
+verbose=False	#Set verbose option False
+homedir=os.environ["HOME"]
+debug=False
+o, a = getopt.getopt(sys.argv[1:], 'a:u:p:n:hv',["help"])
+opts = {}
+for k,v in o:
+	opts[k] = v
+        if k == "-v":
+	        print "\n\nrunning on debuggin mode...\n"
+                verbose=True
+                debug=True
+        elif k in ("-h", "--help"):
+                from pysmssendmod.usage import *
+                usage()
+                sys.exit(0)
+length=len(opts) #Get option number
+# display how many arguments we have
+if verbose:
+	print "Found "+str(length)+" arguments \n"
+if length>2: #we are running the cmd mode ( I define 2 because gui can run with -v option"
+	if verbose:
+		print "Running on command line mode \n"
+	from pysmssendmod.cmdfunc import *#importing cmd modules
+	ongui=False
+else:#importing gui modules
+	try:
+		if verbose:
+			print "importing modules... \n"
+	 	from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
+ 		from pysmssendmod.about import Ui_About, About
+ 		from pysmssendmod.tray import *
+	 	from pysmssendmod.accountmanager import *
+ 		from pysmssendmod.updater import *
+ 		from pysmssendmod.updater2 import *
+	 	from pysmssendmod.myloadaccount import *
+ 		from pysmssendmod.checklength import *
+ 		from pysmssendmod.myinserts import *
+ 		from pysmssendmod.mydeleteaccount import *
+ 		from pysmssendmod.myallowsend import *
+	 	from pysmssendmod.creditsleft import *
+ 		from pysmssendmod.login import *
+	 	from pysmssendmod.mysmssend import *
+ 		from pysmssendmod.usage import *
+		from pysmssendmod.mystoreaccount import *	
+		ongui=True
+	except ImportError :
+		raise
+		sys.exit("Module "+module[i]+"didnt installed correctly. Please fill a bug report with the above error")
+	if verbose:
+		print "modules were imported successfully...\n"
+	if os.path.isdir(homedir+TEMPDIR+""):
+		pass
+	else:
+		if verbose:
+			print "creating configuration folder...\n"
+		os.mkdir(homedir+TEMPDIR)
+	if os.path.isdir(homedir+TEMPDIR+"accounts/"):
+		pass
+	else:	
+		if verbose:
+			print "creating accounts folder...\n"
+		os.mkdir(homedir+TEMPDIR+"accounts/")
+if ongui:
+	if verbose:
+		print "initializing QT GUI...\n"
+	app = QtGui.QApplication(sys.argv)#
+	f = Testmain(verbose)
+	f.show()
+	about = About()
+	updater1=Update()
+	updater2=Update2()
+	if verbose:
+		print "loading stored account...\n"
+	loadaccount()	
+	#creating tray class instance
+	if verbose:
+		print "initializing tray icon...\n"
+	tray=trayicon()
+	tray.start()
+	dotheconnections(f.ui)
+	#f.ui.getdata()
+	if verbose:
+		print "checking for updates...\n"
+	startup=True
+	checkforupdates()
+	startup=False
+	if verbose:
+		print "starting the application...\n"
+	sys.exit(app.exec_())
+else:
+	#run the cmd tool
+	try:
+		o, a = getopt.getopt(sys.argv[1:], 'a:u:p:n:hv',["help"])                            #read options
+		opts = {}
+		for k,v in o:                                                             
+			opts[k] = v
+        		if k == "-v":
+            			verbose = True
+	        	if k in ("-h", "--help"):
+        	    		usage()
+        	    		sys.exit(0)
+		if len(opts) < 4 and debug==False:
+			usage()
+			if len(a) < 1: 
+				sys.exit("No text specified.")
+			else:
+				sys.exit("Invalid number of parameters.")		
+		else:
+			if len(a) < 1: usage(); sys.exit("No text specified.")
+		account = str.lower(opts["-a"])
+		username = opts["-u"]
+		password = opts["-p"]
+		phone = opts["-n"]
+		text = a[0]
+		sms=sendsmscmd(account,username,password,phone,text,verbose)
+	except getopt.GetoptError, msg:
+    			usage()
+			sys.exit("Invalid Option(s) specified")
+	
+        

@@ -1,0 +1,26 @@
+Full Release
+
+** Install from package manager
+
+Use the package for your distro to install the package
+
+Packages available for:
+1) Ubuntu
+2) Debian
+3) Gentoo
+4) Arch
+
+** Install using included scripts
+You can use the install/uninstall scripts to install/uninstall the program on every distro
+
+	INSTALL:
+
+Untar the tarball and run as root the install.sh script 
+
+Make sure that you have PyQt4 ( if you want gui ) , Python-Mechanize
+
+	UNINSTALL:
+
+On the folder where you untar the program run the uninstall.sh script 
+
+Please delete on your own the folder ~/.pysmssend 

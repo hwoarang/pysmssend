@@ -1,0 +1,7 @@
+Pysmssend AUTHORS 
+
+The program was originaly written by Markos Chandras.  
+Ioannis Papadakis helped with some bug fixes and with the new GUI design. 
+Special thanks to Giorgos Kargiotakis for some debugging, code-fixing and the Gentoo Ebuild. 
+I would also like to thank Giorgos Triantafyllou for the Arch Linux pkgbuild and the new icons that he offered. 
+Finally I 'd like to thank Lazaros Tsolakidis for Ubuntu/Debian Packages

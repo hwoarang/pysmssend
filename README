@@ -1,0 +1,39 @@
+for licensing issues please check the LICENSE file	
+Pysmssend 
+
+
+
+*************************** README ***************************
+Supporting  Accounts : Voipbuster, Voipdiscount, Otenet
+This Program was inspired by the SMS program on Cool4U found on Gentoo Forums
+http://forums.gentoo.org/viewtopic-t-455188.html
+
+
+CHANGELOG:
+
+For change log please consider CHANGLOG file
+
+
+INSTALL/UNINSTALL:
+
+Please see INSTALL file
+
+
+NOTE:
+
+Please mind the followings when using the command line tool
+
+1) Use " " if you username,password,text incluse special characters or ! please escape the character as the example below
+
+lets say the password is test!@ , write it as test\ !@
+
+2) Text should be included in  " " if you use the space character
+
+
+
+ACCOUNT MANAGER:
+
+Account manager is a new feature introduced on version 1.28.
+
+The main purpose of it is to help you store some predifined accounts for multiple user situations. Each account requires a custom name.
+So the only thing you have to do is to select a custom name of the account, select the account, write the username and password and save it. After that the new account will appear on the left and you can select it from there or from the first tab from the drop down menu

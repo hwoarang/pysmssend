@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=pySMSsend
+Comment=Send SMS over the Internet
+Exec=pysmssend
+Icon=pysmssend
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;Network;
+
+
