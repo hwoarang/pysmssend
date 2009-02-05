@@ -129,13 +129,13 @@ if __name__=="__main__":
 			else:
 				f.ui.Send.setEnabled(False)
 		def login():
-			global account_loggedin,foobar,leftcred
-			foobar,account_loggedin,leftcred=mylogin(f,tray,verbose)
+			global account_loggedin,foobar,leftcred,username,password
+			foobar,account_loggedin,leftcred,username,password=mylogin(f,tray,verbose)
 		def createabout():
 			about.show()
 		def sendsms():	
-			global account_loggedin,foobar,leftcred
-			mysmssend(foobar,f,tray,account_loggedin,verbose,leftcred)
+			global account_loggedin,foobar,leftcred,username,password
+			mysmssend(foobar,f,tray,account_loggedin,verbose,leftcred,username,password)
 	
 
 

@@ -1,7 +1,6 @@
 from pysmssendmod.tray import *
 from mechanize import Browser
 from pysmssendmod.creditsleft import *
-from pysmssendmod.mywritetofile import *
 import sys
 import urllib2,urllib
 import os,time
@@ -16,9 +15,10 @@ acc_opensms = {
 	'12voip':'https://myaccount.12voip.com/clx/sendsms.php?username=',
 	'webcalldirect':'https://myaccount.webcalldirect.com/clx/sendsms.php?username=',
 	'nonoh':'https://myaccount.nonoh.com/clx/sendsms.php?username=',
-	'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?username'
+	'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?username',
+	'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?username'
 	      }
-def mysmssend(foobar,f,trayic,account):
+def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 	#code is like shit. Sorry about that
 	if account!="NULL":
 		acc_page = acc_opensms[str(account)]#find page
@@ -97,22 +97,20 @@ def mysmssend(foobar,f,trayic,account):
 	       	f.ui.lineEdit_2.setText("Not sent ...")
 		sent=0
         if sent==1:
-		if account=="otenet" or account=="yahoo":
-			cred=creditsleft(f,account,testfoo)
+		# get new credits lets
+		cred=creditsleft(f,account,testfoo,verbose)
 		if account=="otenet":
 			username=f.ui.lineEdit.text()
 			size2=145-len(username)
 			if size<=size2:
-				f.ui.lineEdit_2.setText("Message Sent")
-				showsentreport1(trayic)
+				tray.showsentreport("Message was sent successfully ;-)")
 				f.ui.Result1.clear()
 				f.ui.credits.setText("SMS Left : "+str(cred))
 				f.ui.lineEdit_3.clear()
 				f.ui.textEdit.clear()
 			elif size>size2:
-				f.ui.lineEdit_2.setText(" Not sent ...")
-				showsentreport2(trayic)
-		elif account=="voipbuster" or account=="voipdiscount" or account == "lowratevoip" or account=="voipbusterpro" or account=="freevoip" or account=="12voip" or account=="webcalldirect" or account=="justvoip" or account=="nonoh":
+				tray.showsentreport("Sorry I couldnt send the message :-( ")
+		elif account!="otenet" and account!="yahoo": # in case we have betamax
 			if size<=160:
 				#now we need to open the response page in order to see if the message was send #succesfully
 				result=report.find("<resultstring>")
@@ -122,9 +120,8 @@ def mysmssend(foobar,f,trayic,account):
 				#uff
 				print result3
 				if result3=="success":
-					f.ui.lineEdit_2.setText("Message Sent")
-					showsentreport1(trayic)
-					f.ui.credits.setText("Not Available...")
+					tray.showsentreport("Message was sent successfully ;-)")
+					f.ui.credits.setText("Credits Left: "+str(cred))
 					f.ui.Result1.clear()
 					f.ui.lineEdit_3.clear()
 					f.ui.textEdit.clear()
@@ -137,8 +134,7 @@ def mysmssend(foobar,f,trayic,account):
 					f.ui.lineEdit_2.setText(" Not sent ...")
 					showsentreport2(trayic)
 			else:
-				f.ui.lineEdit_2.setText(" Not sent ...")
-				showsentreport2(trayic)
+				tray.showsentreport("Sorry, I couldnt send the message :-(")
 		else:#this is for yahoo messaging
 			if size<=120:
 				f.ui.lineEdit_2.setText("Message Sent")

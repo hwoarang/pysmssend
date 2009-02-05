@@ -131,14 +131,12 @@ def mylogin(f,tray,verbose):
 			if verbose:
 				print "Opening sms page...\n"
 			foobar.open(acc_page)#open sms page
-			leftcred=creditsleft(f,account,testfoo,verbose)
+			try:
+				leftcred=creditsleft(f,account,testfoo,verbose)
 				#if all the above worked then the login was ok (i hope so )
-			test=foobar.geturl()
-			if verbose:
-				print "I opened -> "+test+"\n"
-			if test==acc_page:
 				ok=1
-			else:pass
+			except:
+				sys.exit("couldnt open page")	
 		except:
 			errorlogin(f,account)
 			tray.showlogin(account,0)		
@@ -173,4 +171,4 @@ def mylogin(f,tray,verbose):
 	# i think its time to delete yahoo ?!
 	else:#if its yahoo
 		yahooinfo(tray)
-	return foobar,account,leftcred
+	return foobar,account,leftcred,username,password
