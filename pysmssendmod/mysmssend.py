@@ -62,7 +62,7 @@ def mysmssend(foobar,f,trayic,account):
 		foobar["ymsgSmsMessage"] = message
 
 	message=f.ui.textEdit.toPlainText()
-    size=message.length()
+	size=message.length()
 	try:
 		if account=="otenet" or account=="yahoo":
          		foobar.submit()
@@ -95,7 +95,7 @@ def mysmssend(foobar,f,trayic,account):
 			sent=1
 	except:
        	f.ui.lineEdit_2.setText("Not sent ...")
-		sent=0
+	sent=0
         if sent==1:
 		if account=="otenet" or account=="yahoo":
 			cred=creditsleft(f,account,testfoo)
