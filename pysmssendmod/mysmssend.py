@@ -132,13 +132,13 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 						mywritetofile(account,username,password)#write to file
 				else:
 					f.ui.lineEdit_2.setText(" Not sent ...")
-					showsentreport2(trayic)
+					tray.showsentreport("Message didnt send")
 			else:
 				tray.showsentreport("Sorry, I couldnt send the message :-(")
 		else:#this is for yahoo messaging
 			if size<=120:
 				f.ui.lineEdit_2.setText("Message Sent")
-				showsentreport1(trayic)
+				tray.showsentreport("Message sent")
 				f.ui.Result1.clear()
 				f.ui.lineEdit_3.clear()
 				f.ui.textEdit.clear()

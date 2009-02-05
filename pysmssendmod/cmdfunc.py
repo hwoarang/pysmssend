@@ -63,6 +63,7 @@ acc_opensms = {
 	'freevoip':'https://myaccount.freevoip.com/clx/sendsms.php?',
 	'12voip':'https://myaccount.12voip.com/clx/sendsms.php?',
 	'webcalldirect':'https://myaccount.webcalldirect.com/clx/sendsms.php?',
+	'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?',
 	'nonoh':'https://myaccount.nonoh.com/clx/sendsms.php?',
 	'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?'
 	      }
