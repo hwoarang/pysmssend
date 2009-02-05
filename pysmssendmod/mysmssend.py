@@ -56,7 +56,7 @@ def mysmssend(foobar,f,trayic,account):
 	# passing data
 	if account=="otenet":
 		foobar["phone"] = number
-        foobar["message"] = message
+	        foobar["message"] = message
 	elif account=="yahoo":#this means yahoo
 		foobar["ymsgSmsNumber"] = number
 		foobar["ymsgSmsMessage"] = message
