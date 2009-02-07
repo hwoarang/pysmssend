@@ -78,7 +78,6 @@ def creditsleft(account,foobar):
 		euros=balanceline.split('&nbsp;')
 		creditsleft=euros[1].split('</b>')
 		final=creditsleft[0]
-		print "Credits Left : "+str(final)
 	elif account=="otenet":
 		foobar.open("http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do")
 		gethtml=foobar.response()
