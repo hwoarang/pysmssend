@@ -69,10 +69,8 @@ acc_opensms = {
 	      }
 
 ##################### CREDITS LEFT ###############################
-def creditsleft(account,foobar,verbose):
+def creditsleft(account,foobar):
 	if account != "otenet" and account != "yahoo":
-		if verbose:
-			print "Trying to find how much money left ...\n"
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
 		balance=html.find("balanceid")
@@ -93,9 +91,6 @@ def creditsleft(account,foobar,verbose):
 		temp2=temp1[1]
 		left=temp2.split("</span>")
 		final=left[0]
-		print "SMS Left : "+str(final)
-	else:#this means yahoo
-		print "Unlimited"
 	#final is the amount of money we have :)		
 	return final
 #############################################################################
@@ -123,7 +118,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	ok=0
 	testfoo=foobar
 	try:
-		leftcred=creditsleft(account,testfoo,verbose)
+		leftcred=creditsleft(account,testfoo)
 	except:
 		sys.exit("Cannot login to "+account)
 	if verbose:
