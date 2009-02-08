@@ -124,7 +124,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		print "Logged in to "+account
 		if account=="otenet":
 			print "SMS left: "+leftcred
-		elif account=="otenet" and account!="yahoo":
+		elif account!="otenet" and account!="yahoo":
 			print "Credits left: "+leftcred
 
 
