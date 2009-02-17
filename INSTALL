@@ -15,7 +15,9 @@ You can use the install/uninstall scripts to install/uninstall the program on ev
 
 	INSTALL:
 
-Untar the tarball and run as root the install.sh script 
+Untar the tarball and run as root the install.sh script . I strongly recommend NOT to install this
+application via this way. Please use the package for your distro ( listed above ). Otherwise you
+can untar is on a folder on your $HOME and launch it from there without installation
 
 	UNINSTALL:
 
