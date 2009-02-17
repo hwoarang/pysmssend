@@ -13,6 +13,9 @@ CHANGELOG:
 
 For change log please consider CHANGLOG file
 
+DEPENDENCIES:
+	1) PyQt4
+	2) Python mechanize
 
 INSTALL/UNINSTALL:
 

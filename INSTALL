@@ -17,8 +17,6 @@ You can use the install/uninstall scripts to install/uninstall the program on ev
 
 Untar the tarball and run as root the install.sh script 
 
-Make sure that you have PyQt4 ( if you want gui ) , Python-Mechanize
-
 	UNINSTALL:
 
 On the folder where you untar the program run the uninstall.sh script 
