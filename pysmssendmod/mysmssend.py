@@ -4,20 +4,9 @@ from pysmssendmod.creditsleft import *
 import sys
 import urllib2,urllib
 import os,time
-# due to upstream changes , we need to introduce ( again *sigh* ) the old way for sending messages
-acc_opensms = {
-	'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
-	'voipbuster':'https://myaccount.voipbuster.com/clx/sendsms.php?username=',
-	'voipdiscount':'https://myaccount.voipdiscount.com/clx/sendsms.php?username=',
-	'lowratevoip':'https://myaccount.lowratevoip.com/clx/sendsms.php?username=',
-	'voipbusterpro':'https://myaccount.voipbusterpro.com/clx/sendsms.php?username=',
-	'freevoip':'https://myaccount.freevoip.com/clx/sendsms.php?username=',
-	'12voip':'https://myaccount.12voip.com/clx/sendsms.php?username=',
-	'webcalldirect':'https://myaccount.webcalldirect.com/clx/sendsms.php?username=',
-	'nonoh':'https://myaccount.nonoh.com/clx/sendsms.php?username=',
-	'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?username',
-	'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?username'
-	      }
+from pysmssendmod.sites import *
+
+
 def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 	#code is like shit. Sorry about that
 	if account!="NULL":
@@ -28,7 +17,7 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 		account=str.lower(str(account))
 	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
 	testfoo=foobar
-	if account=="otenet" or account=="yahoo":
+	if account=="otenet" or account=="forthnet":
 		foobar.open(acc_page)
 	#get message and phone and username and password
 	username=f.ui.lineEdit.text()
@@ -43,11 +32,11 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 
      		except:
         		sys.exit("Error contacting site... Please try again later\n")
-	elif account!="otenet" and account!="yahoo":
+	elif account!="otenet" and account!="forthnet":
 		#do nothing
 		pass
 
-	else:#if yahoo
+	else:#if forthnet
 		try:
 			foobar.select_form(nr=0)
 		except:
@@ -57,17 +46,19 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 	if account=="otenet":
 		foobar["phone"] = number
 	        foobar["message"] = message
-	elif account=="yahoo":#this means yahoo
-		foobar["ymsgSmsNumber"] = number
-		foobar["ymsgSmsMessage"] = message
+	elif account=="forthnet":
+		foobar["txtTo"] = number
+		foobar["txtMessage"] = message
 
 	message=f.ui.textEdit.toPlainText()
 	size=message.length()
 	try:
-		if account=="otenet" or account=="yahoo":
+		if account=="otenet" or account=="forthnet":
+			if verbose:
+				print "Sending..."
          		foobar.submit()
 			sent=1
-		else:
+		else:# betamax stuff
 			#fixing the url
 			url=acc_opensms[str(account)]
 			#hack 1
@@ -98,10 +89,23 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 		sent=0
         if sent==1:
 		# get new credits lets
-		cred=creditsleft(f,account,testfoo,verbose)
 		if account=="otenet":
-			username=f.ui.lineEdit.text()
-			size2=145-len(username)
+			cred=creditsleft(f,account,testfoo,verbose)
+		elif account=="forthnet":
+			gethtml=foobar.response()
+			html=gethtml.read()
+			balance=html.find("<span id=\"lbPerDay\">")
+			balanceline=html[balance:]
+			temp1=balanceline.split("<span id=\"lbPerDay\">")
+			temp2=temp1[1].split("</span>")
+			temp3=temp2[0].split("/");
+		        cred=5-int(temp3[0])
+		if account=="otenet" or account=="forthnet":
+			if acount=="otenet":
+				username=f.ui.lineEdit.text()
+				size2=145-len(username)
+			else:
+				size2=160		
 			if size<=size2:
 				tray.showsentreport("Message was sent successfully ;-)")
 				f.ui.Result1.clear()
@@ -110,7 +114,7 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 				f.ui.textEdit.clear()
 			elif size>size2:
 				tray.showsentreport("Sorry I couldnt send the message :-( ")
-		elif account!="otenet" and account!="yahoo": # in case we have betamax
+		elif account!="otenet" and account!="forthnet": # in case we have betamax
 			if size<=160:
 				#now we need to open the response page in order to see if the message was send #succesfully
 				result=report.find("<resultstring>")
@@ -135,10 +139,3 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 					tray.showsentreport("Message didnt send")
 			else:
 				tray.showsentreport("Sorry, I couldnt send the message :-(")
-		else:#this is for yahoo messaging
-			if size<=120:
-				f.ui.lineEdit_2.setText("Message Sent")
-				tray.showsentreport("Message sent")
-				f.ui.Result1.clear()
-				f.ui.lineEdit_3.clear()
-				f.ui.textEdit.clear()

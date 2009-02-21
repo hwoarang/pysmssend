@@ -220,12 +220,6 @@ if ongui:
 	tray=trayicon()
 	tray.start()
 	dotheconnections(f.ui)
-	#f.ui.getdata()
-	if verbose:
-		print "checking for updates...\n"
-	startup=True
-	checkforupdates()
-	startup=False
 	if verbose:
 		print "starting the application...\n"
 	sys.exit(app.exec_())
@@ -254,8 +248,8 @@ else:
 		password = opts["-p"]
 		phone = opts["-n"]
 		text = a[0]
-		cmdlogin(account,username,password,verbose)
-		sendsmscmd(account,username,password,phone,text,verbose)
+		leftcred=cmdlogin(account,username,password,verbose)
+		sendsmscmd(account,username,password,phone,text,verbose,leftcred)
 	except getopt.GetoptError, msg:
     			usage()
 			sys.exit("Invalid Option(s) specified")

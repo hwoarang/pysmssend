@@ -1,6 +1,6 @@
 def myallowsend(f,leftcred,account):
 		# print leftcred
-		if account != "otenet" and account != "yahoo":
+		if account != "otenet" and account != "forthnet":
 			#this is how it works
 			#if you have 0.05 credits on your account, you cant send a message.Ok?
 			 if leftcred<"0.05":
@@ -16,7 +16,7 @@ def myallowsend(f,leftcred,account):
 				 f.ui.textEdit.clear()
 				 f.ui.Send.setEnabled(True)
 				 f.ui.lineEdit3.clear()
-		elif account=="otenet":
+		elif account=="otenet" or account=="forthnet":
 		 	#same here, you must have more the 0 message left on your account. Obviously :P
 			if leftcred=="0":
 				f.ui.lineEdit3.setReadOnly(True)

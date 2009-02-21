@@ -10,7 +10,7 @@ def usage():
 
   		-h                  print this message
   		-a <account>        Account name: <otenet|voipbuster|voipdiscount|voipbusterpro|lowratevoip|
-				    12voip|freevoip|yahoo|webcalldirect>
+				    12voip|freevoip|forthnet|webcalldirect>
   		-u <username>       username
   		-p <password>       password
   		-n <number>         Telephone Number

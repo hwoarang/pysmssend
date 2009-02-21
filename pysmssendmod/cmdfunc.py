@@ -20,57 +20,16 @@
 # -*- coding: utf-8 -*-
 from mechanize import Browser
 from pysmssendmod.usage import *
+from pysmssendmod.sites import *
 import sys
 import urllib2,urllib
 foobar = Browser()
 foobar.set_handle_robots(False)
 
-acc_openlogin = {
-        'otenet':'http://tools.otenet.gr/tools/index.do',
-        'voipbuster':'https://myaccount.voipbuster.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'voipdiscount':'https://myaccount.voipdiscount.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'lowratevoip':'https://myaccount.lowratevoip.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'voipbusterpro':'https://myaccount.voipbusterpro.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'freevoip':'https://myaccount.freevoip.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        '12voip':'https://myaccount.12voip.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'webcalldirect':'https://myaccount.webcalldirect.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'nonoh':'https://myaccount.nonoh.net/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'voipcheap':'https://myaccount.voipcheap.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
-        'justvoip':'https://myaccount.justvoip.com/clx/index.php?part=plogin&username=Znexbf6430&password='
-}
-
-acc_verify = {
-        'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
-	'voipbuster':'https://myaccount.voipbuster.com/clx/index.php?part=menu&justloggedin=true',
-	'voipdiscount':'https://myaccount.voipdiscount.com/clx/index.php?part=menu&justloggedin=true',
-	'lowratevoip':'https://myaccount.lowratevoip.com/clx/index.php?part=menu&justloggedin=true',
-	'voipbusterpro':'https://myaccount.voipbusterpro.com/clx/index.php?part=menu&justloggedin=true',
-	'freevoip':'https://myaccount.freevoip.com/clx/index.php?part=menu&justloggedin=true',
-	'12voip':'https://myaccount.12voip.com/clx/index.php?part=menu&justloggedin=true',
-	'yahoo':'http://everywhere.yahoo.com/sms/sendsms',
-	'webcalldirect':'https://myaccount.webcalldirect.com/clx/index.php?part=menu&justloggedin=true',
-	'voipcheap':'https://myaccount.voipcheap.com/clx/index.php?part=menu&justloggedin=true',
-	'nonoh':'https://myaccount.nonoh.net/clx/index.php?part=menu&justloggedin=true',
-	'justvoip':'https://myaccount.justvoip.com/clx/index.php?part=menu&justloggedin=true'
-}
-
-acc_opensms = {
-	'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
-	'voipbuster':'https://myaccount.voipbuster.com/clx/sendsms.php?',
-	'voipdiscount':'https://myaccount.voipdiscount.com/clx/sendsms.php?',
-	'lowratevoip':'https://myaccount.lowratevoip.com/clx/sendsms.php?',
-	'voipbusterpro':'https://myaccount.voipbusterpro.com/clx/sendsms.php?',
-	'freevoip':'https://myaccount.freevoip.com/clx/sendsms.php?',
-	'12voip':'https://myaccount.12voip.com/clx/sendsms.php?',
-	'webcalldirect':'https://myaccount.webcalldirect.com/clx/sendsms.php?',
-	'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?',
-	'nonoh':'https://myaccount.nonoh.com/clx/sendsms.php?',
-	'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?'
-	      }
 
 ##################### CREDITS LEFT ###############################
 def creditsleft(account,foobar):
-	if account != "otenet" and account != "yahoo":
+	if account != "otenet" and account != "forthnet":
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
 		balance=html.find("balanceid")
@@ -90,6 +49,15 @@ def creditsleft(account,foobar):
 		temp2=temp1[1]
 		left=temp2.split("</span>")
 		final=left[0]
+        elif account=="forthnet":#this means forthnet
+		gethtml=foobar.response()
+		html=gethtml.read()
+                balance=html.find("<span id=\"SentItems1_lbPerDay\">")
+                balanceline=html[balance:]
+                temp1=balanceline.split("<span id=\"SentItems1_lbPerDay\">")
+                temp2=temp1[1].split("</span>")
+                temp3=temp2[0].split("/");
+                final=str(5-int(temp3[0]))
 	#final is the amount of money we have :)		
 	return final
 #############################################################################
@@ -106,10 +74,14 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	foobar.open(login_page)#open url
 	if account=="otenet":
 		foobar.select_form(name="loginform")
-	elif account!="otenet" and account!="yahoo":
+	elif account!="otenet":
 		foobar.select_form(nr=0)
-	foobar["username"] = username
-        foobar["password"] = password
+	if account !="forthnet":
+		foobar["username"] = username
+        	foobar["password"] = password
+	else:
+		foobar["Username"] = username
+		foobar["Password"] = password
 	foobar.submit()
 	if verbose:
 		print "Verifying data.."
@@ -122,13 +94,20 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		sys.exit("Cannot login to "+account)
 	if verbose:
 		print "Logged in to "+account
-		if account=="otenet":
-			print "SMS left: "+leftcred
-		elif account!="otenet" and account!="yahoo":
-			print "Credits left: "+leftcred
+		if account=="otenet" or account =="forthnet":
+			print "SMS left: "+str(leftcred)
+		elif account!="otenet" and account!="forthnet":
+			print "Credits left: "+str(leftcred)
+	if account=="otenet" or account=="forthnet":
+		if leftcred=="0":
+			sys.exit("You cant send more messages today")
+	elif account!="otenet" and account!="forthnet":
+		if leftcred<="0.03":
+			sys.exit("You cant send more messages today")
+	return leftcred
 
 
-def sendsmscmd(account,username,password,number,message,verbose):
+def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 	acc_page = acc_opensms[str(account)]#find page
 	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
 	testfoo=foobar
@@ -139,10 +118,10 @@ def sendsmscmd(account,username,password,number,message,verbose):
 
      		except:
         		sys.exit("Error contacting site... Please try again later\n")
-	elif account!="otenet" and account!="yahoo":
+	elif account!="otenet" and account!="forthnet":
 		#do nothing
 		pass
-	else:#if yahoo
+	elif account=="forthnet":
 		try:
 			foobar.select_form(nr=0)
 		except:
@@ -152,9 +131,9 @@ def sendsmscmd(account,username,password,number,message,verbose):
 	if account=="otenet":
 		foobar["phone"] = number
        		foobar["message"] = message
-	elif account=="yahoo":#this means yahoo
-		foobar["ymsgSmsNumber"] = number
-		foobar["ymsgSmsMessage"] = message
+	elif account=="forthnet":
+		foobar["txtTo"] = number
+		foobar["txtMessage"] = message
 	else:
 		#hack 1
 		#adding data
@@ -168,38 +147,43 @@ def sendsmscmd(account,username,password,number,message,verbose):
 		#adding header
 		user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 		headers = { 'User-Agent' : user_agent }
-	try:
-		if account=="otenet" or account=="yahoo":
-			if verbose:
-				print "Sending..."
-			foobar.submit()
+	if account=="otenet" or account=="forthnet":
+		if verbose:
+			print "Sending..."
+		foobar.submit()
+		if account=="otenet":
 			leftcred2=creditsleft(account,testfoo,verbose)
-			if leftcred==leftcred2:#if we have the same messages after the submit
-				#it means that we didnt send the message
-				#set final_report
-				final_report=="failure"
-				#hope it works
-        	else:
-			if verbose:
-				print "Sending..."
-			req = urllib2.Request(acc_opensms[str(account)], data, headers)
-			#small delay
-			pass
-			pass
-			pass
-			#its not my fault if betamax sends wrong reports
-			response=urllib2.urlopen(req)
-			report=response.read()
-	                #lets find out if the message was sent correctly
-			data_response1=report.find("<resultstring>")
-			data_response2=report.find("</resultstring>")
-			final_report=report[data_response1+14:data_response2]
-			#im done with the report.
-
-
-	except:
-		sys.exit("Program terminated with error code")
-	#finisht the job
+		elif account=="forthnet":
+			gethtml=foobar.response()
+			html=gethtml.read()
+			balance=html.find("<span id=\"lbPerDay\">")
+			balanceline=html[balance:]
+			temp1=balanceline.split("<span id=\"lbPerDay\">")
+			temp2=temp1[1].split("</span>")
+			temp3=temp2[0].split("/");
+			leftcred2=5-int(temp3[0])
+		if leftcred==leftcred2:#if we have the same messages after the submit
+			#it means that we didnt send the message
+			#set final_report
+			final_report=="failure"
+			#hope it works
+        else:
+		if verbose:
+			print "Sending..."
+		req = urllib2.Request(acc_opensms[str(account)], data, headers)
+		#small delay
+		pass
+		pass
+		pass
+		#its not my fault if betamax sends wrong reports
+		response=urllib2.urlopen(req)
+		report=response.read()
+	        #lets find out if the message was sent correctly
+		data_response1=report.find("<resultstring>")
+		data_response2=report.find("</resultstring>")
+		final_report=report[data_response1+14:data_response2]
+		#im done with the report.
+	#finish the job
 	#if verbose show the report and exit with error code if the report is failure
 	if final_report=="failure":
 		if verbose:

@@ -55,8 +55,8 @@ try:
 		phone = opts["-n"]
 		text = a[0]
 		if len(text) > (145 - len(username)): sys.exit("Max characters allowed are (145-username) length.")
-		cmdlogin(account,username,password,verbose)
-		sendsmscmd(account,username,password,phone,text,verbose)
+		leftcred=cmdlogin(account,username,password,verbose)
+		sendsmscmd(account,username,password,phone,text,verbose,leftcred)
 except getopt.GetoptError, msg:
     		usage()
 		sys.exit("Invalid Option(s) specified")
