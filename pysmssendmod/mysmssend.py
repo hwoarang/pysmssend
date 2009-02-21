@@ -101,7 +101,7 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 			temp3=temp2[0].split("/");
 		        cred=str(5-int(temp3[0]))
 		if account=="otenet" or account=="forthnet":
-			if acount=="otenet":
+			if account=="otenet":
 				username=f.ui.lineEdit.text()
 				size2=145-len(username)
 			else:
