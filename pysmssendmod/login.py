@@ -97,7 +97,6 @@ def mylogin(f,tray,verbose):
 	except:
 		errorlogin(f,account)
 		tray.showlogin(account,0)
-		sys.exit("Couldn't login to "+account)
 	# Give feedback to user
 	f.ui.Result1.setText("Logged in to "+account)			
 	tray.showlogin(account,1)

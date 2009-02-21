@@ -49,7 +49,9 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 			sent=1
 		else:# betamax
 			#fixing the url
-			url=acc_opensms[str(account)]
+			url=acc_opensms2[str(account)]
+			if verbose:
+				print "Opening betamax sms url --> "+url
 			#adding data
 			values={'username':username,
 				'password':password,
@@ -77,7 +79,7 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 		sent=0
         if sent==1:
 		# get new credits lets
-		if account=="otenet":
+		if account!="forthnet":
 			cred=creditsleft(f,account,testfoo,verbose)
 		elif account=="forthnet":
 			gethtml=foobar.response()
@@ -110,6 +112,10 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 				result3=report[result+14:result2]
 				#do the final check
 				#uff
+				pass
+				pass
+				if verbose:
+					print "Result: "+result3
 				if result3=="success":
 					tray.showsentreport("Message was sent successfully ;-)",1)
 					f.ui.credits.setText("Credits Left: "+str(cred))
