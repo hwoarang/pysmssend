@@ -99,7 +99,7 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 			temp1=balanceline.split("<span id=\"lbPerDay\">")
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
-		        cred=5-int(temp3[0])
+		        cred=str(5-int(temp3[0]))
 		if account=="otenet" or account=="forthnet":
 			if acount=="otenet":
 				username=f.ui.lineEdit.text()
