@@ -48,7 +48,7 @@ def creditsleft(f,account,foobar,verbose):
 		temp1=dataline.split("""class="txtmov10b_yellow">""")
 		temp2=temp1[1]
 		left=temp2.split("</span>")
-		final=str(5-int(left[0]))
+		final=left[0]
 		f.ui.credits.setText(str(final)+" sms left for today :-)")
 		if verbose:
 			print "you can send "+final+" messages ..\n"
