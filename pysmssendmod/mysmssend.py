@@ -110,7 +110,6 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 				result3=report[result+14:result2]
 				#do the final check
 				#uff
-				print result3
 				if result3=="success":
 					tray.showsentreport("Message was sent successfully ;-)",1)
 					f.ui.credits.setText("Credits Left: "+str(cred))
@@ -119,6 +118,6 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 					f.ui.textEdit.clear()
 				else:
 					f.ui.lineEdit_2.setText(" Not sent ...")
-					tray.showsentreport("Message didnt send"),0
+					tray.showsentreport("Message didnt send",0)
 			else:
-				tray.showsentreport("Message too long...")
+				tray.showsentreport("Message too long...",0)
