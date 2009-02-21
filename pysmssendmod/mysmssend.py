@@ -8,13 +8,7 @@ from pysmssendmod.sites import *
 
 
 def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
-	#code is like shit. Sorry about that
-	if account!="NULL":
-		acc_page = acc_opensms[str(account)]#find page
-	else:
-		#find the account by reading the combo again :(
-		account=f.ui.comboBox.currentText()#read account
-		account=str.lower(str(account))
+	acc_page = acc_opensms[str(account)]#find page
 	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
 	testfoo=foobar
 	if account=="otenet" or account=="forthnet":
@@ -29,19 +23,13 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 	if account=="otenet":
 		try:
 			foobar.select_form(name="sendform")
-
      		except:
         		sys.exit("Error contacting site... Please try again later\n")
-	elif account!="otenet" and account!="forthnet":
-		#do nothing
-		pass
-
-	else:#if forthnet
+	elif account=="forthnet":
 		try:
 			foobar.select_form(nr=0)
 		except:
 			sys.exit("Error contacting site... Please try again later\n")
-
 	# passing data
 	if account=="otenet":
 		foobar["phone"] = number
@@ -50,6 +38,7 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 		foobar["txtTo"] = number
 		foobar["txtMessage"] = message
 
+	# convert message to plain text. It is easier to handle it
 	message=f.ui.textEdit.toPlainText()
 	size=message.length()
 	try:
@@ -58,10 +47,9 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 				print "Sending..."
          		foobar.submit()
 			sent=1
-		else:# betamax stuff
+		else:# betamax
 			#fixing the url
 			url=acc_opensms[str(account)]
-			#hack 1
 			#adding data
 			values={'username':username,
 				'password':password,
@@ -104,7 +92,7 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 			if account=="otenet":
 				username=f.ui.lineEdit.text()
 				size2=145-len(username)
-			else:
+			else:#forthnet
 				size2=160		
 			if size<=size2:
 				tray.showsentreport("Message was sent successfully ;-)")
@@ -129,13 +117,8 @@ def mysmssend(foobar,f,trayic,account,verbose,leftcred,username,password):
 					f.ui.Result1.clear()
 					f.ui.lineEdit_3.clear()
 					f.ui.textEdit.clear()
-					#save data to file ;)
-					print "Saving account information..."
-					homedir=os.environ["HOME"]
-					if f.ui.rememberMe.checkState()==2:#if Remember Me is ON
-						mywritetofile(account,username,password)#write to file
 				else:
 					f.ui.lineEdit_2.setText(" Not sent ...")
 					tray.showsentreport("Message didnt send")
 			else:
-				tray.showsentreport("Sorry, I couldnt send the message :-(")
+				tray.showsentreport("Message too long...")
