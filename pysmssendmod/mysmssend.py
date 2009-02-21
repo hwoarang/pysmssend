@@ -95,13 +95,13 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 			else:#forthnet
 				size2=160		
 			if size<=size2:
-				tray.showsentreport("Message was sent successfully ;-)")
+				tray.showsentreport("Message was sent successfully ;-)",1)
 				f.ui.Result1.clear()
 				f.ui.credits.setText("SMS Left : "+str(cred))
 				f.ui.lineEdit_3.clear()
 				f.ui.textEdit.clear()
 			elif size>size2:
-				tray.showsentreport("Sorry I couldnt send the message :-( ")
+				tray.showsentreport("Sorry I couldnt send the message :-( ",0)
 		elif account!="otenet" and account!="forthnet": # in case we have betamax
 			if size<=160:
 				#now we need to open the response page in order to see if the message was send #succesfully
@@ -112,13 +112,13 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 				#uff
 				print result3
 				if result3=="success":
-					tray.showsentreport("Message was sent successfully ;-)")
+					tray.showsentreport("Message was sent successfully ;-)",1)
 					f.ui.credits.setText("Credits Left: "+str(cred))
 					f.ui.Result1.clear()
 					f.ui.lineEdit_3.clear()
 					f.ui.textEdit.clear()
 				else:
 					f.ui.lineEdit_2.setText(" Not sent ...")
-					tray.showsentreport("Message didnt send")
+					tray.showsentreport("Message didnt send"),0
 			else:
 				tray.showsentreport("Message too long...")
