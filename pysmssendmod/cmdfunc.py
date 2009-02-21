@@ -36,7 +36,7 @@ def creditsleft(account,foobar):
 		balanceline=html[balance:]
 		euros=balanceline.split('&nbsp;')
 		creditsleft=euros[1].split('</b>')
-		final=creditsleft[0]
+		final=str(creditsleft[0])
 	elif account=="otenet":
 		foobar.open("http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do")
 		gethtml=foobar.response()
@@ -48,8 +48,8 @@ def creditsleft(account,foobar):
 		temp1=dataline.split("""class="txtmov10b_yellow">""")
 		temp2=temp1[1]
 		left=temp2.split("</span>")
-		final=left[0]
-        elif account=="forthnet":#this means forthnet
+		final=str(5-int(left[0]))
+        elif account=="forthnet":
 		gethtml=foobar.response()
 		html=gethtml.read()
                 balance=html.find("<span id=\"SentItems1_lbPerDay\">")
@@ -84,7 +84,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		foobar["Password"] = password
 	foobar.submit()
 	if verbose:
-		print "Verifying data.."
+		print "Verifying data..."
 	pass #create a small delay
 	ok=0
 	testfoo=foobar
@@ -98,12 +98,8 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 			print "SMS left: "+str(leftcred)
 		elif account!="otenet" and account!="forthnet":
 			print "Credits left: "+str(leftcred)
-	if account=="otenet" or account=="forthnet":
-		if leftcred=="0":
-			sys.exit("You cant send more messages today")
-	elif account!="otenet" and account!="forthnet":
-		if leftcred<="0.03":
-			sys.exit("You cant send more messages today")
+	if leftcred<="0.03":
+		sys.exit("You cant send more messages today :-(")
 	return leftcred
 
 
@@ -112,22 +108,18 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
 	testfoo=foobar
 	foobar.open(acc_page)
+	if verbose:
+		print "Creating message..."
 	if account=="otenet":
 		try:
 			foobar.select_form(name="sendform")
-
      		except:
         		sys.exit("Error contacting site... Please try again later\n")
-	elif account!="otenet" and account!="forthnet":
-		#do nothing
-		pass
 	elif account=="forthnet":
 		try:
 			foobar.select_form(nr=0)
 		except:
 			sys.exit("Error contacting site... Please try again later\n")
-	if verbose:
-		print "Creating message..."
 	if account=="otenet":
 		foobar["phone"] = number
        		foobar["message"] = message
@@ -135,8 +127,6 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 		foobar["txtTo"] = number
 		foobar["txtMessage"] = message
 	else:
-		#hack 1
-		#adding data
         	values={'username':username,
 				'password':password,
 				'from':username,
@@ -161,12 +151,11 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 			temp1=balanceline.split("<span id=\"lbPerDay\">")
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
-			leftcred2=5-int(temp3[0])
+			leftcred2=str(5-int(temp3[0]))
 		if leftcred==leftcred2:#if we have the same messages after the submit
 			#it means that we didnt send the message
 			#set final_report
 			final_report=="failure"
-			#hope it works
         else:
 		if verbose:
 			print "Sending..."
