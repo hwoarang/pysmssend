@@ -63,6 +63,6 @@ def creditsleft(f,account,foobar,verbose):
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
 			final=str(5-int(temp3[0]))
-		f.ui.credits.setText(str(final)+" sms left for today :-)")
+			f.ui.credits.setText(str(final)+" sms left for today :-)")
 	#final is the amount of money we have :)		
 	return final
