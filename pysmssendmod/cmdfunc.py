@@ -159,7 +159,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
         else:
 		if verbose:
 			print "Sending..."
-		req = urllib2.Request(acc_opensms[str(account)], data, headers)
+		req = urllib2.Request(acc_opensms2[str(account)], data, headers)
 		#small delay
 		pass
 		pass
