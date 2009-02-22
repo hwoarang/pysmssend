@@ -92,31 +92,35 @@ def mylogin(f,tray,verbose):
 		print "Getting login feedback from --> "+acc_page+"..."
 	foobar.open(acc_page)
 	# Find out the remaining credits for our account
+	error=0
 	try:
 		leftcred=creditsleft(f,account,testfoo,verbose)
+		error=0;
 	except:
 		errorlogin(f,account)
 		tray.showlogin(account,0)
+		error=1;
 	# Give feedback to user
-	f.ui.Result1.setText("Logged in to "+account)			
-	tray.showlogin(account,1)
-	# lock send and number field if we are short of credits
-	myallowsend(f,leftcred,account)
-	if f.ui.rememberMe.checkState()==2:#if Remember Me is ON
-		if verbose:
-			print "Saving account..."
-		try:
-		       file=open(homedir+TEMPDIR+account,"w")#open file according to account
-		       file.write(username+"\n")#write username
-		       file.write(password+"\n")#write password
-		       file.close()#close it
-		       if verbose:
-		       		print "Account saved.. :-)"
-		except:
-			print "ERROR: Account was not stored!"
-	else:#delte the file
-		if os.path.exists(homedir+TEMPDIR+account):
+	if error=0:# pass only if everything was ok
+		f.ui.Result1.setText("Logged in to "+account)			
+		tray.showlogin(account,1)
+		# lock send and number field if we are short of credits
+		myallowsend(f,leftcred,account)
+		if f.ui.rememberMe.checkState()==2:#if Remember Me is ON
 			if verbose:
-				print "Deleting your saved account..."
-			os.remove(homedir+TEMPDIR+account)
-	return foobar,account,leftcred,username,password
+				print "Saving account..."
+			try:
+			       file=open(homedir+TEMPDIR+account,"w")#open file according to account
+			       file.write(username+"\n")#write username
+			       file.write(password+"\n")#write password
+			       file.close()#close it
+			       if verbose:
+			       		print "Account saved.. :-)"
+			except:
+				print "ERROR: Account was not stored!"
+		else:#delte the file
+			if os.path.exists(homedir+TEMPDIR+account):
+				if verbose:
+					print "Deleting your saved account..."
+				os.remove(homedir+TEMPDIR+account)
+		return foobar,account,leftcred,username,password

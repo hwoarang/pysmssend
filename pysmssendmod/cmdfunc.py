@@ -156,6 +156,8 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 			#it means that we didnt send the message
 			#set final_report
 			final_report=="failure"
+		else:
+			final_report=="success"
         else:
 		if verbose:
 			print "Sending..."
