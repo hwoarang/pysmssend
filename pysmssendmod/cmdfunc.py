@@ -21,16 +21,16 @@
 from mechanize import Browser
 from pysmssendmod.usage import *
 from pysmssendmod.sites import *
-import sys
+import sys,time
 import urllib2,urllib
 foobar = Browser()
 foobar.set_handle_robots(False)
 
 
 ##################### CREDITS LEFT ###############################
-def creditsleft(account,foobar):
+def creditsleft(account,foobar,verbose):
 	if verbose:
-		print "Retrieving remaining credits"
+		print "Retrieving remaining credits..."
 	if account != "otenet" and account != "forthnet":
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
@@ -55,11 +55,11 @@ def creditsleft(account,foobar):
 		gethtml=foobar.response()
 		html=gethtml.read()
                 balance=html.find("<span id=\"SentItems1_lbPerDay\">")
-                balanceline=html[balance:]
-                temp1=balanceline.split("<span id=\"SentItems1_lbPerDay\">")
-                temp2=temp1[1].split("</span>")
+       	        balanceline=html[balance:]
+               	temp1=balanceline.split("<span id=\"SentItems1_lbPerDay\">")
+       	        temp2=temp1[1].split("</span>")
                 temp3=temp2[0].split("/");
-                final=str(5-int(temp3[0]))
+               	final=str(5-int(temp3[0]))
 	#final is the amount of money we have :)		
 	return final
 #############################################################################
@@ -87,14 +87,14 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	foobar.submit()
 	if verbose:
 		print "Verifying data..."
-	pass #create a small delay
+	time.sleep(3) #create a small delay
 	ok=0
 	testfoo=foobar
 	try:
-		leftcred=creditsleft(account,testfoo)
-				
+		leftcred=creditsleft(account,testfoo,verbose)
+	
 	except:
-		sys.exit("Cannot login to "+account)
+		sys.exit("Cannot login to "+account+". Invalid credentials or network error. Please try again :-)")
 	if verbose:
 		print "Logged in to "+account
 		if account=="otenet" or account =="forthnet":
