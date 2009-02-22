@@ -29,6 +29,8 @@ foobar.set_handle_robots(False)
 
 ##################### CREDITS LEFT ###############################
 def creditsleft(account,foobar):
+	if verbose:
+		print "Retrieving remaining credits"
 	if account != "otenet" and account != "forthnet":
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
@@ -90,6 +92,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	testfoo=foobar
 	try:
 		leftcred=creditsleft(account,testfoo)
+				
 	except:
 		sys.exit("Cannot login to "+account)
 	if verbose:
