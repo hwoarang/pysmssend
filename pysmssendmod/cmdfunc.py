@@ -87,14 +87,22 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	foobar.submit()
 	if verbose:
 		print "Verifying data..."
-	time.sleep(3) #create a small delay
+	time.sleep(2) #create a small delay
 	ok=0
 	testfoo=foobar
-	try:
-		leftcred=creditsleft(account,testfoo,verbose)
-	
-	except:
-		sys.exit("Cannot login to "+account+". Invalid credentials or network error. Please try again :-)")
+	repeat=0
+	while repeat<=2:# Do 3 login attemps just in case there is a network error or smth
+		try:
+			time.sleep(1)
+			leftcred=creditsleft(account,testfoo,verbose)
+			break
+		except:
+			repeat=repeat+1# increase login attemps
+			if repeat<=3:
+				if verbose:
+					print "Retrying to login...("+str(repeat)+"/3)"
+			else:# in case all of them failed
+				sys.exit("Cannot login to "+account+". Invalid credentials or network error. Please try again :-)")
 	if verbose:
 		print "Logged in to "+account
 		if account=="otenet" or account =="forthnet":
