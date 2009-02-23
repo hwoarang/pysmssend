@@ -98,7 +98,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 			break
 		except:
 			repeat=repeat+1# increase login attemps
-			if repeat !> 3:
+			if repeat <= 3:
 				if verbose:
 					print "Retrying to login...("+str(repeat)+"/3)"
 			else:# in case all of them failed
