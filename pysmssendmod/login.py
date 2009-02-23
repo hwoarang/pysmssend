@@ -101,7 +101,7 @@ def mylogin(f,tray,verbose):
 		tray.showlogin(account,0)
 		error=1;
 	# Give feedback to user
-	if error=0:# pass only if everything was ok
+	if error==0:# pass only if everything was ok
 		f.ui.Result1.setText("Logged in to "+account)			
 		tray.showlogin(account,1)
 		# lock send and number field if we are short of credits
