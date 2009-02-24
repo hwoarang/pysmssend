@@ -78,7 +78,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 			print "Opening url --> "+login_page
 		foobar.open(login_page)#open url
 	except:
-		sys.exit("ERROR: Check your internet connection and try again..."
+		sys.exit("ERROR: Check your internet connection and try again...")
 	if account=="otenet":
 		foobar.select_form(name="loginform")
 	elif account!="otenet":
