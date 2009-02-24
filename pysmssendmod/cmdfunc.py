@@ -79,6 +79,8 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		foobar.open(login_page)#open url
 	except:
 		sys.exit("ERROR: Check your internet connection and try again...")
+	if verbose:
+		print "Connection established"
 	if account=="otenet":
 		foobar.select_form(name="loginform")
 	elif account!="otenet":
@@ -89,9 +91,12 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	else:
 		foobar["Username"] = username
 		foobar["Password"] = password
-	foobar.submit()
-	if verbose:
-		print "Verifying data..."
+	try:
+		if verbose:
+			print "Verifying data..."
+		foobar.submit()
+	except:
+		sys.exit("ERROR: Check your internet connection and try again...")
 	time.sleep(2) #create a small delay
 	ok=0
 	testfoo=foobar
