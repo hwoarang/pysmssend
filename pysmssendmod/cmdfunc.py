@@ -73,7 +73,12 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	login_page=acc_openlogin[str(account)]#find url
 	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]#add eaders
 	testfoo.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]#add headers
-	foobar.open(login_page)#open url
+	try:
+		if verbose:
+			print "Opening url --> "+login_page
+		foobar.open(login_page)#open url
+	except:
+		sys.exit("ERROR: Check your internet connection and try again..."
 	if account=="otenet":
 		foobar.select_form(name="loginform")
 	elif account!="otenet":
