@@ -142,7 +142,6 @@ if __name__=="__main__":
 
 
 #EXECUTING MAIN PROGRAM
-print"test"
 verbose=False	#Set verbose option False
 homedir=os.environ["HOME"]
 debug=False
