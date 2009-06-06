@@ -36,12 +36,14 @@ TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 global account,verbose,username,password,text,debug
 debug=False
-version="1.40"
+version="1.41"
 modules=['pysmssendgui','about','tray','accountmanager','updater','updater2','myloadaccount','checklength','myinserts','mydeleteaccount','myallowsend','creditsleft','login','mysmssend','usage','mystoreaccount']
 
 #Check for pyqt4 support
 try:
+  print "Importing PyQt4 modules..."
   from PyQt4 import QtCore, QtGui
+  print "Done"
 except ImportError :
   print "You need to have PyQT4 installed for gui support..."
 if __name__=="__main__":
@@ -140,6 +142,7 @@ if __name__=="__main__":
 
 
 #EXECUTING MAIN PROGRAM
+print"test"
 verbose=False	#Set verbose option False
 homedir=os.environ["HOME"]
 debug=False
