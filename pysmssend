@@ -85,15 +85,11 @@ if __name__=="__main__":
 		    	data2=data1.read()
 		    	data3=data2.find("Current Version")
 		    	data4=data2[data3:].split("<em>")[1].split("</em>")[0] 
-			#workaround #1
-			if not startup:#if we are NOT at the init of the program
-			    	if data4>version :
-					updater1.show()
-				else:
-					updater2.show()			
-			else:#if we are at the begining of the program 
-				if data4>version :#show us the popup only if there is a newer version
-					updater1.show()
+			if data4>version :
+				updater1.show()
+			else:
+				updater2.show()			
+		
 		def loadaccount():
 			global f
 			myloadaccount(f,verbose)		
