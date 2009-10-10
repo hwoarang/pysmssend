@@ -60,9 +60,9 @@ def creditsleft(f,account,foobar,verbose):
 			#if debug
 			if verbose:
 				print html
-			balance=html.find("<span id=\"SentItems1_lbPerDay\">")
+			balance=html.find("<span id=\"SentItems2Phase1_lbPerDay\">")
 			balanceline=html[balance:]
-			temp1=balanceline.split("<span id=\"SentItems1_lbPerDay\">")
+			temp1=balanceline.split("<span id=\"SentItems2Phase1_lbPerDay\">")
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
 			final=str(5-int(temp3[0]))
