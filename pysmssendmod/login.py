@@ -77,8 +77,8 @@ def mylogin(f,tray,verbose):
 		foobar["username"] = username
 		foobar["password"] = password
 	else:#forthnet
-		foobar["Username"] = Username
-		foobar["Password"] = Password
+		foobar["Username"] = username
+		foobar["Password"] = password
 	if verbose:
 		print "Submitting your data..."
 	foobar.submit()
