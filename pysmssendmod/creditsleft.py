@@ -54,9 +54,12 @@ def creditsleft(f,account,foobar,verbose):
 			print "you can send "+final+" messages ..\n"
 	elif account=="forthnet":#this means forthnet
 		if verbose:
-			print "Forthnet: Trying to find how many messages you can send..\n"
+			print "Forthnet: Retrieving credits...\n"
 			gethtml=foobar.response()
 			html=gethtml.read()
+			#if debug
+			if verbose:
+				print html
 			balance=html.find("<span id=\"SentItems1_lbPerDay\">")
 			balanceline=html[balance:]
 			temp1=balanceline.split("<span id=\"SentItems1_lbPerDay\">")
