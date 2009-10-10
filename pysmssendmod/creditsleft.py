@@ -57,9 +57,6 @@ def creditsleft(f,account,foobar,verbose):
 			print "Forthnet: Retrieving credits...\n"
 			gethtml=foobar.response()
 			html=gethtml.read()
-			#if debug
-			if verbose:
-				print html
 			balance=html.find("<span id=\"SentItems2Phase1_lbPerDay\">")
 			balanceline=html[balance:]
 			temp1=balanceline.split("<span id=\"SentItems2Phase1_lbPerDay\">")
