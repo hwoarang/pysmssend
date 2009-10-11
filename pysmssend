@@ -36,7 +36,7 @@ TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 global account,verbose,username,password,text,debug
 debug=False
-version="1.41"
+version="1.42"
 modules=['pysmssendgui','about','tray','accountmanager','updater','updater2','myloadaccount','checklength','myinserts','mydeleteaccount','myallowsend','creditsleft','login','mysmssend','usage','mystoreaccount']
 
 #Check for pyqt4 support
@@ -80,7 +80,7 @@ if __name__=="__main__":
 
 		def checkforupdates():
 			updater=Browser()
-		    	updater.open("http://pysmssend.sourceforge.net")
+		    	updater.open("http://pysmssend.silverarrow.org")
 		    	data1=updater.response()
 		    	data2=data1.read()
 		    	data3=data2.find("Current Version")

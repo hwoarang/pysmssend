@@ -19,7 +19,7 @@ def usage():
 
 
 
-				Homepage: http://pysmssend.sourceforge.net
+				Homepage: http://pysmssend.silverarrow.org
 
 	
 	"""

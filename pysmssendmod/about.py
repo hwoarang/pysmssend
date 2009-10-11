@@ -256,13 +256,13 @@ class Ui_About(object):
         self.textBrowser.setHtml(QtGui.QApplication.translate("About", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pysmssend 1.41</p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pysmssend 1.42</p>\n"
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pysmssend Project is a freeware project for Linux OS for sending SMS over the Internet using multiple providers. </p>\n"
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Homepage: <a href=\"http://pysmssend.sourceforge.net\"><span style=\" text-decoration: underline; color:#0000ff;\">Pysmssend Homepage </span></a></p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Homepage: <a href=\"http://pysmssend.silverarrow.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Pysmssend Homepage </span></a></p>\n"
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Bugs report: You can use the mailing lists to report bugs or send bug report to <a href=\"http://sourceforge.net/tracker/?atid=993724&group_id=205459&func=browse\"><span style=\" text-decoration: underline; color:#0000ff;\">Bug Report</span></a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Bugs report: You can use the mailing lists to report bugs or send bug report to <a href=\"hwoarang@silverarrow.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Bug Report</span></a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("About", "About", None, QtGui.QApplication.UnicodeUTF8))
         self.textEdit_4.setHtml(QtGui.QApplication.translate("About", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
@@ -294,5 +294,5 @@ class Ui_About(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtGui.QApplication.translate("About", "Licence Agreement", None, QtGui.QApplication.UnicodeUTF8))
         #support tab
 	self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QtGui.QApplication.translate("About", "Donate", None, QtGui.QApplication.UnicodeUTF8))
-	self.textBrowser_3.setHtml(QtGui.QApplication.translate("About", "<html>If you like this program you can support its further development by donating using paypal services<br /><br >If you'd like to donate please use paypals button on <a href=\"http://pysmssend.sourceforge.net\"><span style=\" text-decoration: underline; color:#0000ff;\">Pysmssend Homepage </span></a></html>", None, QtGui.QApplication.UnicodeUTF8))
+	self.textBrowser_3.setHtml(QtGui.QApplication.translate("About", "<html>If you like this program you can support its further development by donating using paypal services<br /><br >If you'd like to donate please use paypals button on <a href=\"http://pysmssend.silverarrow.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Pysmssend Homepage </span></a></html>", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -5,6 +5,7 @@
 1) Code clean up
 2) Support Forthnet Greek ISP
 3) Compatible with PyQt4-4.5
+4) Drop support for Yahoo provider
 
 **1.40
 

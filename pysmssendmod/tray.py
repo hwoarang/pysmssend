@@ -1,7 +1,7 @@
 4 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #***************************************************************************
-#*    Pysmssend ( Source Code ) Addressbook functions
+#*    Pysmssend ( Source Code ) Tray Icon
 #***************************************************************************
 # This file is part of Pysmssend Project
 #
@@ -40,7 +40,7 @@ class trayicon:
 		self.trayic.Exit=ActionsMenu.addAction(exiticon,"Quit Pysmssend")
 		self.trayic.setContextMenu(ActionsMenu)
 		self.trayic.show()
-		self.trayic.setToolTip("Pysmssend 1.41")
+		self.trayic.setToolTip("Pysmssend 1.42")
 
 	def showsentreport(self,message,status):
 		self.status=status
@@ -55,9 +55,6 @@ class trayicon:
 			self.trayic.showMessage("","Logged in to "+account,self.trayic.Information,6000)
 		else:
 			self.trayic.showMessage("","Login to "+account+" failed",self.trayic.Warning,6000)
-	def yahooinfo(trayic):
-		trayic.showMessage("","Logged in to Yahoo. Please remember that Yahoo charges the recipient with standar rates . Please refer to http://everywhere.yahoo.com/sms/sendsms for more information",trayic.Information,15000)
-
 	def hidemain(gui):
 		gui.hide()
 

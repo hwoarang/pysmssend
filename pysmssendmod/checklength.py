@@ -23,7 +23,7 @@ def mychecklength(f):#takes the gui as an argument
 	choice=str.lower(str(choice))#lower the string
 	message=f.ui.textEdit.toPlainText()  #get message text
 	size=message.length()#read message length
-	if choice != "otenet" and choice != "yahoo":
+	if choice != "otenet":
 		left=160-size
 		length2=str(left)
 		if left >=0:

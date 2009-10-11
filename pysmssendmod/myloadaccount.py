@@ -26,11 +26,6 @@ TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 
 def myloadaccount(f,verbose):
-	isyahoo=f.ui.comboBox.currentText()
-	isyahoo=str.lower(str(isyahoo))
-	if isyahoo=="yahoo":
-		f.ui.lineEdit.setReadOnly(True)
-		f.ui.lineEdit2.setReadOnly(True)
 	homedir=os.environ["HOME"]#read home directory
 	f.ui.credits.clear() #clear Credits
 	f.ui.lineEdit.clear()#clear username field

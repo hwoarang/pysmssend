@@ -40,7 +40,7 @@ def errorlogin(f,account):
 	f.ui.lineEdit3.clear()
 	f.ui.lineEdit3.insert("Error loggin in...:")
 	f.ui.Send.setEnabled(False)
-	f.ui.textEdit.setText("There was an error while trying to login on "+account+".Either the username or password was wrong or there was a connectivity issue with the site. If this error occured	when you tried to login with Betamax account it might be a popup message for you on your account informing you about previous credit transaction you might have with the company. If this problem persist please send a bug report at hwoarang_gr@users.sourceforge.net")
+	f.ui.textEdit.setText("There was an error while trying to login on "+account+".Either the username or password was wrong or there was a connectivity issue with the site. If this error occured	when you tried to login with Betamax account it might be a popup message for you on your account informing you about previous credit transaction you might have with the company. If this problem persist please send a bug report at hwoarang@silverarrow.org")
 
 #login function
 def mylogin(f,tray,verbose):

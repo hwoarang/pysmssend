@@ -27,8 +27,9 @@ CHANGELOG:
 Ream CHANGELOG file for changes on each version
 
 DEPENDENCIES:
-	1) PyQt4
-	2) Python mechanize
+	1) Python<3
+	2) PyQt4
+	3) Python mechanize
 
 INSTALL/UNINSTALL:
 
