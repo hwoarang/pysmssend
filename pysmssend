@@ -52,7 +52,7 @@ if __name__=="__main__":
 		def dotheconnections(GUI):
 			try:
 				if verbose:
-					print "creating Connections...\n"
+					print "Creating internal signal-slots connections..."
 				QtCore.QObject.connect(GUI.comboBox,QtCore.SIGNAL("activated(const QString&)"),loadaccount)
 				QtCore.QObject.connect(GUI.comboBox_2,QtCore.SIGNAL("activated(const QString&)"),loadstoredaccount)
 				QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),storeaccount)
@@ -72,13 +72,17 @@ if __name__=="__main__":
 	                        QtCore.QObject.connect(tray.trayic.Updater,QtCore.SIGNAL("triggered()"),checkforupdates)
 	                        QtCore.QObject.connect(tray.trayic.Exit,QtCore.SIGNAL("triggered()"),closemod)
 	                        QtCore.QObject.connect(tray.trayic.About,QtCore.SIGNAL("triggered()"),createabout)
+				if verbose:
+					print "Done"
 
 			except:
-				print "Failed to creating connections. Please fill a bug report"
+				print "Failed to create internal connections. Please send a bug report at hwoarang@silverarrow.org"
 	    
 	    	#Functions definitions
 
 		def checkforupdates():
+			if verbose:
+				print "Checking for new version"
 			updater=Browser()
 		    	updater.open("http://pysmssend.silverarrow.org")
 		    	data1=updater.response()
@@ -86,8 +90,12 @@ if __name__=="__main__":
 		    	data3=data2.find("Current Version")
 		    	data4=data2[data3:].split("<em>")[1].split("</em>")[0] 
 			if data4>version :
+				if verbose:
+					print "Found new version ("+data4+")"
 				updater1.show()
 			else:
+				if verbose:
+					print "You have the latest version installed"
 				updater2.show()			
 		
 		def loadaccount():
@@ -146,7 +154,7 @@ opts = {}
 for k,v in o:
 	opts[k] = v
         if k == "-v":
-	        print "\n\nrunning on debuggin mode...\n"
+	        print "\n\nVerbose mode enabled !"
                 verbose=True
                 debug=True
         elif k in ("-h", "--help"):
@@ -155,17 +163,15 @@ for k,v in o:
                 sys.exit(0)
 length=len(opts) #Get option number
 # display how many arguments we have
-if verbose:
-	print "Found "+str(length)+" arguments \n"
 if length>2: #we are running the cmd mode ( I define 2 because gui can run with -v option"
 	if verbose:
-		print "Running on command line mode \n"
+		print "Command line mode enabled !"
 	from pysmssendmod.cmdfunc import *#importing cmd modules
 	ongui=False
 else:#importing gui modules
 	try:
 		if verbose:
-			print "importing modules... \n"
+			print "Importing modules..."
 	 	from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
  		from pysmssendmod.about import Ui_About, About
  		from pysmssendmod.tray import *
@@ -187,22 +193,26 @@ else:#importing gui modules
 		raise
 		sys.exit("Module "+module[i]+"didnt installed correctly. Please fill a bug report with the above error")
 	if verbose:
-		print "modules were imported successfully...\n"
+		print "Done"
 	if os.path.isdir(homedir+TEMPDIR+""):
 		pass
 	else:
 		if verbose:
-			print "creating configuration folder...\n"
+			print "Creating configuration folder..."
 		os.mkdir(homedir+TEMPDIR)
+		if verbose:
+			print "Done"
 	if os.path.isdir(homedir+TEMPDIR+"accounts/"):
 		pass
 	else:	
 		if verbose:
-			print "creating accounts folder...\n"
+			print "Creating accounts folder..."
 		os.mkdir(homedir+TEMPDIR+"accounts/")
+		if verbose:
+			print "Done"
 if ongui:
 	if verbose:
-		print "initializing QT GUI...\n"
+		print "Building Qt interface..."
 	app = QtGui.QApplication(sys.argv)#
 	f = Testmain(verbose)
 	f.show()
@@ -210,16 +220,19 @@ if ongui:
 	updater1=Update()
 	updater2=Update2()
 	if verbose:
-		print "loading stored account...\n"
+		print "Loading stored accounts..."
 	loadaccount()	
+	if verbose
+		print "Done"
 	#creating tray class instance
 	if verbose:
-		print "initializing tray icon...\n"
+		print "Creating tray icon..."
 	tray=trayicon()
 	tray.start()
+	print "Done"
 	dotheconnections(f.ui)
 	if verbose:
-		print "starting the application...\n"
+		print "Firing up!!!"
 	sys.exit(app.exec_())
 else:
 	#run the cmd tool

@@ -40,7 +40,7 @@ def errorlogin(f,account):
 	f.ui.lineEdit3.clear()
 	f.ui.lineEdit3.insert("Error loggin in...:")
 	f.ui.Send.setEnabled(False)
-	f.ui.textEdit.setText("There was an error while trying to login on "+account+".Either the username or password was wrong or there was a connectivity issue with the site. If this error occured	when you tried to login with Betamax account it might be a popup message for you on your account informing you about previous credit transaction you might have with the company. If this problem persist please send a bug report at hwoarang@silverarrow.org")
+	f.ui.textEdit.setText("An error occurred while trying to login to "+account+".Either the username or password was wrong or there was a connectivity issue with the site. If you were trying to login to a Betamax account there might be a popup message for you waitting on your Betamax account. In any other case, if this problem persist please send a bug report at hwoarang@silverarrow.org")
 
 #login function
 def mylogin(f,tray,verbose):
@@ -82,6 +82,8 @@ def mylogin(f,tray,verbose):
 	if verbose:
 		print "Submitting your data..."
 	foobar.submit()
+	if verbose:
+		print "Done"
 	pass #create a small delay...
 	if account=="otenet":
 		acc_page="http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do"
@@ -102,7 +104,7 @@ def mylogin(f,tray,verbose):
 		error=1;
 	# Give feedback to user
 	if error==0:# pass only if everything was ok
-		f.ui.Result1.setText("Logged in to "+account)			
+		f.ui.Result1.setText("Logged in to "+account+" ;-)")			
 		tray.showlogin(account,1)
 		# lock send and number field if we are short of credits
 		myallowsend(f,leftcred,account)
