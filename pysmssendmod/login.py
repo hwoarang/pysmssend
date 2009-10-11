@@ -123,4 +123,9 @@ def mylogin(f,tray,verbose):
 				if verbose:
 					print "Deleting your saved account..."
 				os.remove(homedir+TEMPDIR+account)
+		#display supported number format
+		if account=="forthnet":
+			f.ui.lineEdit3.setText("Phone format: 694XXXXXXXX")
+		else
+			f.ui.lineEdit3.setText("Phone format: +30694XXXXXXX")
 		return foobar,account,leftcred,username,password
