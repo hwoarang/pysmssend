@@ -128,6 +128,6 @@ def mylogin(f,tray,verbose):
 		#display supported number format
 		if account=="forthnet":
 			f.ui.lineEdit3.setText("Phone format: 694XXXXXXXX")
-		else
+		else:
 			f.ui.lineEdit3.setText("Phone format: +30694XXXXXXX")
 		return foobar,account,leftcred,username,password
