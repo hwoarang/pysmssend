@@ -222,7 +222,7 @@ if ongui:
 	if verbose:
 		print "Loading stored accounts..."
 	loadaccount()	
-	if verbose
+	if verbose:
 		print "Done"
 	#creating tray class instance
 	if verbose:
