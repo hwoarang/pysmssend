@@ -126,8 +126,10 @@ def mylogin(f,tray,verbose):
 					print "Deleting your saved account..."
 				os.remove(homedir+TEMPDIR+account)
 		#display supported number format
+		QString phonemessage = new QString("-- ")
 		if account=="forthnet":
-			f.ui.lineEdit3.setText("Phone format: 694XXXXXXXX")
+			phonemessage.append("694XXXXXXX")
 		else:
-			f.ui.lineEdit3.setText("Phone format: +30694XXXXXXX")
+			phonemessage.append("+30694XXXXXXX")
+		phonemessage.append(" --")
 		return foobar,account,leftcred,username,password
