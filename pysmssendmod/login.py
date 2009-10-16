@@ -22,6 +22,7 @@ from pysmssendmod.creditsleft import *
 from pysmssendmod.myallowsend import  *
 from pysmssendmod.tray import *
 from mechanize import Browser
+from PyQt4 import QtCore
 import os,sys
 from pysmssendmod.sites import *
 homedir=os.environ["HOME"]
@@ -132,4 +133,5 @@ def mylogin(f,tray,verbose):
 		else:
 			phonemessage.append("+30694XXXXXXX")
 		phonemessage.append(" --")
+		f.ui.lineEdit3(phonemessage)
 		return foobar,account,leftcred,username,password
