@@ -56,7 +56,7 @@ acc_opensms2 = {
 'webcalldirect':'https://myaccount.webcalldirect.com/clx/sendsms.php?username=',
 'nonoh':'https://myaccount.nonoh.com/clx/sendsms.php?username=',
 'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?username',
-'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?username'
+'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?username',
 'voipraider':'https://myaccount.voipraider.com/clx/sendsms.php?username'
 
 }
