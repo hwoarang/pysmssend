@@ -30,7 +30,7 @@ foobar.set_handle_robots(False)
 ##################### CREDITS LEFT ###############################
 def creditsleft(account,foobar,verbose):
 	if verbose:
-		print "Retrieving remaining credits..."
+		print("Retrieving remaining credits...")
 	if account != "otenet" and account != "forthnet":
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
@@ -75,12 +75,12 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 	testfoo.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]#add headers
 	try:
 		if verbose:
-			print "Opening url --> "+login_page
+			print("Opening url --> "+login_page
 		foobar.open(login_page)#open url
 	except:
 		sys.exit("ERROR: Check your internet connection and try again...")
 	if verbose:
-		print "Connection established"
+		print("Connection established")
 	if account=="otenet":
 		foobar.select_form(name="loginform")
 	elif account!="otenet":
@@ -93,7 +93,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		foobar["Password"] = password
 	try:
 		if verbose:
-			print "Verifying data..."
+			print("Verifying data...")
 		foobar.submit()
 	except:
 		sys.exit("ERROR: Check your internet connection and try again...")
@@ -110,15 +110,15 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 			repeat=repeat+1# increase login attemps
 			if repeat <= 3:
 				if verbose:
-					print "Retrying to login...("+str(repeat)+"/3)"
+					print("Retrying to login...("+str(repeat)+"/3)")
 			else:# in case all of them failed
 				sys.exit("Cannot login to "+account+". Invalid credentials or network error. Please try again :-)")
 	if verbose:
-		print "Logged in to "+account
+		print("Logged in to "+account
 		if account=="otenet" or account =="forthnet":
-			print "SMS left: "+str(leftcred)
+			print("SMS left: "+str(leftcred)
 		elif account!="otenet" and account!="forthnet":
-			print "Credits left: "+str(leftcred)
+			print("Credits left: "+str(leftcred)
 	if leftcred<="0.03":
 		sys.exit("You cant send more messages today :-(")
 	return leftcred
@@ -130,7 +130,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 	testfoo=foobar
 	foobar.open(acc_page)
 	if verbose:
-		print "Creating message..."
+		print("Creating message...")
 	if account=="otenet":
 		try:
 			foobar.select_form(name="sendform")
@@ -160,7 +160,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 		headers = { 'User-Agent' : user_agent }
 	if account=="otenet" or account=="forthnet":
 		if verbose:
-			print "Sending..."
+			print("Sending...")
 		foobar.submit()
 		if account=="otenet":
 			leftcred2=creditsleft(account,testfoo,verbose)
@@ -181,7 +181,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 			final_report=="success"
         else:
 		if verbose:
-			print "Sending..."
+			print("Sending...")
 		req = urllib2.Request(acc_opensms2[str(account)], data, headers)
 		#small delay
 		pass
@@ -199,9 +199,9 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 	#if verbose show the report and exit with error code if the report is failure
 	if final_report=="failure":
 		if verbose:
-			print "Report: "+final_report
+			print("Report: "+final_report
 		sys.exit("Failed to send message")
 	else:
 		if verbose:
-			print "Report: "+final_report
+			print("Report: "+final_report
 		sys.exit(0)

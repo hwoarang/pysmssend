@@ -35,14 +35,14 @@ def myloadaccount(f,verbose):
 		choice=f.ui.comboBox.currentText()#read account
 		choice=str.lower(str(choice))
 		if verbose:
-			print "searching for "+choice+" stored account...\n"
+			print("searching for "+choice+" stored account...\n")
 		data=open(homedir+TEMPDIR+choice,"r")#open account file
 		if verbose:
-			print "I found stored account...\n"
+			print("I found stored account...\n")
 		account=data.read()#read it
 		infos=account.split()
 		if verbose:
-			print "inserting data to the fields...\n"
+			print("inserting data to the fields...\n")
 		f.ui.lineEdit.insert(infos[0])#parse the infos on the fields
 		f.ui.lineEdit2.insert(infos[1])
 	except:
@@ -57,7 +57,7 @@ def myloadstoredaccount(f,verbose):
 		choice=f.ui.comboBox_2.currentText()#read account
 		if choice!="None":
 			if verbose:
-				print "importing "+choice+" account...\n"
+				print("importing "+choice+" account...\n")
 			#read index of account
 			index=f.ui.comboBox_2.currentIndex()			#insert username
 			row=f.ui.tableWidget_2.item(index-1,0)
@@ -72,7 +72,7 @@ def myloadstoredaccount(f,verbose):
 			f.ui.lineEdit.insert(username)
 			f.ui.lineEdit2.insert(passwd)
 			if verbose:
-				print "successfully imported "+choice+"...\n"
+				print("successfully imported "+choice+"...\n")
 		else:
 			f.ui.lineEdit.clear()#clear username field
 			f.ui.lineEdit2.clear()#clear password field

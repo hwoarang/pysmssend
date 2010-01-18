@@ -17,11 +17,11 @@ def myallowsend(f,leftcred,account):
 				 f.ui.Send.setEnabled(True)
 				 f.ui.lineEdit3.clear()
 		elif account=="otenet" or account=="forthnet":
-		 	#same here, you must have more the 0 message left on your account. Obviously :P
+			#same here, you must have more the 0 message left on your account. Obviously :P
 			if leftcred=="0":
 				f.ui.lineEdit3.setReadOnly(True)
 				f.ui.textEdit.setReadOnly(True)
-	 			f.ui.lineEdit3.clear()
+				f.ui.lineEdit3.clear()
 				f.ui.lineEdit3.insert("No SMS left to send...")
 				f.ui.Send.setEnabled(False)
 			else:

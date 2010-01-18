@@ -44,14 +44,14 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 	try:
 		if account=="otenet" or account=="forthnet":
 			if verbose:
-				print "Sending..."
+				print("Sending...")
          		foobar.submit()
 			sent=1
 		else:# betamax
 			#fixing the url
 			url=acc_opensms2[str(account)]
 			if verbose:
-				print "Opening betamax sms url --> "+url
+				print("Opening betamax sms url --> "+url
 			#adding data
 			values={'username':username,
 				'password':password,
@@ -115,7 +115,7 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 				pass
 				pass
 				if verbose:
-					print "Result: "+result3
+					print("Result: "+result3
 				if result3=="success":
 					tray.showsentreport("Message was sent successfully ;-)",1)
 					f.ui.credits.setText("Credits Left: "+str(cred))
