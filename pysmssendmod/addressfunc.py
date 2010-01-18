@@ -30,31 +30,31 @@ def getdata(self,Form,verbose):
 	return_code=254
 	global tilfwno3,num_lines,homedir   
 	if debug:
-                print "\nBuilding Addressbook ... \n"     
-                print "Creating Temp Files ...\n\n Wait...\n"
+                print("\nBuilding Addressbook ... \n"     
+                print("Creating Temp Files ...\n\n Wait...\n")
         homedir=os.environ["HOME"]
 	#this may vary according to KDE version. We need to specify which kde is running
 	if debug:
-		print "Trying to find the kaddressbook contacts' path...\n"
+		print("Trying to find the kaddressbook contacts' path...\n")
 	if os.path.exists(homedir+"/.kde4/share/apps/kabc/std.vcf"):
 		if debug:
-			print "Found contacts under .kde4/share/apps/kabc/ folder\n"
+			print("Found contacts under .kde4/share/apps/kabc/ folder\n")
 		addresspath=".kde4"
 		found=1
 	elif os.path.exists(homedir+"/.kde/share/apps/kabc/std.vcf"):
 	        if debug:
-		        print "Found contacts under .kde/share/apps/kabc/ folder\n"
+		        print("Found contacts under .kde/share/apps/kabc/ folder\n")
 		addresspath=".kde"
 		found=1
         else:
-		if debug:     print "Kaddressbook contacts not found... \n\n"
+		if debug:     print("Kaddressbook contacts not found... \n\n")
 		num_lines=0
 		self.retranslateUi(Form,num_lines)
 
 	if found:     
 		if debug:
-			print "Found Kaddressbook contacts ...\n\n"
-			print "opening "+homedir+"/"+addresspath+"/share/apps/kabc/std.vcf"	
+			print("Found Kaddressbook contacts ...\n\n")
+			print("opening "+homedir+"/"+addresspath+"/share/apps/kabc/std.vcf"	
                 try:  filestd = open(homedir+"/"+addresspath+"/share/apps/kabc/std.vcf","r")
                 except IOError: sys.exit("Can't open file std.vcf")
                 text = filestd.readlines()
@@ -101,4 +101,4 @@ def getdata(self,Form,verbose):
             		item.setText(QtGui.QApplication.translate("self", str(tel), None, QtGui.QApplication.UnicodeUTF8))
             		self.tableWidget.setItem(mycounter,1,item)
                         mycounter=mycounter+1
-		if debug:     print "Finished\n\n"
+		if debug:     print("Finished\n\n")

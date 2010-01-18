@@ -36,61 +36,61 @@ modules=['pysmssendgui','about','tray','accountmanager','updater','updater2','my
 
 #Check for pyqt4 support
 try:
-  print "Importing PyQt4 modules..."
+  print("Importing PyQt4 modules...")
   from PyQt4 import QtCore, QtGui
-  print "Done"
+  print("Done")
 except ImportError :
-  print "You need to have PyQT4 installed for gui support..."
+  print("You need to have PyQT4 installed for gui support...")
 if __name__=="__main__":
 
 		global account,username,password,test,verbose,length,leftcred
 		def dotheconnections(GUI):
 			try:
 				if verbose:
-					print "Creating internal signal-slots connections..."
+					print("Creating internal signal-slots connections...")
 				QtCore.QObject.connect(GUI.comboBox,QtCore.SIGNAL("activated(const QString&)"),loadaccount)
 				QtCore.QObject.connect(GUI.comboBox_2,QtCore.SIGNAL("activated(const QString&)"),loadstoredaccount)
 				QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),storeaccount)
 				QtCore.QObject.connect(GUI.pushButton_2,QtCore.SIGNAL("clicked()"),clearform)
-	        		QtCore.QObject.connect(GUI.Exit,QtCore.SIGNAL("clicked()"),closemod)
+				QtCore.QObject.connect(GUI.Exit,QtCore.SIGNAL("clicked()"),closemod)
 				QtCore.QObject.connect(GUI.Insert,QtCore.SIGNAL("clicked()"),insert)
 				QtCore.QObject.connect(GUI.lineEdit2,QtCore.SIGNAL("returnPressed()"),f.ui.Login.animateClick)
-        			QtCore.QObject.connect(GUI.lineEdit3,QtCore.SIGNAL("returnPressed()"),f.ui.textEdit.setFocus)
+				QtCore.QObject.connect(GUI.lineEdit3,QtCore.SIGNAL("returnPressed()"),f.ui.textEdit.setFocus)
 				QtCore.QObject.connect(GUI.lineEdit3,QtCore.SIGNAL("textChanged(const QString &)"),enablebutton)
-        			QtCore.QObject.connect(GUI.Login,QtCore.SIGNAL("clicked()"),login)
-        			QtCore.QObject.connect(GUI.Send,QtCore.SIGNAL("clicked()"),sendsms)
-        			QtCore.QObject.connect(GUI.textEdit,QtCore.SIGNAL("textChanged()"),checklength)
+				QtCore.QObject.connect(GUI.Login,QtCore.SIGNAL("clicked()"),login)
+				QtCore.QObject.connect(GUI.Send,QtCore.SIGNAL("clicked()"),sendsms)
+				QtCore.QObject.connect(GUI.textEdit,QtCore.SIGNAL("textChanged()"),checklength)
 				QtCore.QObject.connect(GUI.actionAbout,QtCore.SIGNAL("activated()"),createabout)
 				QtCore.QObject.connect(GUI.ins_acc,QtCore.SIGNAL("clicked()"),insertaccount)
 				QtCore.QObject.connect(GUI.del_acc,QtCore.SIGNAL("clicked()"),deleteaccount)
 				QtCore.QObject.connect(GUI.actionCheck_for_updates,QtCore.SIGNAL("activated()"),checkforupdates)
-	                        QtCore.QObject.connect(tray.trayic.Updater,QtCore.SIGNAL("triggered()"),checkforupdates)
-	                        QtCore.QObject.connect(tray.trayic.Exit,QtCore.SIGNAL("triggered()"),closemod)
-	                        QtCore.QObject.connect(tray.trayic.About,QtCore.SIGNAL("triggered()"),createabout)
+				QtCore.QObject.connect(tray.trayic.Updater,QtCore.SIGNAL("triggered()"),checkforupdates)
+				QtCore.QObject.connect(tray.trayic.Exit,QtCore.SIGNAL("triggered()"),closemod)
+				QtCore.QObject.connect(tray.trayic.About,QtCore.SIGNAL("triggered()"),createabout)
 				if verbose:
-					print "Done"
+					print("Done")
 
 			except:
-				print "Failed to create internal connections. Please send a bug report at hwoarang@silverarrow.org"
+				print("Failed to create internal connections. Please send a bug report at hwoarang@silverarrow.org")
 	    
 	    	#Functions definitions
 
 		def checkforupdates():
 			if verbose:
-				print "Checking for new version"
+				print("Checking for new version")
 			updater=Browser()
-		    	updater.open("http://pysmssend.silverarrow.org")
-		    	data1=updater.response()
-		    	data2=data1.read()
-		    	data3=data2.find("Current Version")
-		    	data4=data2[data3:].split("<em>")[1].split("</em>")[0] 
+			updater.open("http://pysmssend.silverarrow.org")
+			data1=updater.response()
+			data2=data1.read()
+			data3=data2.find("Current Version")
+			data4=data2[data3:].split("<em>")[1].split("</em>")[0] 
 			if data4>version :
 				if verbose:
-					print "Found new version ("+data4+")"
+					print("Found new version ("+data4+")")
 				updater1.show()
 			else:
 				if verbose:
-					print "You have the latest version installed"
+					print("You have the latest version installed")
 				updater2.show()			
 		
 		def loadaccount():
@@ -100,9 +100,9 @@ if __name__=="__main__":
 			global f
 			myloadstoredaccount(f,verbose)
 		def checklength():
-        		global f
+			global f
 			mychecklength(f)
-    		def insert():
+		def insert():
 			global f
 			myinsert(f)
 		def insertaccount():
@@ -112,7 +112,7 @@ if __name__=="__main__":
 			global f
 			mydeleteaccount(f)
 		def storeaccount():
-	 		global f
+			global f
 			mystoreaccount(f)		
 		def clearform():
 			f.ui.lineEdit_6.clear()
@@ -148,66 +148,66 @@ o, a = getopt.getopt(sys.argv[1:], 'a:u:p:n:hv',["help"])
 opts = {}
 for k,v in o:
 	opts[k] = v
-        if k == "-v":
-	        print "\n\nVerbose mode enabled !"
-                verbose=True
-                debug=True
-        elif k in ("-h", "--help"):
-                from pysmssendmod.usage import *
-                usage()
-                sys.exit(0)
+	if k == "-v":
+		print("\n\nVerbose mode enabled !")
+		verbose=True
+		debug=True
+	elif k in ("-h", "--help"):
+		from pysmssendmod.usage import *
+		usage()
+		sys.exit(0)
 length=len(opts) #Get option number
 # display how many arguments we have
 if length>2: #we are running the cmd mode ( I define 2 because gui can run with -v option"
 	if verbose:
-		print "Command line mode enabled !"
+		print("Command line mode enabled !")
 	from pysmssendmod.cmdfunc import *#importing cmd modules
 	ongui=False
 else:#importing gui modules
 	try:
 		if verbose:
-			print "Importing modules..."
-	 	from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
- 		from pysmssendmod.about import Ui_About, About
- 		from pysmssendmod.tray import *
-	 	from pysmssendmod.accountmanager import *
- 		from pysmssendmod.updater import *
- 		from pysmssendmod.updater2 import *
-	 	from pysmssendmod.myloadaccount import *
- 		from pysmssendmod.checklength import *
- 		from pysmssendmod.myinserts import *
- 		from pysmssendmod.mydeleteaccount import *
- 		from pysmssendmod.myallowsend import *
-	 	from pysmssendmod.creditsleft import *
- 		from pysmssendmod.login import *
-	 	from pysmssendmod.mysmssend import *
- 		from pysmssendmod.usage import *
+			print("Importing modules...")
+		from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
+		from pysmssendmod.about import Ui_About, About
+		from pysmssendmod.tray import *
+		from pysmssendmod.accountmanager import *
+		from pysmssendmod.updater import *
+		from pysmssendmod.updater2 import *
+		from pysmssendmod.myloadaccount import *
+		from pysmssendmod.checklength import *
+		from pysmssendmod.myinserts import *
+		from pysmssendmod.mydeleteaccount import *
+		from pysmssendmod.myallowsend import *
+		from pysmssendmod.creditsleft import *
+		from pysmssendmod.login import *
+		from pysmssendmod.mysmssend import *
+		from pysmssendmod.usage import *
 		from pysmssendmod.mystoreaccount import *	
 		ongui=True
 	except ImportError :
 		raise
 		sys.exit("Module "+module[i]+"didnt installed correctly. Please fill a bug report with the above error")
 	if verbose:
-		print "Done"
+		print("Done")
 	if os.path.isdir(homedir+TEMPDIR+""):
 		pass
 	else:
 		if verbose:
-			print "Creating configuration folder..."
+			print("Creating configuration folder...")
 		os.mkdir(homedir+TEMPDIR)
 		if verbose:
-			print "Done"
+			print("Done")
 	if os.path.isdir(homedir+TEMPDIR+"accounts/"):
 		pass
 	else:	
 		if verbose:
-			print "Creating accounts folder..."
+			print("Creating accounts folder...")
 		os.mkdir(homedir+TEMPDIR+"accounts/")
 		if verbose:
-			print "Done"
+			print("Done")
 if ongui:
 	if verbose:
-		print "Building Qt interface..."
+		print("Building Qt interface...")
 	app = QtGui.QApplication(sys.argv)#
 	f = Testmain(verbose)
 	f.show()
@@ -215,19 +215,19 @@ if ongui:
 	updater1=Update()
 	updater2=Update2()
 	if verbose:
-		print "Loading stored accounts..."
+		print("Loading stored accounts...")
 	loadaccount()	
 	if verbose:
-		print "Done"
+		print("Done")
 	#creating tray class instance
 	if verbose:
-		print "Creating tray icon..."
+		print("Creating tray icon...")
 	tray=trayicon()
 	tray.start()
-	print "Done"
+	print("Done")
 	dotheconnections(f.ui)
 	if verbose:
-		print "Firing up!!!"
+		print("Firing up!!!")
 	sys.exit(app.exec_())
 else:
 	#run the cmd tool
@@ -236,9 +236,9 @@ else:
 		opts = {}
 		for k,v in o:                                                             
 			opts[k] = v
-        		if k == "-v":
-            			verbose = True
-	        	if k in ("-h", "--help"):
+		if k == "-v":
+			verbose = True
+			if k in ("-h", "--help"):
         	    		usage()
         	    		sys.exit(0)
 		if len(opts) < 4 and debug==False:
@@ -256,8 +256,8 @@ else:
 		text = a[0]
 		leftcred=cmdlogin(account,username,password,verbose)
 		sendsmscmd(account,username,password,phone,text,verbose,leftcred)
-	except getopt.GetoptError, msg:
-    			usage()
-			sys.exit("Invalid Option(s) specified")
+	except getopt.GetoptError.msg:
+		usage()
+		sys.exit("Invalid Option(s) specified")
 	
         
