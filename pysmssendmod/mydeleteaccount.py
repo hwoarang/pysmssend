@@ -1,5 +1,5 @@
-from mydeletefile import *
-from accountmanager import *
+from pysmssendmod.mydeletefile import *
+from pysmssendmod.accountmanager import *
 def mydeleteaccount(f):
 	row=f.ui.tableWidget_2.currentItem()
 	num=f.ui.tableWidget_2.currentRow()
