@@ -34,7 +34,7 @@ foobar.set_handle_robots(False)
 
 ## this function is called when login failed ##
 def errorlogin(f,account):
-        f.ui.Result1.setText("Login to "+account+" failed")
+	f.ui.Result1.setText("Login to "+account+" failed")
 	f.ui.credits.clear()
 	f.ui.lineEdit3.setReadOnly(True)
 	f.ui.textEdit.setReadOnly(True)

@@ -24,7 +24,7 @@
 def creditsleft(f,account,foobar,verbose):
 	if account != "otenet" and account != "forthnet":
 		if verbose:
-			print account+": Trying to find how much money left ...\n")
+			print(account+": Trying to find how much money left ...\n")
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
 		balance=html.find("balanceid")
