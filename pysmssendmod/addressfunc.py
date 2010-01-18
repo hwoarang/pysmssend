@@ -30,8 +30,8 @@ def getdata(self,Form,verbose):
 	return_code=254
 	global tilfwno3,num_lines,homedir   
 	if debug:
-                print("\nBuilding Addressbook ... \n"     
-                print("Creating Temp Files ...\n\n Wait...\n")
+                print("\nBuilding Addressbook ... \n"     )
+		print("Creating Temp Files ...\n\n Wait...\n")
         homedir=os.environ["HOME"]
 	#this may vary according to KDE version. We need to specify which kde is running
 	if debug:
