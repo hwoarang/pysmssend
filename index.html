@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Pysmssend is a program written in python, used to send sms through voip accounts. Currently the only supported OS are some distributions of Linux." />
+		<meta name="keywords" content="Pysmssend, Linux, Python program, Voip, sms, Internet, Markos Chandras" />		
+		<title>PySMSsend</title>
+
+		<style type="text/css">
+			<!--
+			body {background-color: #CCCCCC;}
+			.style41 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: small;}
+			.style45 {font-size: medium; font-family: Verdana, Arial, Helvetica, sans-serif;}
+			.style50 {font-weight: bold; color: #000000;}
+			.style52 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: x-small;color: #999999;}
+			.style54 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: x-small; }
+			-->
+		</style>
+	</head>
+
+<body>
+<p align="center"><img src="sit3-shine.7.gif" alt="Image cannot be loaded - Linux Penguin" width="164" height="180" /></p>
+<p align="center" class="style50"><u><font size="5" face="Verdana">PYSMSSEND PROJECT</font></u></p>
+<br /><br />
+<p align="left" class="style54"><strong>Project Name:</strong> <u>Pysmssend</u></p>
+<p align="left" class="style54"><strong>Current Version:</strong> 
+<em>1.42</em></p>
+<p align="left" class="style54"><strong>Operating System:</strong> <i><a href="http://en.wikipedia.org/wiki/Linux">Linux</a></i></p>
+<p align="left" class="style54"><strong>Programming Language: </strong><i><a href="http://www.python.org">Python</a></i></p>
+<p align="left" class="style54"><strong>Licence:</strong> <i> <a href="LICENCE">GNU General Public Licence</a></i></p>
+<p align="left" class="style54"><strong>Git (for Developers &amp; Beta Testers.): </strong><i><a 
+href="http://github.com/hwoarang/pysmssend/tree/master">Repository</a></i></p>
+<p align="left" class="style54"><strong>Bugzilla: </strong><i><a href="http://sourceforge.net/tracker/?group_id=205459">Bugs Report 
+</a></i>
+<p align="left" class="style54"><strong>Development Team:</strong> <em><a 
+href="http://hwoarang.silverarrow.org">Markos Chandras</a>, <a href="http://www.void.gr/kargig">Giorgos 
+Kargiotakis</a>, Giorgos Triantafullou, Lazaros Tsolakidis </em></p>
+<p align="left" class="style54"><strong>Support/Donate:</strong> <em>If you like the program you can support its further development 
+using paypal
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="image" src="http://hwoarang.silverarrow.org/wp-content/themes/fluidity3c/images/paypal.gif" style="border-width: 0"
+name="submit" alt="Make payments with PayPal - it's fast, free and secure!" /><br />
+<input type="hidden" name="cmd" value="_xclick" />
+<input type="hidden" name="business" value="markaki2002@yahoo.gr" />
+<input type="hidden" name="item_name" value="Donation to Pysmssend Project" />
+<input type="hidden" name="no_shipping" value="1" />
+<input type="hidden" name="return" value="http://pysmssend.silverarrow.org" />
+<input type="hidden" name="no_note" value="1" />
+<input type="hidden" name="currency_code" value="EUR" />
+<input type="hidden" name="tax" value="0" />
+<input type="hidden" name="lc" value="GR" />
+<input type="hidden" name="bn" value="PP-DonationsBF" />
+<img alt="" style="border-width: 0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+</form>
+</em>
+</p>
+<p align="center" class="style41">Bugs &amp; Requests (<em>Do not change mail subject</em>): <a href="mailto:hwoarang@silverarrow.org?subject=Pysmssend%20Project">Support</a></p>
+<p align="center" class="style41">&nbsp;</p>
+<hr size="2" />
+<p class="style41">Pysmssend project is a program for sending sms over the internet using your ADSL/VOIP provider account. The program has both GUI and Command line interfaces so that it can fullfil any needs.<br />
+  The providers currently supported are:</p>
+<ul type="circle">
+	<li><span class="style41"><b>Otenet</b></span></li>
+	<li><span class="style41"><b>Forthnet</b></span></li>
+	<li><span class="style41"><b>Voipbuster</b></span></li>
+	<li><span class="style41"><b>Voipdiscount</b></span></li>
+	<li><span class="style41"><b>LowrateVoip</b></span></li>
+	<li><span class="style41"><b>12Voip</b></span></li>
+	<li><span class="style41"><b>VoipbusterPro</b></span></li>
+	<li><span class="style41"><b>Freevoip</b></span></li>
+	<li><span class="style41"><b>WebcallDirect</b></span></li>
+	<li><span class="style41"><b>Yahoo(beta)</b></span></li>
+	<li><span class="style41"><b>Voipcheap</b></span></li>
+	<li><span class="style41"><b>JustVoip</b></span><br><br></li>
+</ul>
+Please note that we havent tested all the providers. Fill a bug if you encounter any problem.<br 
+/>
+<p class="style41">Also many development has been done to support Gentoo Ebuilds and use flag qt4. Gentoo users can compile it with or without qt4 flag in order to have gui or not (accordingly) interface. The Ebuild will be on Bugzilla soon.<br />
+  Pkgbuild are also available on AUR for both i686 and amd64 architectures. <br />
+  Packages for Ubuntu/Debian are also available.<br />
+</p>
+<p class="style41">We would like to inform you that we would be grateful to support more providers worldwide. 
+In order to do this we will need your help as the Development Team is located in Greece 
+thus we do not have accounts on foreign providers.<br />
+</p>
+<p class="style41">Hope you like the program and enjoy it. Please consult command line manual (pysmssend -h ) or README for more information.</p>
+<br />If you want to help, you can contact me on <u>hwoarang--at--silverarrow.org</u> . 
+Developers 
+and 
+Beta 
+Testers are 
+always welcome :)
+<br /><br />
+<div align="center">
+<!-- <b> Current Open bugs </b><br>
+<!-- Bug: <a href="https://sourceforge.net/tracker/index.php?func=detail&aid=1898065&group_id=205459&atid=993724"><!-- bug #1898055 --> 
+<!-- </a> -->
+<!-- None ;) -->
+<br><br>
+<p><b><u>Stable Version</u></b></p>
+</div>
+<div align="center">
+<table width="1134" border="1" cellspacing="1" bordercolor="#000000">
+  <tr>
+    <th width="127" scope="col"><span class="style45">Release Date </span></th>
+    <th width="220" scope="col"><span class="style45">Download Links </span></th>
+    <th width="397" scope="col"><span class="style45">Comments</span></th>
+    <th width="104" scope="col"><span class="style45">Change Log </span></th>
+    <th width="134" scope="col"><span class="style45">Installation</span></th>
+    <th width="119" scope="col"><span class="style45">README</span></th>
+  </tr>
+  <tr>
+    <td rowspan="5"><div align="center" class="style41">16/10/2009</div></td>
+    <td><div align="center" class="style41"><a 
+href="http://www.silverarrow.org/projects/pysmssend/pysmssend-1.42.tar.gz">Pysmssend-1.42</a></div></td>
+    <td><div align="left" class="style41">Build for all Linux distributions</div></td>
+    <td rowspan="5"><div align="center" class="style41"><a href="CHANGELOG">1.42</a></div></td>
+    <td rowspan="5"><div align="center" class="style41"><a href="INSTALL">Install</a></div></td>
+    <td rowspan="5"><div align="center" class="style41"><a href="README">Readme</a></div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="style41"><a href="http://packages.gentoo.org/package/app-misc/pysmssend">Gentoo Linux Ebuild</a></div></td>
+    <td><div align="left" class="style41">Ebuild for Gentoo Linux distribution</div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="style41">
+<a href="http://aur.archlinux.org/packages.php?do_Details=1&ID=12972&O=0&L=&C=&K=&SB=&SO=&PP=&do_MyPackages=1&do_Orphans=&SeB=">Arch Linux PkgBuild</a></div></td>
+    <td><div align="left" class="style41">Package for Arch Linux distribution</div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="style41"><a 
+href="http://www.silverarrow.org/projects/pysmssend/pysmssend_1.4.2-1-all.deb">Debian/Ubuntu package</a></div></td>
+    <td><div align="left" class="style41">Package for Debian based/Ubuntu Linux distribution</div></td>
+  </tr>
+  <tr>
+	<td><div align="center" class="style41"><a
+		href="http://www.mandrivalinux.gr/rpm/2010.0/noarch/pysmssend-1.42-1mlgr2010.0.noarch.rpm">Mandiva Linux</a>
+	</div></td>
+	<td><div align="left" class="style41">Package for Mandiva Linux</div></td>
+  </tr>
+  </tr>
+</table>
+<br><br><br>
+<p><b><u>Git Repository</u></b></p>
+Clone the new <a href="http://github.com/hwoarang/pysmssend">git repository</a> in order to get the latest changes
+
+<br /><br /><p><b><u>Snapshot</u></b></p>
+
+<table width="1134" border="1" cellspacing="1" bordercolor="#000000">
+  <tr>
+    <th width="220" scope="col"><span class="style45">Download Links </span></th>
+    <th width="220" scope="col"><span class="style45">Whats new </span></th>
+  </tr>
+<tr>
+	 <td><div align="center" class="style41"><a 
+href="http://www.silverarrow.org/projects/pysmssend/pysmssend-1.43_pre20100118.tar.gz">Pysmssend-1.43_pre20100118</a></div></td>
+	<td><div align="center" class="style41"><a
+href="http://github.com/hwoarang/pysmssend/commits/master">Changelog</a></div></td>
+</div></td></tr>
+</table>
+</div>
+
+
+<p align="center" class="style41">Below there are some screenshots of the program in action.</p>
+<p align="center" class="style41">&nbsp;<i><font size="2">(Version maybe not be 
+the latest. Screenshot are given as a reference only.)</font></i></p>
+<p align="center">
+<img border="0" src="pysmssend-2.24.jpg" width="528" height="409" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img border="0" src="pysmssend-3.24.jpg" width="528" height="409"></p>
+<p align="center">
+<img border="0" src="pysmssend_3.jpg" width="536" height="412"><br /><br />
+</p>
+<p align="center">
+<img border="0" src="pysmssend-4.24SMALL.JPG" width="754" height="191" /></p>
+&nbsp;<br /><br />
+<p align="center" class="style41"><i><a href="AUTHORS">Credits</a></i> </p>
+<p align="center" class="style41"><em><strong>The  Development Team</strong></em></p>
+<p align="center" class="style52">Webpage Version 1.4, Designed by M4rk and Hwoarang. </p>
+<p align="center" class="style52">Page updated on 18/01/2010</p>
+<script type="text/javascript">
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+<script type="text/javascript">
+
+try {
+
+var pageTracker = _gat._getTracker("UA-2921597-7");
+
+pageTracker._trackPageview();
+
+} catch(err) {}</script>
+</body>
+</html>

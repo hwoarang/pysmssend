@@ -9,7 +9,7 @@ acc_openlogin = {
 	'12voip':'https://myaccount.12voip.com/clx/index.php?part=plogin&username=Znexbf6430&password=',	
 	'webcalldirect':'https://myaccount.webcalldirect.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
 	'nonoh':'https://myaccount.nonoh.net/clx/index.php?part=plogin&username=Znexbf6430&password=',
-	'voipcheap':'https://myaccount.voipcheap.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
+	'voipcheap':'https://www.voipcheap.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
 	'voipraider':'https://myaccount.voipraider.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
 	'justvoip':'https://myaccount.justvoip.com/clx/index.php?part=plogin&username=Znexbf6430&password=',
 	'forthnet':'https://www.forthnet.gr/secure/webSMS/login.aspx?'
@@ -23,7 +23,7 @@ acc_opensms = {
 	'freevoip':'https://myaccount.freevoip.com/clx/index.php?part=menu&justloggedin=true',
 	'12voip':'https://myaccount.12voip.com/clx/index.php?part=menu&justloggedin=true',
 	'webcalldirect':'https://myaccount.webcalldirect.com/clx/index.php?part=menu&justloggedin=true',
-	'voipcheap':'https://myaccount.voipcheap.com/clx/index.php?part=menu&justloggedin=true',
+	'voipcheap':'https://www.voipcheap.com/myaccount/index.php?part=menu&justloggedin=true',
 	'nonoh':'https://myaccount.nonoh.net/clx/index.php?part=menu&justloggedin=true',
 	'justvoip':'https://myaccount.justvoip.com/clx/index.php?part=menu&justloggedin=true',
 	'voipraider':'https://myaccount.voipraider.com/clx/index.php?part=menu&justloggedin=true',
@@ -39,7 +39,7 @@ acc_verify = {
 	'freevoip':'https://myaccount.freevoip.com/clx/index.php?part=menu&justloggedin=true',
 	'12voip':'https://myaccount.12voip.com/clx/index.php?part=menu&justloggedin=true',
 	'webcalldirect':'https://myaccount.webcalldirect.com/clx/index.php?part=menu&justloggedin=true',
-	'voipcheap':'https://myaccount.voipcheap.com/clx/index.php?part=menu&justloggedin=true',
+	'voipcheap':'https://www.voipcheap.com/myaccount/index.php?part=menu&justloggedin=true',
 	'nonoh':'https://myaccount.nonoh.net/clx/index.php?part=menu&justloggedin=true',
 	'voipraider':'https://myaccount.voipraider.net/clx/index.php?part=menu&justloggedin=true',
 	'justvoip':'https://myaccount.justvoip.com/clx/index.php?part=menu&justloggedin=true'
@@ -56,7 +56,7 @@ acc_opensms2 = {
 'webcalldirect':'https://myaccount.webcalldirect.com/clx/sendsms.php?username=',
 'nonoh':'https://myaccount.nonoh.com/clx/sendsms.php?username=',
 'justvoip':'https://myaccount.justvoip.com/clx/sendsms.php?username',
-'voipcheap':'https://myaccount.voipcheap.com/clx/sendsms.php?username',
+'voipcheap':'https://www.voipcheap.com/myaccount/sendsms.php?username',
 'voipraider':'https://myaccount.voipraider.com/clx/sendsms.php?username'
 
 }

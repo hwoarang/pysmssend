@@ -2,3 +2,4 @@ tarball.sh
 clean.sh
 *.swp
 nightly.sh
+index.html
