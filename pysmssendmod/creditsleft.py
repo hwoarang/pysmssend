@@ -24,7 +24,7 @@
 def creditsleft(f,account,foobar,verbose):
 	if account != "otenet" and account != "forthnet":
 		if verbose:
-			print(account+": Trying to find how much money left ...\n")
+			print account+": Trying to find how much money left ...\n"
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
 		html=gethtml.read()
 		balance=html.find("balanceid")
@@ -34,10 +34,10 @@ def creditsleft(f,account,foobar,verbose):
 		final=creditsleft[0]
 		f.ui.credits.setText("Credits Left : "+str(final))
 		if verbose:
-			print("you have "+final+" left...\n")
+			print "you have "+final+" left...\n"
 	elif account=="otenet":
 		if verbose:
-			print("Otenet: Trying to find how many messages you can send..\n")
+			print "Otenet: Trying to find how many messages you can send..\n"
 		foobar.open("http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do")
 		gethtml=foobar.response()
 		html=gethtml.read()
@@ -51,10 +51,10 @@ def creditsleft(f,account,foobar,verbose):
 		final=left[0]
 		f.ui.credits.setText(str(final)+" sms left for today :-)")
 		if verbose:
-			print("you can send "+final+" messages ..\n")
+			print "you can send "+final+" messages ..\n"
 	elif account=="forthnet":#this means forthnet
 		if verbose:
-			print("Forthnet: Retrieving credits...\n")
+			print "Forthnet: Retrieving credits...\n"
 			gethtml=foobar.response()
 			html=gethtml.read()
 			balance=html.find("<span id=\"SentItems2Phase1_lbPerDay\">")

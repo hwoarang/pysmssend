@@ -34,7 +34,7 @@ foobar.set_handle_robots(False)
 
 ## this function is called when login failed ##
 def errorlogin(f,account):
-	f.ui.Result1.setText("Login to "+account+" failed")
+        f.ui.Result1.setText("Login to "+account+" failed")
 	f.ui.credits.clear()
 	f.ui.lineEdit3.setReadOnly(True)
 	f.ui.textEdit.setReadOnly(True)
@@ -60,11 +60,11 @@ def mylogin(f,tray,verbose):
 	testfoo.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
 	try:
 		if verbose:
-			print("Contacting url --> "+login_page+"...")
+			print "Contacting url --> "+login_page+"..."
 		foobar.open(login_page)
 	except:
 		#this means that we couldnt connect to the site because of a network error
-		print("ERROR: Please check your connection with your ISP...")
+		print "ERROR: Please check your connection with your ISP..."
 		errorlogin(f,account)
 		tray.showlogin(account,0)
 	
@@ -81,10 +81,10 @@ def mylogin(f,tray,verbose):
 		foobar["Username"] = username
 		foobar["Password"] = password
 	if verbose:
-		print("Submitting your data...")
+		print "Submitting your data..."
 	foobar.submit()
 	if verbose:
-		print("Done")
+		print "Done"
 	pass #create a small delay...
 	if account=="otenet":
 		acc_page="http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do"
@@ -92,7 +92,7 @@ def mylogin(f,tray,verbose):
 		acc_page = acc_opensms[str(account)]
 	testfoo=foobar
 	if verbose:
-		print("Getting login feedback from --> "+acc_page+"...")
+		print "Getting login feedback from --> "+acc_page+"..."
 	foobar.open(acc_page)
 	# Find out the remaining credits for our account
 	error=0
@@ -111,20 +111,20 @@ def mylogin(f,tray,verbose):
 		myallowsend(f,leftcred,account)
 		if f.ui.rememberMe.checkState()==2:#if Remember Me is ON
 			if verbose:
-				print("Saving account...")
+				print "Saving account..."
 			try:
 			       file=open(homedir+TEMPDIR+account,"w")#open file according to account
 			       file.write(username+"\n")#write username
 			       file.write(password+"\n")#write password
 			       file.close()#close it
 			       if verbose:
-			       		print("Account saved.. :-)")
+			       		print "Account saved.. :-)"
 			except:
-				print("ERROR: Account was not stored!")
+				print "ERROR: Account was not stored!"
 		else:#delte the file
 			if os.path.exists(homedir+TEMPDIR+account):
 				if verbose:
-					print("Deleting your saved account...")
+					print "Deleting your saved account..."
 				os.remove(homedir+TEMPDIR+account)
 		#display supported number format
 		phonemessage=QtCore.QString("-- ")

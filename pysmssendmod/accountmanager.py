@@ -44,7 +44,7 @@ def createmanager(self,Form):
 	self.tableWidget_2.clear()
 	#Set title on the table
 	headerItem2 = QtGui.QTableWidgetItem()
-	headerItem2.setText(QtGui.QApplication.translate("Sent", "Account", None, QtGui.QApplication.UnicodeUTF8))
+        headerItem2.setText(QtGui.QApplication.translate("Sent", "Account", None, QtGui.QApplication.UnicodeUTF8))
 	for i in range(0,num):
 		headerItem2 = QtGui.QTableWidgetItem()
 		headerItem2.setText(QtGui.QApplication.translate("self",str(i+1), None, QtGui.QApplication.UnicodeUTF8))

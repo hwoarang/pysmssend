@@ -1,5 +1,5 @@
 def usage():                                            
-	print(""")
+	print """
 		pysmssend         Send SMS over the Internet
         
 		type 'pysmssend' for Gui interface
