@@ -23,13 +23,8 @@ import sys,signal
 import os
 import getopt
 import re
-#set  /usr/lib/python2.X/site-packges path as first
-#find python version
-v1=sys.version
-v2=v1[0:3]
-final="/usr/lib/python"+v2+"/site-packages/"
-sys.path.insert(1,final)
-#end of hack
+
+#Define variables
 homedir=os.environ["HOME"]
 SHAREDIR="/usr/share/pysmssend/"
 TEMPDIR="/.pysmssend/"

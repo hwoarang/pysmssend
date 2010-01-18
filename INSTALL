@@ -2,7 +2,7 @@ Full Release
 
 ** Install from package manager
 
-Use the package for your distro to install the package
+Thanks to various packages, the below distors offer packages for pysmssend
 
 Packages available for:
 1) Ubuntu
@@ -10,7 +10,11 @@ Packages available for:
 3) Gentoo
 4) Arch
 
+Visit http://pysmssend.silverarrow.org to download them
+
+
 ** Install using included scripts
+
 You can use the install/uninstall scripts to install/uninstall the program on every distro
 
 	INSTALL:
@@ -21,6 +25,6 @@ can untar is on a folder on your $HOME and launch it from there without installa
 
 	UNINSTALL:
 
-On the folder where you untar the program run the uninstall.sh script 
+On the folder where you had untared the program run the uninstall.sh script 
 
 Please delete on your own the folder ~/.pysmssend 
