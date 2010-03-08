@@ -8,11 +8,12 @@ from pysmssendmod.sites import *
 
 
 def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
-	acc_page = acc_opensms[str(account)]#find page
-	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
-	testfoo=foobar
-	if account=="otenet" or account=="forthnet":
-		foobar.open(acc_page)
+	if account != "pennytel":
+		acc_page = acc_opensms[str(account)]#find page
+		foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
+		testfoo=foobar
+		if account=="otenet" or account=="forthnet":
+			foobar.open(acc_page)
 	#get message and phone and username and password
 	username=f.ui.lineEdit.text()
         password=f.ui.lineEdit2.text()
@@ -47,6 +48,17 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 				print "Sending..."
          		foobar.submit()
 			sent=1
+		elif account=="pennytel":
+			from SOAPpy import WSDL                                                                                            
+			import SOAPpy
+			if verbose:
+				print "Sending to " + number + "..."
+			WSDLFILE = 'http://pennytel.com/pennytelapi/services/PennyTelAPI?WSDL'
+			_server = WSDL.Proxy(WSDLFILE)
+			sendTime=SOAPpy.dateTimeType((2000, 1, 1, 0, 0, 0, 4, 86, 0))
+			results = _server.sendSMS(
+			username,password,1,number,message,sendTime)
+			sent=1
 		else:# betamax
 			#fixing the url
 			url=acc_opensms2[str(account)]
@@ -79,7 +91,7 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 		sent=0
         if sent==1:
 		# get new credits lets
-		if account!="forthnet":
+		if account!="forthnet" and account!="pennytel":
 			cred=creditsleft(f,account,testfoo,verbose)
 		elif account=="forthnet":
 			gethtml=foobar.response()
@@ -90,7 +102,16 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
 		        cred=str(5-int(temp3[0]))
-		if account=="otenet" or account=="forthnet":
+		if account=="pennytel":
+			WSDLFILE = 'http://pennytel.com/pennytelapi/services/PennyTelAPI?WSDL'
+			_server = WSDL.Proxy(WSDLFILE)
+			leftcred,blocked,currency,lastusage,others,zerobalancedate = _server.getAccount(username,password)
+			tray.showsentreport("Message was sent successfully ;-)",1)
+			f.ui.Result1.clear()
+			f.ui.credits.setText("Credit Left : "+str(leftcred))
+			f.ui.lineEdit_3.clear()
+			f.ui.textEdit.clear()
+		elif account=="otenet" or account=="forthnet":
 			if account=="otenet":
 				username=f.ui.lineEdit.text()
 				size2=145-len(username)

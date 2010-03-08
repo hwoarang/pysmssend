@@ -22,7 +22,7 @@
 #really really cool function :P
 #shows us how much money left on our account ( or messages for otenet
 def creditsleft(f,account,foobar,verbose):
-	if account != "otenet" and account != "forthnet":
+	if account != "otenet" and account != "forthnet" and account != "pennytel":
 		if verbose:
 			print account+": Trying to find how much money left ...\n"
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
