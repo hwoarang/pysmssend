@@ -40,7 +40,7 @@ class trayicon:
 		self.trayic.Exit=ActionsMenu.addAction(exiticon,"Quit Pysmssend")
 		self.trayic.setContextMenu(ActionsMenu)
 		self.trayic.show()
-		self.trayic.setToolTip("Pysmssend 1.42")
+		self.trayic.setToolTip("Pysmssend 1.44")
 
 	def showsentreport(self,message,status):
 		self.status=status

@@ -31,7 +31,7 @@ TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 global account,verbose,username,password,text,debug
 debug=False
-version="1.42"
+version="1.44"
 modules=['pysmssendgui','about','tray','accountmanager','updater','updater2','myloadaccount','checklength','myinserts','mydeleteaccount','myallowsend','creditsleft','login','mysmssend','usage','mystoreaccount']
 
 #Check for pyqt4 support
