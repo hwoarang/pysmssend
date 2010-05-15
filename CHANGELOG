@@ -1,5 +1,10 @@
  ***************************CHANGE LOG********************
 
+** 1.45
+
+1) Fix local variable bug ( bug #3002071 )
+2) Fix Betamax login page url
+
 ** 1.44
 
 1) Code clean up
