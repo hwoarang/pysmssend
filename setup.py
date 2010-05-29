@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(name='pysmssend',
-    version='1.44',
+    version='1.45',
     description='Send SMS over the Internet',
     author='Markos Chandras',
     author_email='hwoarang@silverarrow.org',

@@ -29,8 +29,6 @@ homedir=os.environ["HOME"]
 SHAREDIR="/usr/share/pysmssend/"
 TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
-foobar=Browser()
-foobar.set_handle_robots(False)
 
 ## this function is called when login failed ##
 def errorlogin(f,account):
@@ -94,6 +92,8 @@ def mylogin(f,tray,verbose):
 	else:
 		testfoo=Browser()
 		testfoo.set_handle_robots(False)
+		foobar=Browser()
+		foobar.set_handle_robots(False)
 		# acc_openlogin is defined on sites modules
 		login_page=acc_openlogin[str(account)]
 		## insert headers  ##

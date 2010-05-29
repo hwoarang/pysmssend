@@ -2312,8 +2312,8 @@ class Ui_Sent(object):
         self.Tabs.setCurrentIndex(0)
        
     def retranslateUi(self, Sent,lines):
-        Sent.setWindowTitle(QtGui.QApplication.translate("Sent", "Pysmssend 1.44", None, QtGui.QApplication.UnicodeUTF8))
-        Sent.setStatusTip(QtGui.QApplication.translate("Sent", "Pysmssend 1.44", None, QtGui.QApplication.UnicodeUTF8))
+        Sent.setWindowTitle(QtGui.QApplication.translate("Sent", "Pysmssend 1.45", None, QtGui.QApplication.UnicodeUTF8))
+        Sent.setStatusTip(QtGui.QApplication.translate("Sent", "Pysmssend 1.45", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("Sent", "Service", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setStatusTip(QtGui.QApplication.translate("Sent", "Choose your provider", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.setWhatsThis(QtGui.QApplication.translate("Sent", "Select the service you want", None, QtGui.QApplication.UnicodeUTF8))

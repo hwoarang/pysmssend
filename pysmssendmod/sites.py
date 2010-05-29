@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 acc_openlogin = {
 	'otenet':'http://tools.otenet.gr/tools/index.do',
-	'voipbuster':'https://www.voipbuster.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'lowratevoip':'https://www.lowratevoip.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',	
-	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'freevoip':'https://www.freevoip.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'12voip':'https://www.12voip.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',	
-	'webcalldirect':'https://www.webcalldirect.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'nonoh':'https://www.nonoh.net/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'voipcheap':'https://www.voipcheap.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'voipraider':'https://www.voipraider.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
-	'justvoip':'https://www.justvoip.com/myaccount/index.php?part=plogin&username=Znexbf6430&password=',
+	'voipbuster':'https://www.voipbuster.com/myaccount/index.php',
+	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php',
+	'lowratevoip':'https://www.lowratevoip.com/myaccount/index.php',	
+	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php',
+	'freevoip':'https://www.freevoip.com/myaccount/index.php',
+	'12voip':'https://www.12voip.com/myaccount/index.php',	
+	'webcalldirect':'https://www.webcalldirect.com/myaccount/index.php',
+	'nonoh':'https://www.nonoh.net/myaccount/index.php',
+	'voipcheap':'https://www.voipcheap.com/myaccount/index.php',
+	'voipraider':'https://www.voipraider.com/myaccount/index.php',
+	'justvoip':'https://www.justvoip.com/myaccount/index.php',
 	'forthnet':'https://www.forthnet.gr/secure/webSMS/login.aspx?'
 	}	
 acc_opensms = {
