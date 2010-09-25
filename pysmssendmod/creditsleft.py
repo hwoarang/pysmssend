@@ -22,14 +22,14 @@
 #really really cool function :P
 #shows us how much money left on our account ( or messages for otenet
 from pysmssendmod.sites import *
-import urllib2
 
 def creditsleft(f,account,foobar,verbose):
 	if account != "otenet" and account != "forthnet" and account != "pennytel":
 		if verbose:
 			print account+": Trying to find how much money left ...\n"
-		respfoobar.open(acc_opensms[str(account)])
+		resp=foobar.open(acc_opensms[str(account)])
 		html=resp.read()
+		print html
 		balance=html.find("balanceid")
 		balanceline=html[balance:]
 		euros=balanceline.split('&nbsp;')

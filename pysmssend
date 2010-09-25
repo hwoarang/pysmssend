@@ -78,9 +78,7 @@ if __name__=="__main__":
 		def checkforupdates():
 			if verbose:
 				print "Checking for new version"
-			updater=Browser()
-		    	updater.open("http://pysmssend.silverarrow.org")
-		    	data1=updater.response()
+		    	data1=urllib2.urlopen("http://pysmssend.silverarrow.org")
 		    	data2=data1.read()
 		    	data3=data2.find("Current Version")
 		    	data4=data2[data3:].split("<em>")[1].split("</em>")[0] 
@@ -135,8 +133,8 @@ if __name__=="__main__":
 		def createabout():
 			about.show()
 		def sendsms():	
-			global account_loggedin,foobar,leftcred,username,password
-			mysmssend(foobar,f,tray,account_loggedin,verbose,leftcred,username,password)
+			global account_loggedin,leftcred,username,password
+			mysmssend(f,tray,account_loggedin,verbose,leftcred,username,password)
 	
 
 
