@@ -4,3 +4,4 @@ clean.sh
 *.swp
 *.tar.gz
 nightly.sh
+*.pyc
