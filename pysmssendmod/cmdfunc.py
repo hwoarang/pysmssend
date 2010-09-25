@@ -169,7 +169,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 			html=gethtml.read()
 			balance=html.find("<span id=\"lbPerDay\">")
 			balanceline=html[balance:]
-			temp1=balanceline.split("<span id=\"lbPerDay\">")
+			temp1=balancelinie.split("<span id=\"lbPerDay\">")
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
 			leftcred2=str(5-int(temp3[0]))
@@ -183,12 +183,11 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 		if verbose:
 			print "Sending..."
 		req = urllib2.Request(acc_opensms2[str(account)], data, headers)
-		#small delay
-		pass
-		pass
-		pass
 		#its not my fault if betamax sends wrong reports
 		response=urllib2.urlopen(req)
+		pass
+		pass
+		pass
 		report=response.read()
 	        #lets find out if the message was sent correctly
 		data_response1=report.find("<resultstring>")

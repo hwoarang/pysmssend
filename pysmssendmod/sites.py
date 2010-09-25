@@ -47,16 +47,16 @@ acc_verify = {
 
 acc_opensms2 = {
 'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
-'voipbuster':'https://www.voipbuster.com/myaccount/sendsms.php?username=',
-'voipdiscount':'https://www.voipdiscount.com/myaccount/sendsms.php?username=',
-'lowratevoip':'https://www.lowratevoip.com/myaccount/sendsms.php?username=',
-'voipbusterpro':'https://www.voipbusterpro.com/myaccount/sendsms.php?username=',
-'freevoip':'https://www.freevoip.com/myaccount/sendsms.php?username=',
-'12voip':'https://www.12voip.com/myaccount/sendsms.php?username=',
-'webcalldirect':'https://www.webcalldirect.com/myaccount/sendsms.php?username=',
-'nonoh':'https://www.nonoh.com/myaccount/sendsms.php?username=',
-'justvoip':'https://www.justvoip.com/myaccount/sendsms.php?username',
-'voipcheap':'https://www.voipcheap.com/myaccount/sendsms.php?username',
-'voipraider':'https://www.voipraider.com/myaccount/sendsms.php?username'
+'voipbuster':'https://www.voipbuster.com/myaccount/sendsms.php?',
+'voipdiscount':'https://www.voipdiscount.com/myaccount/sendsms.php?',
+'lowratevoip':'https://www.lowratevoip.com/myaccount/sendsms.php?',
+'voipbusterpro':'https://www.voipbusterpro.com/myaccount/sendsms.php?',
+'freevoip':'https://www.freevoip.com/myaccount/sendsms.php?',
+'12voip':'https://www.12voip.com/myaccount/sendsms.php?',
+'webcalldirect':'https://www.webcalldirect.com/myaccount/sendsms.php?',
+'nonoh':'https://www.nonoh.com/myaccount/sendsms.php?',
+'justvoip':'https://www.justvoip.com/myaccount/sendsms.php?',
+'voipcheap':'https://www.voipcheap.com/myaccount/sendsms.php?',
+'voipraider':'https://www.voipraider.com/myaccount/sendsms.php?'
 
 }
