@@ -29,7 +29,6 @@ def creditsleft(f,account,foobar,verbose):
 			print account+": Trying to find how much money left ...\n"
 		resp=foobar.open(acc_opensms[str(account)])
 		html=resp.read()
-		print html
 		balance=html.find("balanceid")
 		balanceline=html[balance:]
 		euros=balanceline.split('&nbsp;')

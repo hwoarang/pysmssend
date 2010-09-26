@@ -136,16 +136,16 @@ def mylogin(f,tray,verbose):
 			print "Getting login feedback from --> "+acc_page+"..."
 		# Find out the remaining credits for our account
 		error=0
-		#try:
-		leftcred=creditsleft(f,account,testfoo,verbose)
-		pass
-		pass
-		pass
-		error=0;
-		#except:
-		#	errorlogin(f,account)
-		#	tray.showlogin(account,0)
-		#	error=1;
+		try:
+			leftcred=creditsleft(f,account,testfoo,verbose)
+			pass
+			pass
+			pass
+			error=0
+		except:
+			errorlogin(f,account)
+			tray.showlogin(account,0)
+			error=1
 	# Give feedback to user
 	if error==0:# pass only if everything was ok
 		f.ui.Result1.setText("Logged in to "+account+" ;-)")			
