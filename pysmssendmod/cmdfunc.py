@@ -50,16 +50,17 @@ def creditsleft(account,foobar,verbose):
 		temp1=dataline.split("""class="txtmov10b_yellow">""")
 		temp2=temp1[1]
 		left=temp2.split("</span>")
-		final=str(5-int(left[0]))
+		final=str(int(left[0]))
         elif account=="forthnet":
 		gethtml=foobar.response()
 		html=gethtml.read()
-                balance=html.find("<span id=\"SentItems1_lbPerDay\">")
+                balance=html.find("<span id=\"SentItems2Phase1_lbPerMonth\">")
        	        balanceline=html[balance:]
-               	temp1=balanceline.split("<span id=\"SentItems1_lbPerDay\">")
+               	temp1=balanceline.split("<span id=\"SentItems2Phase1_lbPerMonth\">")
        	        temp2=temp1[1].split("</span>")
                 temp3=temp2[0].split("/");
-               	final=str(5-int(temp3[0]))
+		print temp3
+               	final=str(int(temp3[0]))
 	#final is the amount of money we have :)		
 	return final
 #############################################################################
@@ -169,7 +170,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 			html=gethtml.read()
 			balance=html.find("<span id=\"lbPerDay\">")
 			balanceline=html[balance:]
-			temp1=balancelinie.split("<span id=\"lbPerDay\">")
+			temp1=balanceline.split("<span id=\"lbPerDay\">")
 			temp2=temp1[1].split("</span>")
 			temp3=temp2[0].split("/");
 			leftcred2=str(5-int(temp3[0]))
@@ -183,11 +184,12 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 		if verbose:
 			print "Sending..."
 		req = urllib2.Request(acc_opensms2[str(account)], data, headers)
+		#small delay
+		pass
+		pass
+		pass
 		#its not my fault if betamax sends wrong reports
 		response=urllib2.urlopen(req)
-		pass
-		pass
-		pass
 		report=response.read()
 	        #lets find out if the message was sent correctly
 		data_response1=report.find("<resultstring>")
