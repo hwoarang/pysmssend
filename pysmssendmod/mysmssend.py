@@ -78,12 +78,7 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 			#constructing the url
 			req = urllib2.Request(url+data, headers=headers)
 			response=urllib2.urlopen(req)
-			#create a 4 seconds delay. If you are using adsl you want have any problems
-			#for those people who use dial up im sorry :P
-			#this delay is to allo urllib2 to give us a proper report of sms
 			time.sleep(4)
-			#im doing this because urllib is kinda stupid and returns false response if i dont add a small delay
-			#duh
 			report=response.read()
 			sent=1
 	except:
