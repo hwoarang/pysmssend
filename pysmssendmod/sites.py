@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 acc_openlogin = {
 	'otenet':'http://tools.otenet.gr/tools/index.do',
-	'voipbuster':'https://www.voipbuster.com/myaccount/index.php',
+	'voipbuster':'https://www.voipbuster.com/en/login',
 	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php',
 	'lowratevoip':'https://www.lowratevoip.com/myaccount/index.php',	
 	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php',
@@ -16,7 +16,7 @@ acc_openlogin = {
 	}	
 acc_opensms = {
 	'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
-	'voipbuster':'https://www.voipbuster.com/myaccount/index.php?part=menu&justloggedin=true',
+	'voipbuster':'https://www.voipbuster.com/en/web_sms',
 	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php?part=menu&justloggedin=true',
 	'lowratevoip':'https://www.lowratevoip.com/myaccount/index.php?part=menu&justloggedin=true',
 	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php?part=menu&justloggedin=true',
@@ -46,17 +46,17 @@ acc_verify = {
 }
 
 acc_opensms2 = {
-'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
-'voipbuster':'https://www.voipbuster.com/myaccount/sendsms.php?',
-'voipdiscount':'https://www.voipdiscount.com/myaccount/sendsms.php?',
-'lowratevoip':'https://www.lowratevoip.com/myaccount/sendsms.php?',
-'voipbusterpro':'https://www.voipbusterpro.com/myaccount/sendsms.php?',
-'freevoip':'https://www.freevoip.com/myaccount/sendsms.php?',
-'12voip':'https://www.12voip.com/myaccount/sendsms.php?',
-'webcalldirect':'https://www.webcalldirect.com/myaccount/sendsms.php?',
-'nonoh':'https://www.nonoh.com/myaccount/sendsms.php?',
-'justvoip':'https://www.justvoip.com/myaccount/sendsms.php?',
-'voipcheap':'https://www.voipcheap.com/myaccount/sendsms.php?',
-'voipraider':'https://www.voipraider.com/myaccount/sendsms.php?'
+	'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
+	'voipbuster':'https://www.voipbuster.com/myaccount/sendsms.php?',
+	'voipdiscount':'https://www.voipdiscount.com/myaccount/sendsms.php?',
+	'lowratevoip':'https://www.lowratevoip.com/myaccount/sendsms.php?',
+	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/sendsms.php?',
+	'freevoip':'https://www.freevoip.com/myaccount/sendsms.php?',
+	'12voip':'https://www.12voip.com/myaccount/sendsms.php?',
+	'webcalldirect':'https://www.webcalldirect.com/myaccount/sendsms.php?',
+	'nonoh':'https://www.nonoh.com/myaccount/sendsms.php?',
+	'justvoip':'https://www.justvoip.com/myaccount/sendsms.php?',
+	'voipcheap':'https://www.voipcheap.com/myaccount/sendsms.php?',
+	'voipraider':'https://www.voipraider.com/myaccount/sendsms.php?'
 
 }

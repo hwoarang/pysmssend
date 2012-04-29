@@ -115,7 +115,10 @@ def mylogin(f,tray,verbose):
 			foobar.select_form(name="loginform") 
 		else:
 			foobar.select_form(nr=0)
-		if account!="forthnet":
+		if account == "voipbuster":
+			foobar["login[username]"] = username
+			foobar["login[password]"] = password
+		elif account != "forthnet":
 			foobar["username"] = username
 			foobar["password"] = password
 		else:#forthnet

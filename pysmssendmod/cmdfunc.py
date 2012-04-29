@@ -31,14 +31,23 @@ foobar.set_handle_robots(False)
 def creditsleft(account,foobar,verbose):
 	if verbose:
 		print "Retrieving remaining credits..."
-	if account != "otenet" and account != "forthnet":
-		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details. tt us pure python
+	if account != "otenet" and account != "forthnet" and account != "voipbuster":
+		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details.
 		html=gethtml.read()
 		balance=html.find("balanceid")
 		balanceline=html[balance:]
 		euros=balanceline.split('&nbsp;')
 		creditsleft=euros[1].split('</b>')
 		final=str(creditsleft[0])
+	elif account == "voipbuster":
+		gethtml=foobar.response()
+		html=gethtml.read()
+		balance=html.find("balance-section")
+		balanceline=html[balance:]
+		euros=balanceline.split('balance')
+		euros=euros[3].split(' ')
+		euros=euros[1].split("</span>")
+		final=str(euros[0])
 	elif account=="otenet":
 		foobar.open("http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do")
 		gethtml=foobar.response()
@@ -86,9 +95,12 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		foobar.select_form(name="loginform")
 	elif account!="otenet":
 		foobar.select_form(nr=0)
-	if account !="forthnet":
+	if account == "voipbuster":
+		foobar["login[username]"] = username
+		foobar["login[password]"] = password
+	elif account != "forthnet":
 		foobar["username"] = username
-        	foobar["password"] = password
+		foobar["password"] = password
 	else:
 		foobar["Username"] = username
 		foobar["Password"] = password
@@ -126,10 +138,11 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 
 
 def sendsmscmd(account,username,password,number,message,verbose,leftcred):
-	acc_page = acc_opensms[str(account)]#find page
-	foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
-	testfoo=foobar
-	foobar.open(acc_page)
+	if account == "otenet" or account == "forthnet":
+		acc_page = acc_opensms[str(account)]#find page
+		foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
+		testfoo=foobar
+		foobar.open(acc_page)
 	if verbose:
 		print "Creating message..."
 	if account=="otenet":
@@ -149,15 +162,15 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
 		foobar["txtTo"] = number
 		foobar["txtMessage"] = message
 	else:
-        	values={'username':username,
-				'password':password,
-				'from':username,
-				'to':number,
-				'text':message
-		}
+        	values=[
+			("username",username),
+			("password",password),
+			("to",number),
+			("text",message)
+		]
 	        data = urllib.urlencode(values)
 		#adding header
-		user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+		user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19'
 		headers = { 'User-Agent' : user_agent }
 	if account=="otenet" or account=="forthnet":
 		if verbose:
@@ -183,7 +196,7 @@ def sendsmscmd(account,username,password,number,message,verbose,leftcred):
         else:
 		if verbose:
 			print "Sending..."
-		req = urllib2.Request(acc_opensms2[str(account)], data, headers)
+		req = urllib2.Request(acc_opensms2[str(account)]+data, headers=headers)
 		#small delay
 		pass
 		pass

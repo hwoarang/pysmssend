@@ -65,18 +65,18 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 			if verbose:
 				print "Opening betamax sms url --> "+url
 			#adding data
-			values={'username':username,
-				'password':password,
-				'from':username,
-				'to':number,
-				'text':message
-				}
+			values=[
+				("username",username),
+				("password",password),
+				("to",number),
+				("text",message)
+			]
 			data = urllib.urlencode(values)
 			#adding header
-			user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+			user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19'
 			headers = { 'User-Agent' : user_agent }
 			#constructing the url
-			req = urllib2.Request(url, data, headers)
+			req = urllib2.Request(url+data, headers=headers)
 			response=urllib2.urlopen(req)
 			#create a 4 seconds delay. If you are using adsl you want have any problems
 			#for those people who use dial up im sorry :P

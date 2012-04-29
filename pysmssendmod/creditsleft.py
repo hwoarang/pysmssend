@@ -24,7 +24,7 @@
 from pysmssendmod.sites import *
 
 def creditsleft(f,account,foobar,verbose):
-	if account != "otenet" and account != "forthnet" and account != "pennytel":
+	if account != "otenet" and account != "forthnet" and account != "pennytel" and account != "voipbuster":
 		if verbose:
 			print account+": Trying to find how much money left ...\n"
 		resp=foobar.open(acc_opensms[str(account)])
@@ -34,6 +34,20 @@ def creditsleft(f,account,foobar,verbose):
 		euros=balanceline.split('&nbsp;')
 		creditsleft=euros[1].split('</b>')
 		final=creditsleft[0]
+		f.ui.credits.setText("Credits Left : "+str(final))
+		if verbose:
+			print "you have "+final+" left...\n"
+	elif account == "voipbuster":
+		if verbose:
+			print account+": Trying to find how much money left ...\n"
+		resp=foobar.open(acc_opensms[str(account)])
+		html=resp.read()
+		balance=html.find("balance-section")
+		balanceline=html[balance:]
+		euros=balanceline.split('balance')
+		euros=euros[3].split(' ')
+		euros=euros[1].split("</span>")
+		final=euros[0]
 		f.ui.credits.setText("Credits Left : "+str(final))
 		if verbose:
 			print "you have "+final+" left...\n"
