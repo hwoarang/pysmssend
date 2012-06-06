@@ -13,7 +13,7 @@ echo -e "Building python modules...\n"
 python setup.py build
 echo -e "\n Done \n "
 echo -e "installing python modules...\n"
-python setup.py install
+python setup.py install --record .pysmssend_install.txt
 echo -e "\n ******    Done    ****** \n"
 cp pysmssend /usr/bin/
 cp pysmssendcmd /usr/bin/
