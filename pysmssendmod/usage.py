@@ -35,12 +35,8 @@ def usage():
   		-u <username>       username
   		-p <password>       password
   		-n <number>         Telephone Number
-  		-v 		    Running on verbose mode. Note that this option can be 
-				    used for both Gui and command line interface of the program
-
+  		-v                  Verbose mode (useful for debugging)
 
 
 				Homepage: http://pysmssend.silverarrow.org
-
-	
-	"""
+		"""
