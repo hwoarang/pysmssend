@@ -29,6 +29,7 @@ homedir=os.environ["HOME"]
 TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 global debug
+want_gpg = False;
 
 class Testmain(QtGui.QMainWindow):
     		def __init__(self,verbose):
@@ -2380,7 +2381,7 @@ QtGui.QApplication.UnicodeUTF8))
 	#self.tableWidget_2.clear()
         self.tableWidget_2.setColumnCount(1)
         self.tableWidget_2.setRowCount(num)
-	createmanager(self,Sent)
+	createmanager(self,Sent,want_gpg)
         headerItem2 = QtGui.QTableWidgetItem()
         headerItem2.setText(QtGui.QApplication.translate("Sent", "Account", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget_2.setHorizontalHeaderItem(0,headerItem2)

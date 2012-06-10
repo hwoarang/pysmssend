@@ -36,7 +36,7 @@ def filesindir(path):
 			number=number+1
 	return number,files
 
-def createmanager(self,Form):
+def createmanager(self,Form,want_gpg):
 	num,x=filesindir(ACCOUNTS)
 	#set number of lines
 	self.tableWidget_2.setRowCount(num)
@@ -53,7 +53,10 @@ def createmanager(self,Form):
 		name2=name1.split(ACCOUNTS)[1]
 
 		item2 = QtGui.QTableWidgetItem()
-		item2.setText(QtGui.QApplication.translate("self", str(name2), None, QtGui.QApplication.UnicodeUTF8))
+		item2.setText(QtGui.QApplication.translate("self",
+					str(name2).rstrip(".enc"),
+					None,
+					QtGui.QApplication.UnicodeUTF8))
 		self.tableWidget_2.setItem(i,0,item2)
 		
 def createcombo(self,Form):

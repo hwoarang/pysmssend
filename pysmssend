@@ -29,7 +29,7 @@ homedir=os.environ["HOME"]
 SHAREDIR="/usr/share/pysmssend/"
 TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
-global account,verbose,username,password,text,debug,foobar
+global account,verbose,username,password,text,debug,foobar,want_gpg,gpg_key
 debug=False
 version="1.48"
 
@@ -91,26 +91,26 @@ if __name__=="__main__":
 				updater2.show()			
 		
 		def loadaccount():
-			global f
-			myloadaccount(f,verbose)		
+			global f,want_gpg,gpg_key
+			myloadaccount(f,verbose,want_gpg,gpg_key)		
 		def loadstoredaccount():
 			global f
 			myloadstoredaccount(f,verbose)
 		def checklength():
-        		global f
+			global f
 			mychecklength(f)
-    		def insert():
+		def insert():
 			global f
 			myinsert(f)
 		def insertaccount():
-			global f
-			myinsertaccount(f)
+			global f, want_gpg
+			myinsertaccount(f, want_gpg)
 		def deleteaccount():
-			global f
-			mydeleteaccount(f)
+			global f, verbose, want_gpg
+			mydeleteaccount(f, verbose, want_gpg)
 		def storeaccount():
-	 		global f
-			mystoreaccount(f)		
+	 		global f,want_gpg,gpg_key
+			mystoreaccount(f,want_gpg,gpg_key)
 		def clearform():
 			f.ui.lineEdit_6.clear()
 			f.ui.lineEdit_4.clear()
@@ -128,7 +128,7 @@ if __name__=="__main__":
 				f.ui.Send.setEnabled(False)
 		def login():
 			global account_loggedin,foobar,leftcred,username,password
-			foobar,account_loggedin,leftcred,username,password=mylogin(f,tray,verbose)
+			foobar,account_loggedin,leftcred,username,password=mylogin(f,tray,verbose,want_gpg,gpg_key)
 		def createabout():
 			about.show()
 		def sendsms():	
@@ -172,13 +172,11 @@ else:#importing gui modules
 	 	from pysmssendmod.myloadaccount import *
  		from pysmssendmod.checklength import *
  		from pysmssendmod.myinserts import *
- 		from pysmssendmod.mydeleteaccount import *
  		from pysmssendmod.myallowsend import *
 	 	from pysmssendmod.creditsleft import *
  		from pysmssendmod.login import *
 	 	from pysmssendmod.mysmssend import *
  		from pysmssendmod.usage import *
-		from pysmssendmod.mystoreaccount import *	
 		ongui=True
 	except ImportError :
 		raise
@@ -203,6 +201,44 @@ else:#importing gui modules
 		os.chmod(homedir+TEMPDIR+"accounts/", stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 		if verbose:
 			print "Done"
+	if not os.path.isfile(homedir+TEMPDIR+"config"):
+		cfile = open(homedir+TEMPDIR+"config","w")
+		cfile.write("# PYSMSSEND Configuration\n\n")
+		cfile.write("# Set the following option to '1'\n")
+		cfile.write("# if you want pysmssend to encrypt\n")
+		cfile.write("# your accounts using your gpg key.\n")
+		cfile.write("# Use 0 or no value to disable it\n")
+		cfile.write("pysmssend_gpg_support=\n")
+		cfile.write("# Set your key id\n")
+		cfile.write("pysmssend_gpg_key=\n")
+		cfile.close()
+	else:
+		want_gpg = False
+		cfile = open(homedir+TEMPDIR+"config","r")
+		for line in cfile:
+			line=line.rstrip()
+			if not line.startswith("#"):
+				config_opt=line.split("=")
+				if config_opt[0] == "pysmssend_gpg_support":
+					if config_opt[1] != 0:
+						if verbose:
+							print "GPG support enabled :)"
+						want_gpg = True
+					else:
+						print "GPG support disabled"
+						want_gpp = False
+				elif config_opt[0] == "pysmssend_gpg_key":
+					if not config_opt[1]:
+						gpg_key = False
+						print "You have enabled pysmssend_gpg_support"
+						print "but you haven't specified a key id."
+						print "Please fix your "+homedir+TEMPDIR+"config"
+						sys.exit(1)
+					else:
+						gpg_key = config_opt[1]
+						if verbose:
+							print "GPG key: "+gpg_key
+		
 if ongui:
 	if verbose:
 		print "Building Qt interface..."

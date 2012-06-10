@@ -42,7 +42,7 @@ def errorlogin(f,account):
 	f.ui.textEdit.setText("An error occurred while trying to login to "+account+".Either the username or password was wrong or there was a connectivity issue with the site. If you were trying to login to a Betamax account there might be a popup message for you waitting on your Betamax account. In any other case, if this problem persist please send a bug report at hwoarang@silverarrow.org")
 
 #login function
-def mylogin(f,tray,verbose):
+def mylogin(f,tray,verbose,want_gpg,gpg_key):
 	# getting account name
 	account=f.ui.comboBox.currentText()
 	account=str.lower(str(account))
@@ -163,7 +163,25 @@ def mylogin(f,tray,verbose):
 			       file.write(username+"\n")#write username
 			       file.write(password+"\n")#write password
 			       file.close()#close it
-			       os.chmod(homedir+TEMPDIR+account,stat.S_IRUSR|stat.S_IWUSR)
+			       if want_gpg:
+				   		try:
+							import gnupg
+						except ImportError:
+							print "I can't import the gnupg module"
+							print "Make sure it's installed"
+							sys.exit(1)
+						gpg = gnupg.GPG()
+						gpg.encoding = 'utf-8'
+						try:
+							with open(homedir+TEMPDIR+account) as afile:
+								gpg.encrypt_file(afile,
+											recipients=gpg_key,
+											output=homedir+TEMPDIR+account+".enc")
+								os.remove(homedir+TEMPDIR+account)
+								account=account+".enc"
+								os.chmod(homedir+TEMPDIR+account,stat.S_IRUSR|stat.S_IWUSR)
+						except IOError as e:
+							print e.strerror
 			       if verbose:
 			       		print "Account saved.. :-)"
 			except:

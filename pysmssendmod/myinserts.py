@@ -12,14 +12,34 @@ def myinsert(f):
 
 
 	#insert Account
-def myinsertaccount(f):
+def myinsertaccount(f,want_gpg):
 	f.ui.lineEdit.clear()
 	f.ui.lineEdit2.clear()
 	#insert username
 	row=f.ui.tableWidget_2.currentItem()
 	temp=row.text()
-	accfile=open(ACCOUNTS+temp,"r")#open account file
-	data=accfile.read()
+	if want_gpg:
+		temp = temp + ".enc"
+	full_name =  ACCOUNTS+temp
+	if want_gpg:
+		try:
+			import gnupg
+		except ImportError:
+			print "I can't import the gnupg module"
+			print "Make sure it's installed"
+			sys.exit(1)
+		gpg = gnupg.GPG()
+		gpg.encoding = 'utf-8'
+		try:
+			with open(full_name) as afile:
+				afile = afile.read()
+				data = gpg.decrypt(afile)
+				data = data.data				
+		except IOError as e:
+			print e.strerror
+	else:
+		accfile=open(data, "r")#open account file
+		data=accfile.read()
 	temp1=data.split()
 	index=temp1[0]
 	username=temp1[1]

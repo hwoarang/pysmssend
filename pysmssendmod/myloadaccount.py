@@ -18,37 +18,60 @@
 #    You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
-import os
+import os, stat
 from PyQt4 import QtCore, QtGui
-#seting variables
+from accountmanager import *
+
+#Variables
 homedir=os.environ["HOME"]
 TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 
-def myloadaccount(f,verbose):
-	homedir=os.environ["HOME"]#read home directory
+def myloadaccount(f,verbose,want_gpg,gpg_key):
+	"""
+	Called everytime the user selects a different provider from the
+	drop-down menu
+	"""
+	homedir = os.environ["HOME"]#read home directory
 	f.ui.credits.clear() #clear Credits
 	f.ui.lineEdit.clear()#clear username field
 	f.ui.lineEdit2.clear()#clear password field
 	f.ui.Result1.clear()#clear result field
-	try:
-		choice=f.ui.comboBox.currentText()#read account
-		choice=str.lower(str(choice))
+	choice = f.ui.comboBox.currentText()#read account
+	choice = str.lower(str(choice))
+	if want_gpg:
+		choice = choice+".enc"
+	if verbose:
+		print "Searching for existing "+choice+" account...\n"
+	full_choice = homedir+TEMPDIR+choice
+	if os.path.isfile(full_choice):
 		if verbose:
-			print "searching for "+choice+" stored account...\n"
-		data=open(homedir+TEMPDIR+choice,"r")#open account file
+			print "Found it!\n"
+		if want_gpg:
+			try:
+				import gnupg
+			except ImportError:
+				print "I can't import the gnupg module"
+				print "Make sure it's installed"
+				sys.exit(1)
+			gpg = gnupg.GPG()
+			gpg.encoding = 'utf-8'
+			try:
+				with open(full_choice) as afile:
+					afile = afile.read()
+					data = gpg.decrypt(afile)
+					account = data.data				
+			except IOError as e:
+				print e.strerror
+		else:
+			data = open(full_choice,"r")#open account file
+			account = data.read()#read it
+		infos = account.split()
 		if verbose:
-			print "I found stored account...\n"
-		account=data.read()#read it
-		infos=account.split()
-		if verbose:
-			print "inserting data to the fields...\n"
+			print "Loading account information...\n"
 		f.ui.lineEdit.insert(infos[0])#parse the infos on the fields
 		f.ui.lineEdit2.insert(infos[1])
-	except:
-		pass
 	
-#this function is used due to account manager
 def myloadstoredaccount(f,verbose):
 	homedir=os.environ["HOME"]#read home directory
 	f.ui.lineEdit.clear()#clear username field
@@ -78,4 +101,57 @@ def myloadstoredaccount(f,verbose):
 			f.ui.lineEdit2.clear()#clear password field
 	except:
 		pass
-	
+
+def mystoreaccount(f,want_gpg,gpg_key):
+	#read account
+	account=f.ui.comboBox_3.currentIndex()
+	#read username
+	username=f.ui.lineEdit_6.text()
+	#read password
+	password=f.ui.lineEdit_7.text()
+	#read custom name
+	name=f.ui.lineEdit_4.text()
+	file=open(ACCOUNTS+name,"w")
+	file.write(str(account)+"\n")
+	file.write(str(username)+"\n")
+	file.write(str(password)+"\n")
+	file.close()
+	if want_gpg:
+		try:
+			import gnupg
+		except ImportError:
+			print "I can't import the gnupg module"
+			print "Make sure it's installed"
+			sys.exit(1)
+		gpg = gnupg.GPG()
+		gpg.encoding = 'utf-8'
+		try:
+			with open(ACCOUNTS+name) as afile:
+				gpg.encrypt_file(afile,
+							recipients=gpg_key,
+							output=ACCOUNTS+name+".enc")
+				os.remove(ACCOUNTS+name)
+				name = name + ".enc"
+		except IOError as e:
+			print e.strerror
+	os.chmod(ACCOUNTS+name, stat.S_IRUSR|stat.S_IWUSR)
+	#Reconstruct manager
+	createmanager(f.ui,0,want_gpg)
+	createcombo(f.ui,0)
+
+def mydeleteaccount(f, verbose, want_gpg):
+	row = f.ui.tableWidget_2.currentItem()
+	num = f.ui.tableWidget_2.currentRow()
+	name = row.text()
+	if want_gpg:
+		name = name + ".enc"
+	for file in os.listdir(ACCOUNTS):
+		dirfile=os.path.join(ACCOUNTS,file)
+		if dirfile == ACCOUNTS+name:
+			if verbose:
+				print "Removing "+name
+			os.remove(ACCOUNTS+name)
+			if verbose:
+				print "Done"
+			f.ui.tableWidget_2.removeRow(num)
+	createcombo(f.ui,0)
