@@ -42,12 +42,12 @@ NOTE:
 
 Please mind the followings when using the command line tool
 
-1) Use " " if you username,password,text incluse special characters or ! please escape the character as the example below
+1) Use double quotes " " if your username or password or text includes special
+characters.
 
-lets say the password is test!@ , write it as test\ !@
+Lets say your password is test!@ , write it as test\ !@
 
-2) Text should be included in  " " if you use the space character
-
+2) Text should be included in  " " if it contains spaces.
 
 
 ACCOUNT MANAGER:
