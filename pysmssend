@@ -20,7 +20,7 @@
 # -*- coding: utf-8 -*-
 
 import sys,signal 
-import os
+import os,stat
 import getopt
 import re
 
@@ -32,7 +32,6 @@ ACCOUNTS=homedir+TEMPDIR+"accounts/"
 global account,verbose,username,password,text,debug,foobar
 debug=False
 version="1.48"
-modules=['pysmssendgui','about','tray','accountmanager','updater','updater2','myloadaccount','checklength','myinserts','mydeleteaccount','myallowsend','creditsleft','login','mysmssend','usage','mystoreaccount']
 
 #Check for pyqt4 support
 try:
@@ -186,20 +185,22 @@ else:#importing gui modules
 		sys.exit("Module "+module[i]+"didnt installed correctly. Please fill a bug report with the above error")
 	if verbose:
 		print "Done"
-	if os.path.isdir(homedir+TEMPDIR+""):
-		pass
+	if os.path.isdir(homedir+TEMPDIR):
+		os.chmod(homedir+TEMPDIR, stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 	else:
 		if verbose:
 			print "Creating configuration folder..."
 		os.mkdir(homedir+TEMPDIR)
+		os.chmod(homedir+TEMPDIR, stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 		if verbose:
 			print "Done"
 	if os.path.isdir(homedir+TEMPDIR+"accounts/"):
-		pass
+		os.chmod(homedir+TEMPDIR+"accounts/", stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 	else:	
 		if verbose:
 			print "Creating accounts folder..."
 		os.mkdir(homedir+TEMPDIR+"accounts/")
+		os.chmod(homedir+TEMPDIR+"accounts/", stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 		if verbose:
 			print "Done"
 if ongui:

@@ -23,7 +23,7 @@ from pysmssendmod.myallowsend import  *
 from pysmssendmod.tray import *
 from mechanize import Browser
 from PyQt4 import QtCore
-import os,sys
+import os,sys,stat
 from pysmssendmod.sites import *
 homedir=os.environ["HOME"]
 SHAREDIR="/usr/share/pysmssend/"
@@ -163,6 +163,7 @@ def mylogin(f,tray,verbose):
 			       file.write(username+"\n")#write username
 			       file.write(password+"\n")#write password
 			       file.close()#close it
+			       os.chmod(homedir+TEMPDIR+account,stat.S_IRUSR|stat.S_IWUSR)
 			       if verbose:
 			       		print "Account saved.. :-)"
 			except:

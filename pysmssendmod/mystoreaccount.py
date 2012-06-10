@@ -1,4 +1,4 @@
-import os
+import os,stat
 homedir=os.environ["HOME"]
 from accountmanager import *
 TEMPDIR="/.pysmssend/"
@@ -17,6 +17,7 @@ def mystoreaccount(f):
 	file.write(str(username)+"\n")
 	file.write(str(password)+"\n")
 	file.close()
+	os.chmod(ACCOUNTS+name, stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 	#Reconstruct manager
 	createmanager(f.ui,0)
 	createcombo(f.ui,0)
