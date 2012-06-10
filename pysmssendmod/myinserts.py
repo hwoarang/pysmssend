@@ -38,7 +38,7 @@ def myinsertaccount(f,want_gpg):
 		except IOError as e:
 			print e.strerror
 	else:
-		accfile=open(data, "r")#open account file
+		accfile=open(full_name, "r")#open account file
 		data=accfile.read()
 	temp1=data.split()
 	index=temp1[0]

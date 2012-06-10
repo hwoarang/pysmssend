@@ -155,3 +155,40 @@ def mydeleteaccount(f, verbose, want_gpg):
 				print "Done"
 			f.ui.tableWidget_2.removeRow(num)
 	createcombo(f.ui,0)
+
+def decrypt_old(verbose):
+	for data in (ACCOUNTS, homedir+TEMPDIR):
+		for file in os.listdir(data):
+			if file.find(".enc") > -1 and os.path.isfile(data+file):
+				try:
+					import gnupg
+				except ImportError:
+					print "I can't import the gnupg module"
+					print "Make sure it's installed."
+					print "Until the, I won't be able to decrypt"
+					print "your old data."
+				gpg = gnupg.GPG()
+				gpg.encoding = 'utf-8'
+				with open(data + file, "r") as afile:
+					if verbose:
+						print "Decrypting existing account: "+file
+					status = gpg.decrypt_file(afile, output = (data+(file.rstrip(".enc"))))
+					os.remove(data+file)
+
+def encrypt_old(verbose,gpg_key):
+	for data in (ACCOUNTS, homedir+TEMPDIR):
+		for file in os.listdir(data):
+			if ( file.find(".enc") == -1
+				and os.path.isfile(data+file)
+				and file != "config" ):
+				# No need to double check if gnupg is present
+				import gnupg
+				gpg = gnupg.GPG()
+				gpg.encoding = 'utf-8'
+				with open(data + file, "r") as afile:
+					if verbose:
+						print "Encrypting existing account: "+file
+					status = gpg.encrypt_file(afile,
+							recipients = gpg_key,
+							output = data+(file+".enc"))
+					os.remove(data+file)

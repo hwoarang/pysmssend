@@ -220,7 +220,7 @@ else:#importing gui modules
 			if not line.startswith("#"):
 				config_opt=line.split("=")
 				if config_opt[0] == "pysmssend_gpg_support":
-					if config_opt[1] != 0:
+					if config_opt[1] != 0 and config_opt[1]:
 						if verbose:
 							print "GPG support enabled :)"
 						want_gpg = True
@@ -238,6 +238,10 @@ else:#importing gui modules
 						gpg_key = config_opt[1]
 						if verbose:
 							print "GPG key: "+gpg_key
+	if not want_gpg:
+		decrypt_old(verbose)
+	else:
+		encrypt_old(verbose,gpg_key)
 		
 if ongui:
 	if verbose:
