@@ -17,7 +17,7 @@ def mystoreaccount(f):
 	file.write(str(username)+"\n")
 	file.write(str(password)+"\n")
 	file.close()
-	os.chmod(ACCOUNTS+name, stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
+	os.chmod(ACCOUNTS+name, stat.S_IRUSR|stat.S_IWUSR)
 	#Reconstruct manager
 	createmanager(f.ui,0)
 	createcombo(f.ui,0)
