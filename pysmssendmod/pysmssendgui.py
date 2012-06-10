@@ -2309,7 +2309,7 @@ class Ui_Sent(object):
         self.menuHelp.addAction(self.actionAbout)
         self.menubar.addAction(self.menuHelp.menuAction())
 
-        lines=getdata(self,Sent,verbose)
+        lines=addressbook_getdata(self,Sent,verbose)
         self.Tabs.setCurrentIndex(0)
        
     def retranslateUi(self, Sent,lines):
@@ -2378,7 +2378,6 @@ QtGui.QApplication.UnicodeUTF8))
         self.Insert.setText(QtGui.QApplication.translate("Sent", "Insert", None, QtGui.QApplication.UnicodeUTF8))
         self.Tabs.setTabText(self.Tabs.indexOf(self.tab_3), QtGui.QApplication.translate("Sent", "Addressbook", None, QtGui.QApplication.UnicodeUTF8))
         num,x=filesindir(ACCOUNTS)
-	#self.tableWidget_2.clear()
         self.tableWidget_2.setColumnCount(1)
         self.tableWidget_2.setRowCount(num)
 	createmanager(self,Sent,want_gpg)

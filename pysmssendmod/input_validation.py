@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #***************************************************************************
-#*    Pysmssend  ( Source Code ) CheckLength
+#*    Pysmssend  ( Source Code ) input_validation
 #***************************************************************************
 # This file is part of Pysmssend Project
 #
@@ -18,6 +18,40 @@
 #    You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
+
+def myallowsend(f,leftcred,account):
+		# print leftcred
+		if account != "otenet" and account != "forthnet":
+			#this is how it works
+			#if you have 0.05 credits on your account, you cant send a message.Ok?
+			 if leftcred<"0.03":
+				 f.ui.lineEdit3.setReadOnly(True)
+				 f.ui.textEdit.setReadOnly(True)
+				 f.ui.lineEdit3.clear()
+				 f.ui.lineEdit3.insert("No credits left...")
+				 f.ui.Send.setEnabled(False)
+			 else:
+			 	#other wise i am unlocking the buttons and now you can write your text
+				 f.ui.lineEdit3.setReadOnly(False)
+				 f.ui.textEdit.setReadOnly(False)
+				 f.ui.textEdit.clear()
+				 f.ui.Send.setEnabled(True)
+				 f.ui.lineEdit3.clear()
+		elif account=="otenet" or account=="forthnet":
+		 	#same here, you must have more the 0 message left on your account. Obviously :P
+			if leftcred=="0":
+				f.ui.lineEdit3.setReadOnly(True)
+				f.ui.textEdit.setReadOnly(True)
+	 			f.ui.lineEdit3.clear()
+				f.ui.lineEdit3.insert("No SMS left to send...")
+				f.ui.Send.setEnabled(False)
+			else:
+				f.ui.textEdit.setReadOnly(False)
+				f.ui.lineEdit3.setReadOnly(False)
+				f.ui.textEdit.clear()
+				f.ui.Send.setEnabled(True)
+				f.ui.lineEdit3.clear()
+
 def mychecklength(f):#takes the gui as an argument
 	choice=f.ui.comboBox.currentText()#read account
 	choice=str.lower(str(choice))#lower the string
@@ -46,4 +80,5 @@ def mychecklength(f):#takes the gui as an argument
 		elif left <0:
 			f.ui.lineEdit_3.setText("Above Limit: "+length2)
 			f.ui.Send.setEnabled(False)
-    
+
+	

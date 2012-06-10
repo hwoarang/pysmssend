@@ -35,7 +35,7 @@ version="1.48"
 
 #Check for pyqt4 support
 try:
-  print "Importing PyQt4 modules..."
+  print "Importing PyQt4 modules...",
   from PyQt4 import QtCore, QtGui
   print "Done"
 except ImportError :
@@ -46,7 +46,7 @@ if __name__=="__main__":
 		def dotheconnections(GUI):
 			try:
 				if verbose:
-					print "Creating internal signal-slots connections..."
+					print "Creating internal signal-slots connections...",
 				QtCore.QObject.connect(GUI.comboBox,QtCore.SIGNAL("activated(const QString&)"),loadaccount)
 				QtCore.QObject.connect(GUI.comboBox_2,QtCore.SIGNAL("activated(const QString&)"),loadstoredaccount)
 				QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),storeaccount)
@@ -145,7 +145,6 @@ opts = {}
 for k,v in o:
 	opts[k] = v
         if k == "-v":
-	        print "\n\nVerbose mode enabled !"
                 verbose=True
                 debug=True
         elif k in ("-h", "--help"):
@@ -160,27 +159,18 @@ if length>2: #we are running the cmd mode ( I define 2 because gui can run with 
 	from pysmssendmod.cmdfunc import *#importing cmd modules
 	ongui=False
 else:#importing gui modules
-	try:
-		if verbose:
-			print "Importing modules..."
-	 	from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
- 		from pysmssendmod.about import Ui_About, About
- 		from pysmssendmod.tray import *
-	 	from pysmssendmod.accountmanager import *
- 		from pysmssendmod.updater import *
- 		from pysmssendmod.updater2 import *
-	 	from pysmssendmod.myloadaccount import *
- 		from pysmssendmod.checklength import *
- 		from pysmssendmod.myinserts import *
- 		from pysmssendmod.myallowsend import *
-	 	from pysmssendmod.creditsleft import *
- 		from pysmssendmod.login import *
-	 	from pysmssendmod.mysmssend import *
- 		from pysmssendmod.usage import *
-		ongui=True
-	except ImportError :
-		raise
-		sys.exit("Module "+module[i]+"didnt installed correctly. Please fill a bug report with the above error")
+	if verbose:
+		print "Importing modules...",
+	from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
+	from pysmssendmod.about import Ui_About, About
+	from pysmssendmod.tray import *
+ 	from pysmssendmod.accountmanager import *
+	from pysmssendmod.updater import *
+ 	from pysmssendmod.account_io import *
+	from pysmssendmod.input_validation import *
+	from pysmssendmod.core_io import *
+	from pysmssendmod.usage import *
+	ongui=True
 	if verbose:
 		print "Done"
 	if os.path.isdir(homedir+TEMPDIR):
@@ -215,6 +205,8 @@ else:#importing gui modules
 	else:
 		want_gpg = False
 		cfile = open(homedir+TEMPDIR+"config","r")
+		if verbose:
+			print "Reading "+homedir+TEMPDIR+"config"
 		for line in cfile:
 			line=line.rstrip()
 			if not line.startswith("#"):
@@ -222,10 +214,10 @@ else:#importing gui modules
 				if config_opt[0] == "pysmssend_gpg_support":
 					if config_opt[1] != 0 and config_opt[1]:
 						if verbose:
-							print "GPG support enabled :)"
+							print "GPG support: enabled"
 						want_gpg = True
 					else:
-						print "GPG support disabled"
+						print "GPG support: disabled"
 						want_gpp = False
 				elif config_opt[0] == "pysmssend_gpg_key":
 					if not config_opt[1]:
@@ -245,27 +237,23 @@ else:#importing gui modules
 		
 if ongui:
 	if verbose:
-		print "Building Qt interface..."
+		print "Creating the Qt4 interface..."
 	app = QtGui.QApplication(sys.argv)#
 	f = Testmain(verbose)
 	f.show()
 	about = About()
 	updater1=Update()
 	updater2=Update2()
+	loadaccount()
 	if verbose:
-		print "Loading stored accounts..."
-	loadaccount()	
-	if verbose:
-		print "Done"
-	#creating tray class instance
-	if verbose:
-		print "Creating tray icon..."
+		print "Creating the tray icon...",
 	tray=trayicon()
 	tray.start()
-	print "Done"
+	if verbose:
+		print "Done"
 	dotheconnections(f.ui)
 	if verbose:
-		print "Firing up!!!"
+		print "Launching application..."
 	sys.exit(app.exec_())
 else:
 	#run the cmd tool

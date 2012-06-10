@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #***************************************************************************
-#*    Pysmssend ( Source Code ) Load account
+#*    Pysmssend ( Source Code ) Account Misc Functions
 #***************************************************************************
 # This file is part of Pysmssend Project
 #
@@ -21,7 +21,7 @@
 import os, stat
 from PyQt4 import QtCore, QtGui
 from accountmanager import *
-
+from pysmssendmod.sites import *
 #Variables
 homedir=os.environ["HOME"]
 TEMPDIR="/.pysmssend/"
@@ -42,11 +42,11 @@ def myloadaccount(f,verbose,want_gpg,gpg_key):
 	if want_gpg:
 		choice = choice+".enc"
 	if verbose:
-		print "Searching for existing "+choice+" account...\n"
+		print "Searching for existing "+choice+" account...",
 	full_choice = homedir+TEMPDIR+choice
 	if os.path.isfile(full_choice):
 		if verbose:
-			print "Found it!\n"
+			print "Done!\n"
 		if want_gpg:
 			try:
 				import gnupg
@@ -71,6 +71,9 @@ def myloadaccount(f,verbose,want_gpg,gpg_key):
 			print "Loading account information...\n"
 		f.ui.lineEdit.insert(infos[0])#parse the infos on the fields
 		f.ui.lineEdit2.insert(infos[1])
+	else:
+		if verbose:
+			print "Not found"
 	
 def myloadstoredaccount(f,verbose):
 	homedir=os.environ["HOME"]#read home directory
@@ -192,3 +195,110 @@ def encrypt_old(verbose,gpg_key):
 							recipients = gpg_key,
 							output = data+(file+".enc"))
 					os.remove(data+file)
+
+##Insert Number
+def myinsert(f):
+	f.ui.lineEdit3.clear()
+	row=f.ui.tableWidget.currentItem()
+	number=row.text()
+	f.ui.lineEdit3.insert(number)
+	
+
+
+	#insert Account
+def myinsertaccount(f,want_gpg):
+	f.ui.lineEdit.clear()
+	f.ui.lineEdit2.clear()
+	#insert username
+	row=f.ui.tableWidget_2.currentItem()
+	temp=row.text()
+	if want_gpg:
+		temp = temp + ".enc"
+	full_name =  ACCOUNTS+temp
+	if want_gpg:
+		try:
+			import gnupg
+		except ImportError:
+			print "I can't import the gnupg module"
+			print "Make sure it's installed"
+			sys.exit(1)
+		gpg = gnupg.GPG()
+		gpg.encoding = 'utf-8'
+		try:
+			with open(full_name) as afile:
+				afile = afile.read()
+				data = gpg.decrypt(afile)
+				data = data.data				
+		except IOError as e:
+			print e.strerror
+	else:
+		accfile=open(full_name, "r")#open account file
+		data=accfile.read()
+	temp1=data.split()
+	index=temp1[0]
+	username=temp1[1]
+	password=temp1[2]
+	f.ui.comboBox.setCurrentIndex(int(index))
+	f.ui.lineEdit.insert(username)
+	f.ui.lineEdit2.insert(password)
+
+
+def creditsleft(f,account,foobar,verbose):
+	if account != "otenet" and account != "forthnet" and account != "pennytel" and account != "voipbuster":
+		if verbose:
+			print account+": Trying to find how much money left ...\n"
+		resp=foobar.open(acc_opensms[str(account)])
+		html=resp.read()
+		balance=html.find("balanceid")
+		balanceline=html[balance:]
+		euros=balanceline.split('&nbsp;')
+		creditsleft=euros[1].split('</b>')
+		final=creditsleft[0]
+		f.ui.credits.setText("Credits Left : "+str(final))
+		if verbose:
+			print "you have "+final+" left...\n"
+	elif account == "voipbuster":
+		if verbose:
+			print account+": Trying to find how much money left ...\n"
+		resp=foobar.open(acc_opensms[str(account)])
+		html=resp.read()
+		balance=html.find("balance-section")
+		balanceline=html[balance:]
+		euros=balanceline.split('balance')
+		euros=euros[3].split(' ')
+		euros=euros[1].split("</span>")
+		final=euros[0]
+		f.ui.credits.setText("Credits Left : "+str(final))
+		if verbose:
+			print "you have "+final+" left...\n"
+	elif account=="otenet":
+		if verbose:
+			print "Otenet: Trying to find how many messages you can send..\n"
+		foobar.open("http://tools.otenet.gr/tools/tiles/Intro/generalIntro.do")
+		gethtml=foobar.response()
+		html=gethtml.read()
+		balance=html.find("""  <a href="/tools/tiles/web2sms.do?showPage=smsSend&amp;mnu=smenu23"> <span class="txtmov10b_yellow">""")
+		balanceline=html[balance:]
+		data=balanceline.split()
+		dataline=data[3]
+		temp1=dataline.split("""class="txtmov10b_yellow">""")
+		temp2=temp1[1]
+		left=temp2.split("</span>")
+		final=left[0]
+		f.ui.credits.setText(str(final)+" sms left for today :-)")
+		if verbose:
+			print "you can send "+final+" messages ..\n"
+	elif account=="forthnet":#this means forthnet
+		if verbose:
+			print "Forthnet: Retrieving credits...\n"
+			gethtml=foobar.response()
+			html=gethtml.read()
+			balance=html.find("<span id=\"SentItems2Phase1_lbPerDay\">")
+			balanceline=html[balance:]
+			temp1=balanceline.split("<span id=\"SentItems2Phase1_lbPerDay\">")
+			temp2=temp1[1].split("</span>")
+			temp3=temp2[0].split("/");
+			final=str(5-int(temp3[0]))
+			f.ui.credits.setText(str(final)+" sms left for today :-)")
+	#final is the amount of money we have :)		
+	return final	

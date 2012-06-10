@@ -18,13 +18,14 @@
 #    You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
-from pysmssendmod.creditsleft import *
-from pysmssendmod.myallowsend import  *
+from pysmssendmod.input_validation import  *
 from pysmssendmod.tray import *
 from mechanize import Browser
 from PyQt4 import QtCore
-import os,sys,stat
+import os,sys,stat, time
+import urllib2,urllib
 from pysmssendmod.sites import *
+
 homedir=os.environ["HOME"]
 SHAREDIR="/usr/share/pysmssend/"
 TEMPDIR="/.pysmssend/"
@@ -202,3 +203,141 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 		return foobar,account,leftcred,username,password
 	else:
 		f.ui.Result1.setText("ERROR Logging in to "+account+" :-(")
+
+
+def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
+	if account != "pennytel":
+		acc_page = acc_opensms[str(account)]#find page
+		foobar.addheaders = [("User-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)")]
+		testfoo=foobar
+		if account=="otenet" or account=="forthnet":
+			foobar.open(acc_page)
+	#get message and phone and username and password
+	username=f.ui.lineEdit.text()
+        password=f.ui.lineEdit2.text()
+	number=f.ui.lineEdit3.text()
+        message2=f.ui.textEdit.toPlainText()
+	#convert Qstring to utf8
+	message=message2.toUtf8()
+	if account=="otenet":
+		try:
+			foobar.select_form(name="sendform")
+     		except:
+        		sys.exit("Error contacting site... Please try again later\n")
+	elif account=="forthnet":
+		try:
+			foobar.select_form(nr=0)
+		except:
+			sys.exit("Error contacting site... Please try again later\n")
+	# passing data
+	if account=="otenet":
+		foobar["phone"] = number
+	        foobar["message"] = message
+	elif account=="forthnet":
+		foobar["txtTo"] = number
+		foobar["txtMessage"] = message
+
+	# convert message to plain text. It is easier to handle it
+	message=f.ui.textEdit.toPlainText()
+	size=message.length()
+	try:
+		if account=="otenet" or account=="forthnet":
+			if verbose:
+				print "Sending..."
+         		foobar.submit()
+			sent=1
+		elif account=="pennytel":
+			from SOAPpy import WSDL                                                                                            
+			import SOAPpy
+			if verbose:
+				print "Sending to " + number + "..."
+			WSDLFILE = 'http://pennytel.com/pennytelapi/services/PennyTelAPI?WSDL'
+			_server = WSDL.Proxy(WSDLFILE)
+			sendTime=SOAPpy.dateTimeType((2000, 1, 1, 0, 0, 0, 4, 86, 0))
+			results = _server.sendSMS(
+			username,password,1,number,message,sendTime)
+			sent=1
+		else:# betamax
+			#fixing the url
+			url=acc_opensms2[str(account)]
+			if verbose:
+				print "Opening betamax sms url --> "+url
+			#adding data
+			values=[
+				("username",username),
+				("password",password),
+				("to",number),
+				("text",message)
+			]
+			data = urllib.urlencode(values)
+			#adding header
+			user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.162 Safari/535.19'
+			headers = { 'User-Agent' : user_agent }
+			#constructing the url
+			req = urllib2.Request(url+data, headers=headers)
+			response=urllib2.urlopen(req)
+			time.sleep(4)
+			report=response.read()
+			sent=1
+	except:
+	       	f.ui.lineEdit_2.setText("Not sent ...")
+		sent=0
+        if sent==1:
+		# get new credits lets
+		if account!="forthnet" and account!="pennytel":
+			cred=creditsleft(f,account,testfoo,verbose)
+		elif account=="forthnet":
+			gethtml=foobar.response()
+			html=gethtml.read()
+			balance=html.find("<span id=\"lbPerDay\">")
+			balanceline=html[balance:]
+			temp1=balanceline.split("<span id=\"lbPerDay\">")
+			temp2=temp1[1].split("</span>")
+			temp3=temp2[0].split("/");
+		        cred=str(5-int(temp3[0]))
+		if account=="pennytel":
+			WSDLFILE = 'http://pennytel.com/pennytelapi/services/PennyTelAPI?WSDL'
+			_server = WSDL.Proxy(WSDLFILE)
+			leftcred,blocked,currency,lastusage,others,zerobalancedate = _server.getAccount(username,password)
+			tray.showsentreport("Message was sent successfully ;-)",1)
+			f.ui.Result1.clear()
+			f.ui.credits.setText("Credit Left : "+str(leftcred))
+			f.ui.lineEdit_3.clear()
+			f.ui.textEdit.clear()
+		elif account=="otenet" or account=="forthnet":
+			if account=="otenet":
+				username=f.ui.lineEdit.text()
+				size2=145-len(username)
+			else:#forthnet
+				size2=160		
+			if size<=size2:
+				tray.showsentreport("Message was sent successfully ;-)",1)
+				f.ui.Result1.clear()
+				f.ui.credits.setText("SMS Left : "+str(cred))
+				f.ui.lineEdit_3.clear()
+				f.ui.textEdit.clear()
+			elif size>size2:
+				tray.showsentreport("Sorry I couldnt send the message :-( ",0)
+		elif account!="otenet" and account!="forthnet": # in case we have betamax
+			if size<=160:
+				#now we need to open the response page in order to see if the message was send #succesfully
+				result=report.find("<resultstring>")
+				result2=report.find("</resultstring>")
+				result3=report[result+14:result2]
+				#do the final check
+				#uff
+				pass
+				pass
+				if verbose:
+					print "Result: "+result3
+				if result3=="success":
+					tray.showsentreport("Message was sent successfully ;-)",1)
+					f.ui.credits.setText("Credits Left: "+str(cred))
+					f.ui.Result1.clear()
+					f.ui.lineEdit_3.clear()
+					f.ui.textEdit.clear()
+				else:
+					f.ui.lineEdit_2.setText(" Not sent ...")
+					tray.showsentreport("Message didnt send",0)
+			else:
+				tray.showsentreport("Message too long...",0)
