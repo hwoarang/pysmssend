@@ -262,7 +262,7 @@ class Ui_About(object):
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Homepage: <a href=\"http://pysmssend.silverarrow.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Pysmssend Homepage </span></a></p>\n"
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Bugs report: You can use the mailing lists to report bugs or send bug report to <a href=\"hwoarang@silverarrow.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Bug Report</span></a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Bug reports: Bugs should be reported on the <a href=\"https://github.com/hwoarang/pysmssend/issues\"><span style=\ text-decoration: underline; color:#0000ff;\">GitHub Project Tracker</span></a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("About", "About", None, QtGui.QApplication.UnicodeUTF8))
         self.textEdit_4.setHtml(QtGui.QApplication.translate("About", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
@@ -292,7 +292,3 @@ class Ui_About(object):
         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">You can read the licence <a href=http://www.gnu.org/licenses/gpl-3.0.html>here</a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtGui.QApplication.translate("About", "Licence Agreement", None, QtGui.QApplication.UnicodeUTF8))
-        #support tab
-	self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QtGui.QApplication.translate("About", "Donate", None, QtGui.QApplication.UnicodeUTF8))
-	self.textBrowser_3.setHtml(QtGui.QApplication.translate("About", "<html>If you like this program you can support its further development by donating using paypal services<br /><br >If you'd like to donate please use paypals button on <a href=\"http://pysmssend.silverarrow.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Pysmssend Homepage </span></a></html>", None, QtGui.QApplication.UnicodeUTF8))
-
