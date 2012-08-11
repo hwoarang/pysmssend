@@ -2321,6 +2321,7 @@ class Ui_Sent(object):
         self.comboBox.addItem(QtGui.QApplication.translate("Sent", "Otenet", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.addItem(QtGui.QApplication.translate("Sent", "Voipbuster", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.addItem(QtGui.QApplication.translate("Sent", "Voipdiscount", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.addItem(QtGui.QApplication.translate("Sent", "Voipwise", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.addItem(QtGui.QApplication.translate("Sent", "VoipbusterPro", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.addItem(QtGui.QApplication.translate("Sent", "Lowratevoip", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBox.addItem(QtGui.QApplication.translate("Sent", "12voip", None, QtGui.QApplication.UnicodeUTF8))

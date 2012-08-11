@@ -23,6 +23,7 @@ acc_openlogin = {
 	'otenet':'http://tools.otenet.gr/tools/index.do',
 	'voipbuster':'https://www.voipbuster.com/en/login',
 	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php',
+	'voipwise':'https://www.voipwise.com/myaccount/index.php',
 	'lowratevoip':'https://www.lowratevoip.com/myaccount/index.php',	
 	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php',
 	'freevoip':'https://www.freevoip.com/myaccount/index.php',

@@ -1,5 +1,8 @@
  ***************************CHANGE LOG********************
 
+** 1.49
+1) Add support for voipwise
+
 ** 1.48
 1) Fix accounts for Forthnet and Voipbuster providers
 2) Clean up

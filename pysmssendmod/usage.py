@@ -30,8 +30,7 @@ def usage():
 		example: pysmssend -a otenet -u foo -p bar -n 123456 "Hello World!"
 
   		-h                  print this message
-  		-a <account>        Account name: <otenet|voipbuster|voipdiscount|voipbusterpro|lowratevoip|
-				    12voip|freevoip|forthnet|webcalldirect|pennytel>
+  		-a <account>        Account name: <otenet|voipbuster|voipdiscount|voipbusterpro|lowratevoip|12voip|freevoip|forthnet|webcalldirect|pennytel|voipwise>
   		-u <username>       username
   		-p <password>       password
   		-n <number>         Telephone Number
