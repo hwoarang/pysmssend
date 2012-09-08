@@ -5,5 +5,4 @@ Exec=pysmssend
 Icon=pysmssend
 Terminal=false
 Type=Application
-Encoding=UTF-8
 Categories=Network;
