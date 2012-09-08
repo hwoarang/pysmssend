@@ -38,4 +38,5 @@ setup(name='pysmssend',
 'pysmssendmod/core_io',
 'pysmssendmod/usage',
 'pysmssendmod/sites',
-'pysmssendmod/cmdfunc'])
+'pysmssendmod/cmdfunc',
+'pysmssendmod/input_validation'])
