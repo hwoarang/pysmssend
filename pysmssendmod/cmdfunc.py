@@ -31,7 +31,7 @@ foobar.set_handle_robots(False)
 def creditsleft(account,foobar,verbose):
 	if verbose:
 		print "Retrieving remaining credits..."
-	if account != "otenet" and account != "forthnet" and account != "voipbuster":
+	if account != "otenet" and account != "forthnet" and account != "voipbuster" and account != "lowratevoip":
 		gethtml=foobar.response()#get the html and parse it. Im not going to tell the details.
 		html=gethtml.read()
 		balance=html.find("balanceid")
@@ -39,7 +39,7 @@ def creditsleft(account,foobar,verbose):
 		euros=balanceline.split('&nbsp;')
 		creditsleft=euros[1].split('</b>')
 		final=str(creditsleft[0])
-	elif account == "voipbuster":
+	elif account == "voipbuster" or account == "lowratevoip":
 		gethtml=foobar.response()
 		html=gethtml.read()
 		balance=html.find("balance-section")
@@ -95,7 +95,7 @@ def cmdlogin(account,username,password,verbose):#login function for cmd tools
 		foobar.select_form(name="loginform")
 	elif account!="otenet":
 		foobar.select_form(nr=0)
-	if account == "voipbuster":
+	if account == "voipbuster" or account == "lowratevoip":
 		foobar["login[username]"] = username
 		foobar["login[password]"] = password
 	elif account != "forthnet":

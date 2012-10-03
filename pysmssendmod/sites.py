@@ -24,7 +24,7 @@ acc_openlogin = {
 	'voipbuster':'https://www.voipbuster.com/en/login',
 	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php',
 	'voipwise':'https://www.voipwise.com/myaccount/index.php',
-	'lowratevoip':'https://www.lowratevoip.com/myaccount/index.php',	
+	'lowratevoip':'https://www.lowratevoip.com/login',	
 	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php',
 	'freevoip':'https://www.freevoip.com/myaccount/index.php',
 	'12voip':'https://www.12voip.com/myaccount/index.php',	

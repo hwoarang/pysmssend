@@ -116,7 +116,7 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 			foobar.select_form(name="loginform") 
 		else:
 			foobar.select_form(nr=0)
-		if account == "voipbuster":
+		if account == "voipbuster" or account == "lowratevoip":
 			foobar["login[username]"] = username
 			foobar["login[password]"] = password
 		elif account != "forthnet":

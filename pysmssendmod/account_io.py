@@ -244,7 +244,7 @@ def myinsertaccount(f,want_gpg):
 
 
 def creditsleft(f,account,foobar,verbose):
-	if account != "otenet" and account != "forthnet" and account != "pennytel" and account != "voipbuster":
+	if account != "otenet" and account != "forthnet" and account != "pennytel" and account != "voipbuster" and account != "lowratevoip":
 		if verbose:
 			print account+": Trying to find how much money left ...\n"
 		resp=foobar.open(acc_opensms[str(account)])
@@ -257,7 +257,7 @@ def creditsleft(f,account,foobar,verbose):
 		f.ui.credits.setText("Credits Left : "+str(final))
 		if verbose:
 			print "you have "+final+" left...\n"
-	elif account == "voipbuster":
+	elif account == "voipbuster" or account == "lowratevoip":
 		if verbose:
 			print account+": Trying to find how much money left ...\n"
 		resp=foobar.open(acc_opensms[str(account)])
