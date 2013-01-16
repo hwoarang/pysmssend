@@ -218,7 +218,7 @@ else:#importing gui modules
 						want_gpg = True
 					else:
 						print "GPG support: disabled"
-						want_gpp = False
+						want_gpg = False
 				elif config_opt[0] == "pysmssend_gpg_key":
 					if config_opt[1]:
 						gpg_key = config_opt[1]
