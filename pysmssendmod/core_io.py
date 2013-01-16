@@ -25,6 +25,7 @@ from PyQt4 import QtCore
 import os,sys,stat, time
 import urllib2,urllib
 from pysmssendmod.sites import *
+from pysmssendmod.account_io import *
 
 homedir=os.environ["HOME"]
 SHAREDIR="/usr/share/pysmssend/"
