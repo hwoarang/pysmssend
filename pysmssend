@@ -191,6 +191,7 @@ else:#importing gui modules
 		os.chmod(homedir+TEMPDIR+"accounts/", stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 		if verbose:
 			print "Done"
+	want_gpg = False
 	if not os.path.isfile(homedir+TEMPDIR+"config"):
 		cfile = open(homedir+TEMPDIR+"config","w")
 		cfile.write("# PYSMSSEND Configuration\n\n")
@@ -203,7 +204,6 @@ else:#importing gui modules
 		cfile.write("pysmssend_gpg_key=\n")
 		cfile.close()
 	else:
-		want_gpg = False
 		cfile = open(homedir+TEMPDIR+"config","r")
 		if verbose:
 			print "Reading "+homedir+TEMPDIR+"config"
