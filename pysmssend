@@ -191,7 +191,6 @@ else:#importing gui modules
 		os.chmod(homedir+TEMPDIR+"accounts/", stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
 		if verbose:
 			print "Done"
-	want_gpg = False
 	if not os.path.isfile(homedir+TEMPDIR+"config"):
 		cfile = open(homedir+TEMPDIR+"config","w")
 		cfile.write("# PYSMSSEND Configuration\n\n")
@@ -203,6 +202,7 @@ else:#importing gui modules
 		cfile.write("# Set your key id\n")
 		cfile.write("pysmssend_gpg_key=\n")
 		cfile.close()
+		want_gpg = False
 	else:
 		cfile = open(homedir+TEMPDIR+"config","r")
 		if verbose:
@@ -220,16 +220,17 @@ else:#importing gui modules
 						print "GPG support: disabled"
 						want_gpp = False
 				elif config_opt[0] == "pysmssend_gpg_key":
-					if not config_opt[1]:
-						gpg_key = False
-						print "You have enabled pysmssend_gpg_support"
-						print "but you haven't specified a key id."
-						print "Please fix your "+homedir+TEMPDIR+"config"
-						sys.exit(1)
-					else:
+					if config_opt[1]:
 						gpg_key = config_opt[1]
 						if verbose:
 							print "GPG key: "+gpg_key
+					else:
+						gpg_key = False
+	if want_gpg and not gpg_key:
+		print "You have enabled pysmssend_gpg_support"
+		print "but you haven't specified a key id."
+		print "Please fix your "+homedir+TEMPDIR+"config"
+		sys.exit(1)
 	if not want_gpg:
 		decrypt_old(verbose)
 	else:
