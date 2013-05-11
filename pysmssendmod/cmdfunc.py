@@ -70,7 +70,7 @@ def creditsleft(account,foobar,verbose):
                 temp3=temp2[0].split("/");
 		print temp3
                	final=str(int(temp3[0]))
-	#final is the amount of money we have :)		
+	#final is the amount of money we have :)
 	return final
 #############################################################################
 

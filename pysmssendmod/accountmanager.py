@@ -58,7 +58,7 @@ def createmanager(self,Form,want_gpg):
 					None,
 					QtGui.QApplication.UnicodeUTF8))
 		self.tableWidget_2.setItem(i,0,item2)
-		
+
 def createcombo(self,Form):
 	num,x=filesindir(ACCOUNTS)
 	self.comboBox_2.clear()
@@ -68,6 +68,3 @@ def createcombo(self,Form):
 		name1=x[i]
 		name2=name1.split(ACCOUNTS)[1]
 		self.comboBox_2.addItem(QtGui.QApplication.translate("Sent", str(name2), None, QtGui.QApplication.UnicodeUTF8))
-	
-
-		

@@ -60,7 +60,7 @@ def myloadaccount(f,verbose,want_gpg,gpg_key):
 				with open(full_choice) as afile:
 					afile = afile.read()
 					data = gpg.decrypt(afile)
-					account = data.data				
+					account = data.data
 			except IOError as e:
 				print e.strerror
 		else:
@@ -74,7 +74,7 @@ def myloadaccount(f,verbose,want_gpg,gpg_key):
 	else:
 		if verbose:
 			print "Not found"
-	
+
 def myloadstoredaccount(f,verbose):
 	homedir=os.environ["HOME"]#read home directory
 	f.ui.lineEdit.clear()#clear username field
@@ -202,7 +202,7 @@ def myinsert(f):
 	row=f.ui.tableWidget.currentItem()
 	number=row.text()
 	f.ui.lineEdit3.insert(number)
-	
+
 
 
 	#insert Account
@@ -228,7 +228,7 @@ def myinsertaccount(f,want_gpg):
 			with open(full_name) as afile:
 				afile = afile.read()
 				data = gpg.decrypt(afile)
-				data = data.data				
+				data = data.data
 		except IOError as e:
 			print e.strerror
 	else:
@@ -300,5 +300,5 @@ def creditsleft(f,account,foobar,verbose):
 			temp3=temp2[0].split("/");
 			final=str(5-int(temp3[0]))
 			f.ui.credits.setText(str(final)+" sms left for today :-)")
-	#final is the amount of money we have :)		
-	return final	
+	#final is the amount of money we have :)
+	return final

@@ -51,7 +51,7 @@ def addressbook_getdata(self,Form,verbose):
 		text=""
 		if verbose:
 			print "Found Kaddressbook contacts ..."
-			print "opening "+homedir+"/"+addresspath+"/share/apps/kabc/std.vcf"	
+			print "opening "+homedir+"/"+addresspath+"/share/apps/kabc/std.vcf"
 		try:
 			filestd = open(homedir+"/"+addresspath+"/share/apps/kabc/std.vcf","r")
 			ext = filestd.readlines()
@@ -69,7 +69,7 @@ def addressbook_getdata(self,Form,verbose):
 					nameslist.append(nameline)
 				numlist.append(line)
 			if verbose:
-				print line  	    
+				print line
 			lena = len(nameslist)
 			lenb = len(numlist)
 			num_lines=lenb
@@ -79,8 +79,7 @@ def addressbook_getdata(self,Form,verbose):
 				headerItem = QtGui.QTableWidgetItem()
 				headerItem.setText(QtGui.QApplication.translate("self",str(mycounter+1), None, QtGui.QApplication.UnicodeUTF8))
 				self.tableWidget.setVerticalHeaderItem(mycounter,headerItem)
-			
-			name=nameslist[mycounter]			
+			name=nameslist[mycounter]
 			name=name.replace('N:','')
 			name=name.replace(';;;','')
 			name=name.replace(';',' ')

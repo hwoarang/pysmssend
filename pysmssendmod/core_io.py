@@ -76,7 +76,6 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 					headerItem = QtGui.QTableWidgetItem()
 					headerItem.setText(QtGui.QApplication.translate("self",str(mycounter+1), None, QtGui.QApplication.UnicodeUTF8))
 					f.ui.tableWidget.setVerticalHeaderItem(mycounter,headerItem)
-					
 					name=contact.displayName
 					item = QtGui.QTableWidgetItem()
 					item.setText(QtGui.QApplication.translate("self", str(name), None, QtGui.QApplication.UnicodeUTF8))
@@ -110,11 +109,11 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 			print "ERROR: Please check your connection with your ISP..."
 			errorlogin(f,account)
 			tray.showlogin(account,0)
-		
+
 		## LOGIN SUCCESSED ##
-		
+
 		if account == "otenet":
-			foobar.select_form(name="loginform") 
+			foobar.select_form(name="loginform")
 		else:
 			foobar.select_form(nr=0)
 		if account == "voipbuster" or account == "lowratevoip":
@@ -153,7 +152,7 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 			error=1
 	# Give feedback to user
 	if error==0:# pass only if everything was ok
-		f.ui.Result1.setText("Logged in to "+account+" ;-)")			
+		f.ui.Result1.setText("Logged in to "+account+" ;-)")
 		tray.showlogin(account,1)
 		# lock send and number field if we are short of credits
 		myallowsend(f,leftcred,account)
@@ -248,7 +247,7 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
          		foobar.submit()
 			sent=1
 		elif account=="pennytel":
-			from SOAPpy import WSDL                                                                                            
+			from SOAPpy import WSDL
 			import SOAPpy
 			if verbose:
 				print "Sending to " + number + "..."
@@ -310,7 +309,7 @@ def mysmssend(foobar,f,tray,account,verbose,leftcred,username,password):
 				username=f.ui.lineEdit.text()
 				size2=145-len(username)
 			else:#forthnet
-				size2=160		
+				size2=160
 			if size<=size2:
 				tray.showsentreport("Message was sent successfully ;-)",1)
 				f.ui.Result1.clear()

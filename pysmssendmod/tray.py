@@ -29,7 +29,7 @@ class trayicon:
 		exiticon=QtGui.QIcon(SHAREDIR+"Icons/exit.png")
 		abouticon=QtGui.QIcon(SHAREDIR+"Icons/book.png")
 		updateicon=QtGui.QIcon(SHAREDIR+"Icons/update.png")
-		self.trayic=QtGui.QSystemTrayIcon(icon)	
+		self.trayic=QtGui.QSystemTrayIcon(icon)
 		#Implement Actions
 		global ActionsMenu
 		ActionsMenu=QtGui.QMenu()
@@ -48,7 +48,7 @@ class trayicon:
 		else:
 			self.trayic.showMessage("Report",message,self.trayic.Warning,6000)
 
-	def showlogin(self,account,status):	
+	def showlogin(self,account,status):
 		self.status=status
 		if self.status==1:
 			self.trayic.showMessage("","Logged in to "+account,self.trayic.Information,6000)

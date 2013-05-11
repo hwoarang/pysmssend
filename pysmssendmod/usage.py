@@ -19,12 +19,12 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
 
-def usage():                                            
+def usage():
 	print """
 		pysmssend         Send SMS over the Internet
-        
+
 		type 'pysmssend' for Gui interface
-		
+
 		if you want command line options use pysmssendcmd or pysmssend
 		pysmssendcmd [-h] -a <account> -u <username> -p <password> -n <number> <"text to send">
 		example: pysmssend -a otenet -u foo -p bar -n 123456 "Hello World!"

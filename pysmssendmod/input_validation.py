@@ -80,5 +80,3 @@ def mychecklength(f):#takes the gui as an argument
 		elif left <0:
 			f.ui.lineEdit_3.setText("Above Limit: "+length2)
 			f.ui.Send.setEnabled(False)
-
-	

@@ -18,10 +18,10 @@
 #    You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys,signal 
+import sys,signal
 import os
 import getopt
-from mechanize import Browser 
+from mechanize import Browser
 from pysmssendmod.cmdfunc import *
 
 SHAREDIR="/usr/share/pysmssend/"
@@ -31,9 +31,9 @@ foobar = Browser()
 foobar.set_handle_robots(False)
 
 try:
-	o, a = getopt.getopt(sys.argv[1:], 'a:u:p:n:h:v',["help"])                            
+	o, a = getopt.getopt(sys.argv[1:], 'a:u:p:n:h:v',["help"])
 	opts = {}
-	for k,v in o:                                                             
+	for k,v in o:
 		opts[k] = v
         	if k == "-v":
             		verbose = True
@@ -42,10 +42,10 @@ try:
         	    sys.exit()
 	if len(opts) < 4:
 		usage()
-		if len(a) < 1: 
+		if len(a) < 1:
 			sys.exit("No text specified.")
 		else:
-			sys.exit("Invalid number of parameters.")		
+			sys.exit("Invalid number of parameters.")
 	else:
 		if len(a) < 1: usage(); sys.exit("No text specified.")
 		#Assign variables

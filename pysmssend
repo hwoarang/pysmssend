@@ -19,7 +19,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
 
-import sys,signal 
+import sys,signal
 import os,stat
 import getopt
 import re
@@ -71,7 +71,7 @@ if __name__=="__main__":
 
 			except:
 				print "Failed to create internal connections. Please send a bug report at hwoarang@silverarrow.org"
-	    
+
 	    	#Functions definitions
 
 		def checkforupdates():
@@ -88,11 +88,11 @@ if __name__=="__main__":
 			else:
 				if verbose:
 					print "You have the latest version installed"
-				updater2.show()			
-		
+				updater2.show()
+
 		def loadaccount():
 			global f,want_gpg,gpg_key
-			myloadaccount(f,verbose,want_gpg,gpg_key)		
+			myloadaccount(f,verbose,want_gpg,gpg_key)
 		def loadstoredaccount():
 			global f
 			myloadstoredaccount(f,verbose)
@@ -131,9 +131,9 @@ if __name__=="__main__":
 			foobar,account_loggedin,leftcred,username,password=mylogin(f,tray,verbose,want_gpg,gpg_key)
 		def createabout():
 			about.show()
-		def sendsms():	
+		def sendsms():
 			mysmssend(foobar, f,tray,account_loggedin,verbose,leftcred,username,password)
-	
+
 
 
 #EXECUTING MAIN PROGRAM
@@ -184,7 +184,7 @@ else:#importing gui modules
 			print "Done"
 	if os.path.isdir(homedir+TEMPDIR+"accounts/"):
 		os.chmod(homedir+TEMPDIR+"accounts/", stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR)
-	else:	
+	else:
 		if verbose:
 			print "Creating accounts folder..."
 		os.mkdir(homedir+TEMPDIR+"accounts/")
@@ -235,7 +235,7 @@ else:#importing gui modules
 		decrypt_old(verbose)
 	else:
 		encrypt_old(verbose,gpg_key)
-		
+
 if ongui:
 	if verbose:
 		print "Creating the Qt4 interface..."
@@ -261,7 +261,7 @@ else:
 	try:
 		o, a = getopt.getopt(sys.argv[1:], 'a:u:p:n:hv',["help"])                            #read options
 		opts = {}
-		for k,v in o:                                                             
+		for k,v in o:
 			opts[k] = v
         		if k == "-v":
             			verbose = True
@@ -270,10 +270,10 @@ else:
         	    		sys.exit(0)
 		if len(opts) < 4 and debug==False:
 			usage()
-			if len(a) < 1: 
+			if len(a) < 1:
 				sys.exit("No text specified.")
 			else:
-				sys.exit("Invalid number of parameters.")		
+				sys.exit("Invalid number of parameters.")
 		else:
 			if len(a) < 1: usage(); sys.exit("No text specified.")
 		account = str.lower(opts["-a"])
@@ -286,5 +286,5 @@ else:
 	except getopt.GetoptError, msg:
     			usage()
 			sys.exit("Invalid Option(s) specified")
-	
-        
+
+

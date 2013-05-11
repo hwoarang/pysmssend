@@ -24,17 +24,17 @@ acc_openlogin = {
 	'voipbuster':'https://www.voipbuster.com/en/login',
 	'voipdiscount':'https://www.voipdiscount.com/myaccount/index.php',
 	'voipwise':'https://www.voipwise.com/myaccount/index.php',
-	'lowratevoip':'https://www.lowratevoip.com/login',	
+	'lowratevoip':'https://www.lowratevoip.com/login',
 	'voipbusterpro':'https://www.voipbusterpro.com/myaccount/index.php',
 	'freevoip':'https://www.freevoip.com/myaccount/index.php',
-	'12voip':'https://www.12voip.com/myaccount/index.php',	
+	'12voip':'https://www.12voip.com/myaccount/index.php',
 	'webcalldirect':'https://www.webcalldirect.com/myaccount/index.php',
 	'nonoh':'https://www.nonoh.net/myaccount/index.php',
 	'voipcheap':'https://www.voipcheap.com/myaccount/index.php',
 	'voipraider':'https://www.voipraider.com/myaccount/index.php',
 	'justvoip':'https://www.justvoip.com/myaccount/index.php',
 	'forthnet':'https://www.forthnet.gr/secure/webSMS/login.aspx?'
-	}	
+	}
 acc_opensms = {
 	'otenet':'http://tools.otenet.gr/tools/tiles/web2sms.do?showPage=smsSend&mnu=smenu23',
 	'voipbuster':'https://www.voipbuster.com/en/web_sms',
