@@ -20,7 +20,7 @@
 # -*- coding: utf-8 -*-
 from pysmssendmod.input_validation import  *
 from pysmssendmod.tray import *
-from mechanize import Browser
+from mechanize import Browser, RobustFactory
 from PyQt4 import QtCore
 import os,sys,stat, time
 import urllib2,urllib
@@ -28,7 +28,6 @@ from pysmssendmod.sites import *
 from pysmssendmod.account_io import *
 
 homedir=os.environ["HOME"]
-SHAREDIR="/usr/share/pysmssend/"
 TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 
@@ -46,11 +45,11 @@ def errorlogin(f,account):
 #login function
 def mylogin(f,tray,verbose,want_gpg,gpg_key):
 	# getting account name
-	account=f.ui.comboBox.currentText()
+	account=f.ui.ProvidersCombo.currentText()
 	account=str.lower(str(account))
 	#getting login credentials
-	username=f.ui.lineEdit.text()
-	password=f.ui.lineEdit2.text()
+	username=f.ui.UsernameText.text()
+	password=f.ui.PasswordText.text()
 	# Don't login if pennytel
 	if account=="pennytel":
 		from SOAPpy import WSDL
@@ -62,10 +61,10 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 		leftcred,blocked,currency,lastusage,others,zerobalancedate = _server.getAccount(username,password)
 		if leftcred>0:
 			error=0
-			f.ui.Result1.clear()
-			f.ui.credits.setText("Credit Left : "+currency+str(leftcred))
-			f.ui.lineEdit_3.clear()
-			f.ui.textEdit.clear()
+			f.ui.Status_2.clear()
+			f.ui.CreditsText.setText(currency+str(leftcred))
+			f.ui.PhoneNumberText.clear()
+			f.ui.MessageArea.clear()
 			# Get Addressbook
 			contacts = _server.getAddressBookEntries(username,password,"%")
 			if contacts!=None:
@@ -91,9 +90,9 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 		else:
 			error=1
 	else:
-		testfoo=Browser()
+		testfoo=Browser(factory=RobustFactory())
 		testfoo.set_handle_robots(False)
-		foobar=Browser()
+		foobar=Browser(factory=RobustFactory())
 		foobar.set_handle_robots(False)
 		# acc_openlogin is defined on sites modules
 		login_page=acc_openlogin[str(account)]
@@ -103,7 +102,9 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 		try:
 			if verbose:
 				print "Contacting url --> "+login_page+"..."
-			foobar.open(login_page)
+			page = foobar.open(login_page)
+			page = page.read()
+			print page
 		except:
 			#this means that we couldnt connect to the site because of a network error
 			print "ERROR: Please check your connection with your ISP..."
@@ -152,7 +153,7 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 			error=1
 	# Give feedback to user
 	if error==0:# pass only if everything was ok
-		f.ui.Result1.setText("Logged in to "+account+" ;-)")
+		f.ui.Status_2.setText("Logged in to "+account+" ;-)")
 		tray.showlogin(account,1)
 		# lock send and number field if we are short of credits
 		myallowsend(f,leftcred,account)
@@ -199,7 +200,7 @@ def mylogin(f,tray,verbose,want_gpg,gpg_key):
 		else:
 			phonemessage.append("+30694XXXXXXX")
 		phonemessage.append(" --")
-		f.ui.lineEdit3.setText(phonemessage)
+		f.ui.PhoneNumberText.setText(phonemessage)
 		return foobar,account,leftcred,username,password
 	else:
 		f.ui.Result1.setText("ERROR Logging in to "+account+" :-(")

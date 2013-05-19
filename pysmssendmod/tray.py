@@ -19,7 +19,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtCore, QtGui
-from pysmssendmod.pysmssendgui import Ui_Sent, Testmain
+from designer.pysmssendgui import Ui_pysmssend_form
 SHAREDIR="/usr/share/pysmssend/"
 
 class trayicon:

@@ -27,17 +27,16 @@ homedir=os.environ["HOME"]
 TEMPDIR="/.pysmssend/"
 ACCOUNTS=homedir+TEMPDIR+"accounts/"
 
-def myloadaccount(f,verbose,want_gpg,gpg_key):
+def myloadprovideraccount(f,verbose,want_gpg,gpg_key):
 	"""
 	Called everytime the user selects a different provider from the
 	drop-down menu
 	"""
 	homedir = os.environ["HOME"]#read home directory
-	f.ui.credits.clear() #clear Credits
-	f.ui.lineEdit.clear()#clear username field
-	f.ui.lineEdit2.clear()#clear password field
-	f.ui.Result1.clear()#clear result field
-	choice = f.ui.comboBox.currentText()#read account
+	f.ui.UsernameText.clear()#clear username field
+	f.ui.PasswordText.clear()#clear password field
+	f.ui.Status_2.clear()#clear result field
+	choice = f.ui.ProvidersCombo.currentText()#read account
 	choice = str.lower(str(choice))
 	if want_gpg:
 		choice = choice+".enc"
@@ -69,8 +68,8 @@ def myloadaccount(f,verbose,want_gpg,gpg_key):
 		infos = account.split()
 		if verbose:
 			print "Loading account information...\n"
-		f.ui.lineEdit.insert(infos[0])#parse the infos on the fields
-		f.ui.lineEdit2.insert(infos[1])
+		f.ui.UsernameText.insert(infos[0])#parse the infos on the fields
+		f.ui.PasswordText.insert(infos[1])
 	else:
 		if verbose:
 			print "Not found"
@@ -106,6 +105,7 @@ def myloadstoredaccount(f,verbose):
 		pass
 
 def mystoreaccount(f,want_gpg,gpg_key):
+	"""Save an account to the Account table"""
 	#read account
 	account=f.ui.comboBox_3.currentIndex()
 	#read username
@@ -143,6 +143,7 @@ def mystoreaccount(f,want_gpg,gpg_key):
 	createcombo(f.ui,0)
 
 def mydeleteaccount(f, verbose, want_gpg):
+	"""Delete an account from the Account table"""
 	row = f.ui.tableWidget_2.currentItem()
 	num = f.ui.tableWidget_2.currentRow()
 	name = row.text()
@@ -196,17 +197,9 @@ def encrypt_old(verbose,gpg_key):
 							output = data+(file+".enc"))
 					os.remove(data+file)
 
-##Insert Number
-def myinsert(f):
-	f.ui.lineEdit3.clear()
-	row=f.ui.tableWidget.currentItem()
-	number=row.text()
-	f.ui.lineEdit3.insert(number)
-
-
-
-	#insert Account
+#insert Account
 def myinsertaccount(f,want_gpg):
+	"""Insert selected account from Account Table"""
 	f.ui.lineEdit.clear()
 	f.ui.lineEdit2.clear()
 	#insert username

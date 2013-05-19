@@ -52,7 +52,8 @@ def myallowsend(f,leftcred,account):
 				f.ui.Send.setEnabled(True)
 				f.ui.lineEdit3.clear()
 
-def mychecklength(f):#takes the gui as an argument
+def mychecklength(f):
+	"""Real-time message length display"""
 	choice=f.ui.comboBox.currentText()#read account
 	choice=str.lower(str(choice))#lower the string
 	message=f.ui.textEdit.toPlainText()  #get message text

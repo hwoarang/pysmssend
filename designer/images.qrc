@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../Icons/SMS_Icon.png</file>
+        <file>../Icons/book.png</file>
+        <file>../Icons/check-icon.png</file>
+        <file>../Icons/exit.png</file>
+        <file>../Icons/pysmssend.png</file>
+        <file>../Icons/update.png</file>
+    </qresource>
+</RCC>
